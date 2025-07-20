@@ -8,7 +8,7 @@ public class TeleOp extends Dynawheels {
     @Override
     public void runOpMode() {
         // Initializing
-        config();
+        configureRobot();
 
         waitForStart();
         while (opModeIsActive()) {
@@ -23,10 +23,10 @@ public class TeleOp extends Dynawheels {
             // Field Drive Movement
             if (gamepad1.left_stick_x != 0 || gamepad1.left_stick_y != 0) {
                 fieldDriveMove(gamepad1.left_stick_x, gamepad1.left_stick_y);}
-            else {Reset();}
+            else {resetDriveTrain();}
 
             // Turning
-            if (gamepad1.right_stick_x != 0) {Turn(gamepad1.right_stick_x);}
+            if (gamepad1.right_stick_x != 0) {turnDriveTrain(gamepad1.right_stick_x);}
         }
     }
 }

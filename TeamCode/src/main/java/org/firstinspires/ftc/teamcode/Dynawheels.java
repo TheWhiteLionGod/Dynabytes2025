@@ -13,13 +13,13 @@ public class Dynawheels extends LinearOpMode {
     public IMU imu;
 
     // Gear System
-    public double gear_mode = 3.0;
+    double cur_gear_mode = 3.0;
     boolean on_gear_switch_cooldown = false;
     double gear_switch_time = 0.0;
     double MAX_GEAR = 3.0;
 
     // YAW
-    public double yaw_angle = 0.0;
+    double yaw_angle = 0.0;
 /*
     public double YAWFWD = 0;
     public double YAWLEFT = 90;
@@ -33,7 +33,7 @@ public class Dynawheels extends LinearOpMode {
     }
 
     // Functions
-    public void config() {
+    public void configureRobot() {
         // Mapping Wheels
         BL = hardwareMap.get(DcMotor.class, "BL");
         FL = hardwareMap.get(DcMotor.class, "FL");
@@ -63,17 +63,17 @@ public class Dynawheels extends LinearOpMode {
                 on_gear_switch_cooldown = false;
             }
         } else {
-            gear_mode = Math.min(Math.max(gear_mode + change_val, 1), MAX_GEAR);
+            cur_gear_mode = Math.min(Math.max(cur_gear_mode + change_val, 1), MAX_GEAR);
             on_gear_switch_cooldown = true;
             gear_switch_time = getRuntime();
 
-            telemetry.addData("Current Gear Mode", gear_mode);
+            telemetry.addData("Current Gear Mode", cur_gear_mode);
             telemetry.update();
         }
     }
 
-    public void Move(double pwrx, double pwry) {
-        double gear_pwr = gear_mode / MAX_GEAR;
+    public void moveDriveTrain(double pwrx, double pwry) {
+        double gear_pwr = cur_gear_mode / MAX_GEAR;
         BL.setPower(gear_pwr*(-pwrx-pwry));
         FR.setPower(gear_pwr*(-pwrx-pwry));
 
@@ -92,11 +92,11 @@ public class Dynawheels extends LinearOpMode {
 
         /* At this point, Joystick X/Y (strafe/forward) vectors have been */
         /* rotated by the gyro angle, and can be sent to drive system */
-        Move(pwr_x, pwr_y);
+        moveDriveTrain(pwr_x, pwr_y);
     }
 
-    public void Turn(double pwr) {
-        double gear_pwr = gear_mode / MAX_GEAR;
+    public void turnDriveTrain(double pwr) {
+        double gear_pwr = cur_gear_mode / MAX_GEAR;
         BL.setPower(gear_pwr*pwr);
         FR.setPower(gear_pwr*-pwr);
 
@@ -104,7 +104,7 @@ public class Dynawheels extends LinearOpMode {
         BR.setPower(0);
     }
 
-    public void Reset() {
+    public void resetDriveTrain() {
         BL.setPower(0);
         FL.setPower(0);
         FR.setPower(0);
