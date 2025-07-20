@@ -1,4 +1,4 @@
-# Team Dynabytes 19747 FTC Controller 20205
+# Team Dynabytes 19747 FTC Controller 2025
 
 This is the public controller code for the 2025-2026 season of FTC.
 
