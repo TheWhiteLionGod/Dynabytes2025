@@ -9,12 +9,12 @@ public class TeleOp extends Dynawheels {
     public void runOpMode() {
         // Initializing
         configureRobot();
-
         waitForStart();
+        
         while (opModeIsActive()) {
             // Update Yaw
             YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
-            yaw_angle = orientation.getYaw(AngleUnit.DEGREES);
+            this.yaw_angle = orientation.getYaw(AngleUnit.DEGREES);
 
             // Switching Gears
             if (gamepad1.dpad_up) {changeGearMode(1);}

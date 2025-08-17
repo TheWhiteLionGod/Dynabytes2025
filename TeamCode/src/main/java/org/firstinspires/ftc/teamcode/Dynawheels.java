@@ -107,8 +107,8 @@ public class Dynawheels extends LinearOpMode implements TeleOp {
         BL.setPower(gear_pwr*pwr);
         FR.setPower(gear_pwr*-pwr);
 
-        FL.setPower(0);
-        BR.setPower(0);
+        FL.setPower(gear_pwr*pwr);
+        BR.setPower(gear_pwr*-pwr);
     }
 
     @Override

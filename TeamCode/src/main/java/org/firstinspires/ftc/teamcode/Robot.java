@@ -22,8 +22,20 @@ public interface TeleOp extends Robot {
 
 // Autonomous Specific Methods(MAY BE DEPRECATED DUE TO ROAD RUNNER)
 public interface Autonomous extends Robot {
-    public void moveForward(double pwr);
-    public void moveBackward(double pwr);
-    public void moveLeft(double pwr);
-    public void moveRight(double pwr);
+    // Drivetrain Movement Functions
+    public default void moveForward(double pwr) {
+        moveDriveTrain(Math.abs(pwr), 0);
+    }
+
+    public default void moveBackward(double pwr) {
+        moveDriveTrain(-Math.abs(pwr), 0);
+    }
+
+    public default void moveLeft(double pwr) {
+        moveDriveTrain(0, -Math.abs(pwr));
+    }
+    
+    public default void moveRight(double pwr) {
+        moveDriveTrain(0, Math.abs(pwr));
+    }
 }
