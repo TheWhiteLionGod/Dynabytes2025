@@ -62,16 +62,6 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
         trajectories.add(traj2);
     }
 
-    // Simple Unit Conversion Functions for Ease of Use
-    public double feetToInches(double feet) {
-        return feet * 12.0;
-    }
-
-    // Extra Utility Function. REMEMBER: Road Runner Takes In Trajectories as INCHES, not Feet.
-    public double inchesToFeet(double inches) {
-        return inches / 12.0;
-    }
-
     // Since We Are Using Road Runner, We Need To Implement Dummy Methods Since They Are Required
     @Override
     public void moveDriveTrain(double pwrx, double pwry) {
