@@ -6,20 +6,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.teamcode.Robot;
+
 // Main Class
-public class Dynawheels extends LinearOpMode {
+public class Dynawheels extends LinearOpMode implements TeleOp {
     // Declaring Hardware Variables
-    public DcMotor BL, FL,FR, BR;
+    public DcMotor BL, FL, FR, BR;
     public IMU imu;
 
     // Gear System
     double cur_gear_mode = 3.0;
-    boolean on_gear_switch_cooldown = false;
     double gear_switch_time = 0.0;
     double MAX_GEAR = 3.0;
 
     // YAW
     double yaw_angle = 0.0;
+
 /*
     public double YAWFWD = 0;
     public double YAWLEFT = 90;
@@ -27,12 +29,16 @@ public class Dynawheels extends LinearOpMode {
     public double YAWBWD = 180;
 */
 
+    // PI Constant
+    double PI = 3.1415926;
+
     @Override
     public void runOpMode() {
 
     }
 
     // Functions
+    @Override
     public void configureRobot() {
         // Mapping Wheels
         BL = hardwareMap.get(DcMotor.class, "BL");
@@ -57,21 +63,22 @@ public class Dynawheels extends LinearOpMode {
         imu.resetYaw();
     }
 
+    @Override
     public void changeGearMode(int change_val) {
-        if (on_gear_switch_cooldown) {
-            if (getRuntime() - gear_switch_time >= 0.25) {
-                on_gear_switch_cooldown = false;
-            }
-        } else {
-            cur_gear_mode = Math.min(Math.max(cur_gear_mode + change_val, 1), MAX_GEAR);
-            on_gear_switch_cooldown = true;
-            gear_switch_time = getRuntime();
-
-            telemetry.addData("Current Gear Mode", cur_gear_mode);
-            telemetry.update();
+        // Gear Switch Must Be On Cooldown
+        if (getRuntime() - gear_switch_time <= 0.1) {
+            return;
         }
+        // Ensuring Gear Mode in Bounds
+        cur_gear_mode = Math.min(Math.max(cur_gear_mode + change_val, 1), MAX_GEAR);
+        gear_switch_time = getRuntime();
+
+        // Telemetry
+        telemetry.addData("Current Gear Mode", cur_gear_mode);
+        telemetry.update();
     }
 
+    @Override
     public void moveDriveTrain(double pwrx, double pwry) {
         double gear_pwr = cur_gear_mode / MAX_GEAR;
         BL.setPower(gear_pwr*(-pwrx-pwry));
@@ -81,11 +88,10 @@ public class Dynawheels extends LinearOpMode {
         FL.setPower(gear_pwr*(pwrx-pwry));
     }
 
+    @Override
     public void fieldDriveMove(double pwr_x, double pwr_y) {
-        double pi = 3.1415926;
-
         /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
-        double yaw_radians = yaw_angle * pi/180;
+        double yaw_radians = yaw_angle * PI/180;
         double temp = pwr_y * Math.cos(yaw_radians) + pwr_x * Math.sin(yaw_radians);
         pwr_x = -pwr_y * Math.sin(yaw_radians) + pwr_x * Math.cos(yaw_radians);
         pwr_y = temp;
@@ -95,6 +101,7 @@ public class Dynawheels extends LinearOpMode {
         moveDriveTrain(pwr_x, pwr_y);
     }
 
+    @Override
     public void turnDriveTrain(double pwr) {
         double gear_pwr = cur_gear_mode / MAX_GEAR;
         BL.setPower(gear_pwr*pwr);
@@ -104,6 +111,7 @@ public class Dynawheels extends LinearOpMode {
         BR.setPower(0);
     }
 
+    @Override
     public void resetDriveTrain() {
         BL.setPower(0);
         FL.setPower(0);
