@@ -49,17 +49,27 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
 
         // Defining Trajectories
         Trajectory traj = drive.trajectoryBuilder(start_pos)
-                .lineToConstantHeading(new Vector2d(12, 0))
+                .lineToConstantHeading(new Vector2d(feetToInches(4), 0))
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj.end())
-                .splineToConstantHeading(new Vector2d(-5, -12), 0)
+                .splineToConstantHeading(new Vector2d(feetToInches(-2), feetToInches(-4)), 0)
                 .build();
         
         // "Saving Trajectories"
         trajectories = new ArrayList<Trajectory>();
         trajectories.add(traj);
         trajectories.add(traj2);
+    }
+
+    // Simple Unit Conversion Functions for Ease of Use
+    public double feetToInches(double feet) {
+        return feet * 12.0;
+    }
+
+    // Extra Utility Function. REMEMBER: Road Runner Takes In Trajectories as INCHES, not Feet.
+    public double inchesToFeet(double inches) {
+        return inches / 12.0;
     }
 
     // Since We Are Using Road Runner, We Need To Implement Dummy Methods Since They Are Required
