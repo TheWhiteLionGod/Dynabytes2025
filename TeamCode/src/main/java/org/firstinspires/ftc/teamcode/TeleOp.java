@@ -22,7 +22,7 @@ public class TeleOp extends Dynawheels {
 
             // Field Drive Movement
             if (gamepad1.left_stick_x != 0 || gamepad1.left_stick_y != 0) {
-                fieldDriveMove(gamepad1.left_stick_x, gamepad1.left_stick_y);}
+                fieldMoveDriveTrain(gamepad1.left_stick_x, gamepad1.left_stick_y);}
             else {resetDriveTrain();}
 
             // Turning

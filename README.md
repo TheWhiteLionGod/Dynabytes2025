@@ -6,7 +6,7 @@ This is the public controller code for the 2025-2026 season of FTC.
 
 1. Download Android Studios
 2. Download Repo
-```
+```bash
 git clone https://github.com/TheWhiteLionGod/Dynabytes2025.git
 ```
 

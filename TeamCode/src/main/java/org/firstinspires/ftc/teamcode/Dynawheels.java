@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.teamcode.Robot;
 
 // Main Class
-public class Dynawheels extends LinearOpMode implements TeleOp {
+public class Dynawheels extends LinearOpMode implements Controller {
     // Declaring Hardware Variables
     public DcMotor BL, FL, FR, BR;
     public IMU imu;
@@ -89,7 +89,7 @@ public class Dynawheels extends LinearOpMode implements TeleOp {
     }
 
     @Override
-    public void fieldDriveMove(double pwr_x, double pwr_y) {
+    public void fieldMoveDriveTrain(double pwr_x, double pwr_y) {
         /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
         double yaw_radians = yaw_angle * PI/180;
         double temp = pwr_y * Math.cos(yaw_radians) + pwr_x * Math.sin(yaw_radians);
