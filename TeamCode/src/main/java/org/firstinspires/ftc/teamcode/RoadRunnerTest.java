@@ -6,12 +6,14 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
+
 import java.util.ArrayList;
 
 @TeleOp(name = "RoadRunnerTest", group = "FTC2025")
 public class RoadRunnerTest extends LinearOpMode implements Autonomous{
     SampleMecanumDrive drive;
-    ArrayList<Trajectory> trajectories;   
+    ArrayList<TrajectorySequence> trajectories;
     
     @Override
     public void runOpMode() {
@@ -20,9 +22,9 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
 
         if (opModeIsActive()) {
             // Loop Over All Trajectories(ORDER MATTERS)
-            for (Trajectory traj : trajectories) {
+            for (TrajectorySequence traj : trajectories) {
                 // Moving Robot
-                drive.followTrajectoryAsync(traj);
+                drive.followTrajectorySequenceAsync(traj);
                 
                 // Updating Robot Position
                 while (opModeIsActive() && drive.isBusy()) {
@@ -47,20 +49,24 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
         drive.setPoseEstimate(start_pos);
 
         // Defining Trajectories
-        Trajectory traj = drive.trajectoryBuilder(start_pos)
-                // The * 12 converts 4 feet to inches
-                .lineToConstantHeading(new Vector2d(4 * 12, 0))
-                .build();
+        TrajectorySequence traj = drive.trajectorySequenceBuilder(start_pos)
+                .splineToLinearHeading(new Pose2d(2*12, 0, Math.toRadians(90)), Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(0, -2*12, 0), 0)
 
-        Trajectory traj2 = drive.trajectoryBuilder(traj.end())
-                .splineToConstantHeading(new Vector2d(0, -2 * 12), 0)
+                .splineToLinearHeading(new Pose2d(2*12, 0, Math.toRadians(90)), Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(0, -2*12, 0), 0)
+
+                .splineToLinearHeading(new Pose2d(2*12, 0, Math.toRadians(90)), Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(0, -2*12, 0), 0)
+
+                .splineToSplineHeading(new Pose2d(4*12, 2*12, Math.toRadians(180)), Math.toRadians(180))
+
                 .build();
         
         // "Saving Trajectories"
         // The order that you add the trajectories to the list is the order they will be called.
         trajectories = new ArrayList<>();
         trajectories.add(traj);
-        trajectories.add(traj2);
     }
 
     // Since We Are Using Road Runner, We Need To Implement Dummy Methods Since They Are Required
