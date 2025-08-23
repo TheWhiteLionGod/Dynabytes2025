@@ -5,10 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.Robot;
-
 import java.util.ArrayList;
 
 @TeleOp(name = "RoadRunnerTest", group = "FTC2025")
@@ -31,11 +28,13 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
                 while (opModeIsActive() && drive.isBusy()) {
                     drive.update();
                     telemetry.addData("Robot Position: ", drive.getPoseEstimate());
+                    telemetry.update();
                 }
 
                 // Printing Deviation in Position Once Completed
-                System.out.println(traj.end());
-                System.out.println(drive.getPoseEstimate());
+                telemetry.addData("Expected End Position: ", traj.end());
+                telemetry.addData("Current Position: ", drive.getPoseEstimate());
+                telemetry.update();
             }
         }
     }
@@ -57,7 +56,8 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
                 .build();
         
         // "Saving Trajectories"
-        trajectories = new ArrayList<Trajectory>();
+        // The order that you add the trajectories to the list is the order they will be called.
+        trajectories = new ArrayList<>();
         trajectories.add(traj);
         trajectories.add(traj2);
     }
@@ -65,16 +65,28 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
     // Since We Are Using Road Runner, We Need To Implement Dummy Methods Since They Are Required
     @Override
     public void moveDriveTrain(double pwrx, double pwry) {
-        System.out.println("[ERROR] moveDriveTrain Function Called in Autonomous For Unknown Reasons");
+        telemetry.addData(
+                "[ERROR] moveDriveTrain Function Called in Autonomous For Unknown Reasons: ",
+                drive.getPoseEstimate()
+        );
+        telemetry.update();
     }
     
     @Override
     public void turnDriveTrain(double pwr) {
-        System.out.println("[ERROR] turnDriveTrain Function Called in Autonomous For Unknown Reasons");
+        telemetry.addData(
+                "[ERROR] turnDriveTrain Function Called in Autonomous For Unknown Reasons: ",
+                drive.getPoseEstimate()
+        );
+        telemetry.update();
     }
     
     @Override
     public void resetDriveTrain() {
-        System.out.println("[ERROR] resetDriveTrain Function Called in Autonomous For Unknown Reasons");
+        telemetry.addData(
+                "[ERROR] resetDriveTrain Function Called in Autonomous For Unknown Reasons: ",
+                drive.getPoseEstimate()
+        );
+        telemetry.update();
     }
 }

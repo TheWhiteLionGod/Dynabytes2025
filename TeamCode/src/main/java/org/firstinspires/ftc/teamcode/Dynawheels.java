@@ -6,7 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 // Main Class
 public class Dynawheels extends LinearOpMode implements Controller {
@@ -17,7 +18,7 @@ public class Dynawheels extends LinearOpMode implements Controller {
     // Gear System
     double cur_gear_mode = 3.0;
     double gear_switch_time = 0.0;
-    double MAX_GEAR = 3.0;
+    final double MAX_GEAR = 3.0;
 
     // YAW
     double yaw_angle = 0.0;
@@ -30,7 +31,7 @@ public class Dynawheels extends LinearOpMode implements Controller {
 */
 
     // PI Constant
-    double PI = 3.1415926;
+    final double PI = 3.1415926;
 
     @Override
     public void runOpMode() {
@@ -76,6 +77,11 @@ public class Dynawheels extends LinearOpMode implements Controller {
         // Telemetry
         telemetry.addData("Current Gear Mode", cur_gear_mode);
         telemetry.update();
+    }
+
+    public void updateYaw() {
+        YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+        yaw_angle = orientation.getYaw(AngleUnit.DEGREES);
     }
 
     @Override
