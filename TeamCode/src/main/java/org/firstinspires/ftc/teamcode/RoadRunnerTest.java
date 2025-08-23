@@ -42,17 +42,18 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
     @Override
     public void configureRobot() {
         // Creating Drivetrain
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d start_pos = new Pose2d(0, 0,0);
+        drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(start_pos);
 
         // Defining Trajectories
         Trajectory traj = drive.trajectoryBuilder(start_pos)
-                .lineToConstantHeading(new Vector2d(feetToInches(4), 0))
+                // The * 12 converts 4 feet to inches
+                .lineToConstantHeading(new Vector2d(4 * 12, 0))
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj.end())
-                .splineToConstantHeading(new Vector2d(feetToInches(-2), feetToInches(-4)), 0)
+                .splineToConstantHeading(new Vector2d(0, -2 * 12), 0)
                 .build();
         
         // "Saving Trajectories"

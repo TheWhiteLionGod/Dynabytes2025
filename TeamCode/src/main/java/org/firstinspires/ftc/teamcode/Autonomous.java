@@ -18,14 +18,4 @@ public interface Autonomous extends Robot {
     default void moveRight(double pwr) {
         moveDriveTrain(0, Math.abs(pwr));
     }
-
-    // Simple Unit Conversion Functions for Ease of Use
-    default double feetToInches(double feet) {
-        return feet * 12.0;
-    }
-
-    // Extra Utility Function. REMEMBER: Road Runner Takes In Trajectories as INCHES, not Feet.
-    default double inchesToFeet(double inches) {
-        return inches / 12.0;
-    }
 }
