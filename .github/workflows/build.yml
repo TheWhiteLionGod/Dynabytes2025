@@ -29,25 +29,9 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
 
-    # Set Android SDK environment
-    - name: Configure Android SDK
-      shell: powershell
-      run: |
-        $sdkRoot = "C:\Android\Sdk"
-        Add-Content -Path $env:GITHUB_ENV -Value "ANDROID_HOME=$sdkRoot"
-        Add-Content -Path $env:GITHUB_ENV -Value "ANDROID_SDK_ROOT=$sdkRoot"
-        Add-Content -Path $env:GITHUB_ENV -Value "PATH=$sdkRoot\platform-tools;$sdkRoot\cmdline-tools\latest\bin;$sdkRoot\tools\bin;$env:PATH"
-    
-    - name: Create local.properties
-      shell: powershell
-      run: |
-        $sdkRoot = "C:\Android\Sdk"
-        $repoRoot = "$env:GITHUB_WORKSPACE"
-        $localProps = Join-Path $repoRoot "local.properties"
-        "sdk.dir=$($sdkRoot -replace '\\','\\')" | Out-File -Encoding ASCII $localProps
-
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
 
     # Build with Gradle
     - name: Build with Gradle Wrapper
-      shell: powershell
       run: ./gradlew clean build --no-daemon --stacktrace
