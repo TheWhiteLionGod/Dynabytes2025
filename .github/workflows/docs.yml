@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: "Documentation-Generator"
-          ref: 'v1.5.1'
+          ref: 'v2.0.0'
           repository: TheWhiteLionGod/Documentation-Generator
           
       - name: Setup Python 3.13
