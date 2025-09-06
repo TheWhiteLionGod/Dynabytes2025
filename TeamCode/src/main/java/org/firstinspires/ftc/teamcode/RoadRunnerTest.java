@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import java.util.ArrayList;
 
 @TeleOp(name = "RoadRunnerTest", group = "FTC2025")
-public class RoadRunnerTest extends LinearOpMode implements Autonomous{
+public class RoadRunnerTest extends LinearOpMode {
     SampleMecanumDrive drive;
     ArrayList<TrajectorySequence> trajectories;
     
@@ -41,7 +41,6 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
         }
     }
 
-    @Override
     public void configureRobot() {
         // Creating Drivetrain
         Pose2d start_pos = new Pose2d(0, 0,0);
@@ -67,33 +66,5 @@ public class RoadRunnerTest extends LinearOpMode implements Autonomous{
         // The order that you add the trajectories to the list is the order they will be called.
         trajectories = new ArrayList<>();
         trajectories.add(traj);
-    }
-
-    // Since We Are Using Road Runner, We Need To Implement Dummy Methods Since They Are Required
-    @Override
-    public void moveDriveTrain(double pwrx, double pwry) {
-        telemetry.addData(
-                "[ERROR] moveDriveTrain Function Called in Autonomous For Unknown Reasons: ",
-                drive.getPoseEstimate()
-        );
-        telemetry.update();
-    }
-    
-    @Override
-    public void turnDriveTrain(double pwr) {
-        telemetry.addData(
-                "[ERROR] turnDriveTrain Function Called in Autonomous For Unknown Reasons: ",
-                drive.getPoseEstimate()
-        );
-        telemetry.update();
-    }
-    
-    @Override
-    public void resetDriveTrain() {
-        telemetry.addData(
-                "[ERROR] resetDriveTrain Function Called in Autonomous For Unknown Reasons: ",
-                drive.getPoseEstimate()
-        );
-        telemetry.update();
     }
 }

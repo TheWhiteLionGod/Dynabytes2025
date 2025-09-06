@@ -30,9 +30,6 @@ public class Dynawheels extends LinearOpMode implements Controller {
     public double YAWBWD = 180;
 */
 
-    // PI Constant
-    final double PI = 3.1415926;
-
     @Override
     public void runOpMode() {
 
@@ -97,7 +94,7 @@ public class Dynawheels extends LinearOpMode implements Controller {
     @Override
     public void fieldMoveDriveTrain(double pwr_x, double pwr_y) {
         /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
-        double yaw_radians = yaw_angle * PI/180;
+        double yaw_radians = Math.toRadians(yaw_angle);
         double temp = pwr_y * Math.cos(yaw_radians) + pwr_x * Math.sin(yaw_radians);
         pwr_x = -pwr_y * Math.sin(yaw_radians) + pwr_x * Math.cos(yaw_radians);
         pwr_y = temp;
