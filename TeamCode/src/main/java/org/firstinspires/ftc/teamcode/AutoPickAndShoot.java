@@ -1,27 +1,33 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Disabled
-@TeleOp(name = "SampleAuto", group = "FTC2025")
-public class SampleAuto extends LinearOpMode {
+@TeleOp(name = "AutoPickAndShoot", group = "FTC2025")
+public class AutoPickAndShoot extends LinearOpMode {
     SampleMecanumDrive drive;
     
     @Override
     public void runOpMode() {
         // Creating Drivetrain
         drive = new SampleMecanumDrive(hardwareMap);
+        TrajectoryStorage.start_pos = TrajectoryStorage.blue_down_pos;
+
         TrajectoryStorage.buildTrajectories(drive); // Builds Trajectory Here
         drive.setPoseEstimate(TrajectoryStorage.start_pos);
 
         waitForStart();
 
         // Moving Robot
-        drive.followTrajectorySequenceAsync(TrajectoryStorage.sample_traj);
+        moveRobot(TrajectoryStorage.getBlueBalls);
+        moveRobot(TrajectoryStorage.shootBlue);
+    }
+
+    public void moveRobot(TrajectorySequence traj) {
+        drive.followTrajectorySequenceAsync(traj);
 
         // Updating Robot Position
         while (opModeIsActive() && drive.isBusy()) {

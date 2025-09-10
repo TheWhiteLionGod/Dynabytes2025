@@ -16,8 +16,8 @@ public class TeleOp extends Dynawheels {
             updateYaw();
 
             // Switching Gears
-            if (gamepad1.dpad_up) {changeGearMode(1);}
-            else if (gamepad1.dpad_down) {changeGearMode(-1);}
+            if (gamepad1.right_bumper) {changeGearMode(1);}
+            else if (gamepad1.left_bumper) {changeGearMode(-1);}
 
             // Field Drive Movement
             if (gamepad1.left_stick_x != 0 || gamepad1.left_stick_y != 0) {
@@ -26,6 +26,11 @@ public class TeleOp extends Dynawheels {
 
             // Turning
             if (gamepad1.right_stick_x != 0) {turnDriveTrain(gamepad1.right_stick_x);}
+
+            // Going to "Base"
+            if (gamepad1.dpad_left) {goToRedBase();}
+            else if (gamepad1.dpad_right) {goToBlueBase();}
         }
+        resetDriveTrain();
     }
 }
