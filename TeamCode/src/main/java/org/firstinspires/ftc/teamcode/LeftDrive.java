@@ -1,17 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "LeftDrive", group = "DYNABYTES")
-public class TeleOp extends Dynawheels {
+@TeleOp(name = "LeftDrive", group = "DYNABYTES")
+public class LeftDrive extends Dynawheels {
     @Override
-    public void runOpMode() {
-        // Initializing
-        configureRobot();
-        waitForStart();
-        
-        while (opModeIsActive()) {
+    public void run() {
+        while (canRun()) {
             // Update Yaw Data Every Iteration
             updateYaw();
 

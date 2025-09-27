@@ -4,7 +4,6 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -13,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 // Main Class
-public class Dynawheels extends LinearOpMode implements Controller {
+public abstract class Dynawheels extends Robot {
     // Declaring Hardware Variables
     public DcMotor BL, FL, FR, BR;
     public IMU imu;
@@ -34,14 +33,9 @@ public class Dynawheels extends LinearOpMode implements Controller {
     public double YAWBWD = 180;
 */
 
-    @Override
-    public void runOpMode() {
-
-    }
-
     // Functions
     @Override
-    public void configureRobot() {
+    public void configure() {
         // Mapping Wheels
         BL = hardwareMap.get(DcMotor.class, "BL");
         FL = hardwareMap.get(DcMotor.class, "FL");
@@ -92,7 +86,6 @@ public class Dynawheels extends LinearOpMode implements Controller {
         drive.setPoseEstimate(start_pos);
     }
 
-    @Override
     public void changeGearMode(int change_val) {
         // Gear Switch Must Be On Cooldown
         if (getRuntime() - gear_switch_time <= 0.1) {
@@ -139,7 +132,6 @@ public class Dynawheels extends LinearOpMode implements Controller {
         yaw_angle = orientation.getYaw(AngleUnit.DEGREES);
     }
 
-    @Override
     public void moveDriveTrain(double pwrx, double pwry) {
         double gear_pwr = cur_gear_mode / MAX_GEAR;
         BL.setPower(gear_pwr*(-pwrx-pwry));
@@ -149,7 +141,6 @@ public class Dynawheels extends LinearOpMode implements Controller {
         FL.setPower(gear_pwr*(pwrx-pwry));
     }
 
-    @Override
     public void fieldMoveDriveTrain(double pwr_x, double pwr_y) {
         /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
         double yaw_radians = Math.toRadians(yaw_angle);
@@ -162,7 +153,6 @@ public class Dynawheels extends LinearOpMode implements Controller {
         moveDriveTrain(pwr_x, pwr_y);
     }
 
-    @Override
     public void turnDriveTrain(double pwr) {
         double gear_pwr = cur_gear_mode / MAX_GEAR;
         BL.setPower(gear_pwr*pwr);
@@ -172,7 +162,6 @@ public class Dynawheels extends LinearOpMode implements Controller {
         BR.setPower(gear_pwr*-pwr);
     }
 
-    @Override
     public void resetDriveTrain() {
         BL.setPower(0);
         FL.setPower(0);

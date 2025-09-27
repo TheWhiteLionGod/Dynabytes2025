@@ -7,16 +7,16 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 public class TrajectoryStorage {
-    static Pose2d start_pos = new Pose2d(0, 0,0);
-    static Pose2d red_down_pos = new Pose2d(-5.25 * 12, -2.75 * 12, Math.toRadians(0));
-    static Pose2d blue_down_pos = new Pose2d(-5.25 * 12, 2.75 * 12, Math.toRadians(0));
-    static Pose2d red_up_pos = new Pose2d(4*12, -4*12, Math.toRadians(135));
-    static Pose2d blue_up_pos = new Pose2d(4*12, 4*12, Math.toRadians(225));
-    static TrajectorySequence sample_traj;
-    static TrajectorySequence getRedBalls;
-    static TrajectorySequence getBlueBalls;
-    static TrajectorySequence shootRed;
-    static TrajectorySequence shootBlue;
+    public static Pose2d start_pos = new Pose2d(0, 0,0);
+    public static Pose2d red_down_pos = new Pose2d(-5.25 * 12, -2.75 * 12, Math.toRadians(0));
+    public static Pose2d blue_down_pos = new Pose2d(-5.25 * 12, 2.75 * 12, Math.toRadians(0));
+    public static Pose2d red_up_pos = new Pose2d(4*12, -4*12, Math.toRadians(135));
+    public static Pose2d blue_up_pos = new Pose2d(4*12, 4*12, Math.toRadians(225));
+    public static TrajectorySequence sample_traj;
+    public static TrajectorySequence getRedBalls;
+    public static TrajectorySequence getBlueBalls;
+    public static TrajectorySequence shootRed;
+    public static TrajectorySequence shootBlue;
 
     public static void buildTrajectories(SampleMecanumDrive drive) {
         // Define Trajectories Here
