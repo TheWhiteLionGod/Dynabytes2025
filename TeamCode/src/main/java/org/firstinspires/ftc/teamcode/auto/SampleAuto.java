@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.PositionStorage;
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.TrajectoryStorage;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -14,8 +15,9 @@ public class SampleAuto extends Robot {
     public void configure() {
         // Creating Drivetrain
         drive = new SampleMecanumDrive(hardwareMap);
+        drive.setPoseEstimate(PositionStorage.start_pos);
+
         TrajectoryStorage.buildTrajectories(drive); // Builds Trajectory Here
-        drive.setPoseEstimate(TrajectoryStorage.start_pos);
     }
 
     public void run() {
