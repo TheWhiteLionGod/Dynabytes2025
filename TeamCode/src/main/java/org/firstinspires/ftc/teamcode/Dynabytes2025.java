@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @TeleOp(name = "Controller", group = "FTC2025")
 public class Dynabytes2025 extends Robot {
     DcMotor BL, FL, FR, BR;
+    DcMotor IM;
     double yaw_angle;
     double gear_mode = 3.0;
     boolean on_gear_switch_cooldown = false;
@@ -25,6 +26,8 @@ public class Dynabytes2025 extends Robot {
 
         BL.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.REVERSE);
+
+        IM = hardwareMap.dcMotor.get("IM");
 
         drive = new SampleMecanumDrive(hardwareMap);
     }
@@ -64,6 +67,14 @@ public class Dynabytes2025 extends Robot {
             }
             else if (gamepad1.dpad_right) {
                 goToBlueBase();
+            }
+
+            // Roller Controls
+            if (gamepad2.left_trigger != 0) {
+                startIntake();
+            }
+            else {
+                stopIntake();
             }
             //ENDS
         }
@@ -147,5 +158,13 @@ public class Dynabytes2025 extends Robot {
         FL.setPower(0);
         FR.setPower(0);
         BR.setPower(0);
+    }
+
+    public void startIntake() {
+        IM.setPower(0.5);
+    }
+
+    public void stopIntake() {
+        IM.setPower(0);
     }
 }
