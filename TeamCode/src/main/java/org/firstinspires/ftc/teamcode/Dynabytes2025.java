@@ -1,9 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.Color;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
@@ -11,11 +15,15 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 public class Dynabytes2025 extends Robot {
     DcMotor BL, FL, FR, BR;
     DcMotor OM;
+    Servo Carousel;
+    ColorSensor colorSensor;
     double yaw_angle;
     double gear_mode = 3.0;
     boolean on_gear_switch_cooldown = false;
     double gear_switch_time;
-    double MAX_GEAR = 3.0;
+    final double MAX_GEAR = 3.0;
+    final int GREEN_BALL = 0;
+    final int PURPLE_BALL = 1;
 
     @Override
     public void configure() {
@@ -28,6 +36,9 @@ public class Dynabytes2025 extends Robot {
         FL.setDirection(DcMotor.Direction.REVERSE);
 
         OM = hardwareMap.dcMotor.get("OM");
+
+        Carousel = hardwareMap.servo.get("Carousel");
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
 
         drive = new SampleMecanumDrive(hardwareMap);
     }
@@ -75,6 +86,18 @@ public class Dynabytes2025 extends Robot {
             }
             else {
                 stopLauncher();
+            }
+
+            // Carousel Controls
+            if (gamepad2.x) {
+                Runnable run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
+                Thread thread = new Thread(run);
+                thread.start();
+            }
+            else if (gamepad2.a) {
+                Runnable run = new SpinCarouselThread(colorSensor, Carousel, PURPLE_BALL);
+                Thread thread = new Thread(run);
+                thread.start();
             }
             //ENDS
         }
