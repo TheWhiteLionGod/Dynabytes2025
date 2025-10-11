@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.graphics.Color;
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -14,7 +12,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @TeleOp(name = "Controller", group = "FTC2025")
 public class Dynabytes2025 extends Robot {
     DcMotor BL, FL, FR, BR;
-    DcMotor OM;
+    DcMotor OM, IM;
     Servo Carousel;
     ColorSensor colorSensor;
     double yaw_angle;
@@ -36,6 +34,7 @@ public class Dynabytes2025 extends Robot {
         FL.setDirection(DcMotor.Direction.REVERSE);
 
         OM = hardwareMap.dcMotor.get("OM");
+        IM = hardwareMap.dcMotor.get("IM");
 
         Carousel = hardwareMap.servo.get("Carousel");
         colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
@@ -78,6 +77,14 @@ public class Dynabytes2025 extends Robot {
             }
             else if (gamepad1.dpad_right) {
                 goToBlueBase();
+            }
+
+            // Roller Controls
+            if (gamepad2.left_trigger != 0) {
+                startIntake();
+            }
+            else {
+                stopIntake();
             }
 
             // Launcher Controls
@@ -181,6 +188,14 @@ public class Dynabytes2025 extends Robot {
         FL.setPower(0);
         FR.setPower(0);
         BR.setPower(0);
+    }
+
+    public void startIntake() {
+        IM.setPower(0.5);
+    }
+
+    public void stopIntake() {
+        IM.setPower(0);
     }
 
     public void startLauncher() {
