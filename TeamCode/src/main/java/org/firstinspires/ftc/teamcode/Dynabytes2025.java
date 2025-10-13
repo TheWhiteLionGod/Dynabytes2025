@@ -80,7 +80,7 @@ public class Dynabytes2025 extends Robot {
             }
 
             // Roller Controls
-            if (gamepad2.left_trigger != 0) {
+            if (gamepad1.left_trigger != 0) {
                 startIntake();
             }
             else {
@@ -88,7 +88,7 @@ public class Dynabytes2025 extends Robot {
             }
 
             // Launcher Controls
-            if (gamepad2.right_trigger != 0) {
+            if (gamepad1.right_trigger != 0) {
                 startLauncher();
             }
             else {
@@ -96,12 +96,12 @@ public class Dynabytes2025 extends Robot {
             }
 
             // Carousel Controls
-            if (gamepad2.x) {
+            if (gamepad1.x) {
                 Runnable run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
                 Thread thread = new Thread(run);
                 thread.start();
             }
-            else if (gamepad2.a) {
+            else if (gamepad1.a) {
                 Runnable run = new SpinCarouselThread(colorSensor, Carousel, PURPLE_BALL);
                 Thread thread = new Thread(run);
                 thread.start();
