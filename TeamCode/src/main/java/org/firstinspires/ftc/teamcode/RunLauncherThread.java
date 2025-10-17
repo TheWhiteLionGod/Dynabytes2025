@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -28,9 +26,8 @@ public class RunLauncherThread implements Runnable {
             Lift.setPosition(LIFT_OUT_POS);
             Thread.sleep(1000);
         }
-        catch (InterruptedException e) {
-            telemetry.addLine("Interrupt Exception Thrown");
-            telemetry.update();
+        catch (InterruptedException ignored) {
+
         }
         finally {
             Lift.setPosition(LIFT_IN_POS);

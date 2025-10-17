@@ -47,7 +47,6 @@ public class SpinCarouselThread implements Runnable {
                 break;
 
             default:
-                telemetry.addLine("INVALID BALL COLOR ENTERED");
                 break;
         }
     }
@@ -63,12 +62,10 @@ public class SpinCarouselThread implements Runnable {
             try {
                 Thread.sleep(500);
             }
-            catch (InterruptedException err) {
-                telemetry.addLine("Interrupt Exception Occurred");
+            catch (InterruptedException ignored) {
+
             }
         }
-        telemetry.addData("FAILED TO FIND GREEN BALL, HSV", hsvValues[0]);
-        telemetry.update();
     }
 
     public void findPurpleBall() {
@@ -82,12 +79,10 @@ public class SpinCarouselThread implements Runnable {
             try {
                 Thread.sleep(500);
             }
-            catch (InterruptedException err) {
-                telemetry.addLine("Interrupt Exception Occurred");
+            catch (InterruptedException ignored) {
+
             }
         }
-        telemetry.addData("FAILED TO FIND PURPLE BALL, HSV", hsvValues[0]);
-        telemetry.update();
     }
 
     public void spinCarousel() {
