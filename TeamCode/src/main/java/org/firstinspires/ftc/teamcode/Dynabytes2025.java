@@ -13,8 +13,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 public class Dynabytes2025 extends Robot {
     DcMotor BL, FL, FR, BR;
     DcMotor OM, IM;
-    Servo Carousel;
+    Servo Carousel, Lift;
     ColorSensor colorSensor;
+    Thread SpinCarousel, RunLauncher;
+    RunLauncherThread LauncherRunnable;
     double yaw_angle;
     double gear_mode = 3.0;
     boolean on_gear_switch_cooldown = false;
@@ -37,6 +39,7 @@ public class Dynabytes2025 extends Robot {
         IM = hardwareMap.dcMotor.get("IM");
 
         Carousel = hardwareMap.servo.get("Carousel");
+        Lift = hardwareMap.servo.get("Lift");
         colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
 
         drive = new SampleMecanumDrive(hardwareMap);
@@ -89,22 +92,26 @@ public class Dynabytes2025 extends Robot {
 
             // Launcher Controls
             if (gamepad1.right_trigger != 0) {
-                startLauncher();
-            }
-            else {
-                stopLauncher();
+                if (RunLauncher == null || !RunLauncher.isAlive()) {
+                    LauncherRunnable = new RunLauncherThread(OM, Lift);
+                    RunLauncher = new Thread(LauncherRunnable);
+                    RunLauncher.start();
+                }
+                else if (LauncherRunnable.canInterrupt) {
+                    RunLauncher.interrupt();
+                }
             }
 
             // Carousel Controls
-            if (gamepad1.x) {
+            if (gamepad1.x && (SpinCarousel == null || !SpinCarousel.isAlive())) {
                 Runnable run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
-                Thread thread = new Thread(run);
-                thread.start();
+                SpinCarousel = new Thread(run);
+                SpinCarousel.start();
             }
-            else if (gamepad1.a) {
+            else if (gamepad1.a && (SpinCarousel == null || !SpinCarousel.isAlive())) {
                 Runnable run = new SpinCarouselThread(colorSensor, Carousel, PURPLE_BALL);
-                Thread thread = new Thread(run);
-                thread.start();
+                SpinCarousel = new Thread(run);
+                SpinCarousel.start();
             }
             //ENDS
         }
@@ -196,13 +203,5 @@ public class Dynabytes2025 extends Robot {
 
     public void stopIntake() {
         IM.setPower(0);
-    }
-
-    public void startLauncher() {
-        OM.setPower(1);
-    }
-
-    public void stopLauncher() {
-        OM.setPower(0);
     }
 }
