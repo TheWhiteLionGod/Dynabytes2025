@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.PositionStorage;
+import org.firstinspires.ftc.teamcode.Positions;
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.TrajectoryStorage;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -13,7 +13,7 @@ public class AutoPickAndShoot extends Robot {
     public void configure() {
         // Creating Drivetrain
         drive = new SampleMecanumDrive(hardwareMap);
-        drive.setPoseEstimate(PositionStorage.blue_down_pos);
+        drive.setPoseEstimate(Positions.BLUE_DOWN.getPose2D());
 
         TrajectoryStorage.buildTrajectories(drive); // Builds Trajectory Here
     }

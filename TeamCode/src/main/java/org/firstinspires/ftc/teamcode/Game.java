@@ -19,7 +19,6 @@ public class Game extends LinearOpMode {
 
         // Starting Autonomous
         auto.configure();
-
         auto.game = this;
         auto.run();
 
