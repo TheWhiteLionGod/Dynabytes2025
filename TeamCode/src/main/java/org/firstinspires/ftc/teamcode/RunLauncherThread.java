@@ -7,8 +7,6 @@ public class RunLauncherThread implements Runnable {
     DcMotor OM;
     Servo Lift;
     public volatile boolean canInterrupt = false;
-    final double LIFT_IN_POS = 0.0;
-    final double LIFT_OUT_POS = 0.0;
     public RunLauncherThread(DcMotor OM, Servo Lift) {
         this.OM = OM;
         this.Lift = Lift;
@@ -23,14 +21,14 @@ public class RunLauncherThread implements Runnable {
             this.canInterrupt = true;
             Thread.sleep(500);
 
-            Lift.setPosition(LIFT_OUT_POS);
+            Lift.setPosition(Constants.LIFT_OUT_POS);
             Thread.sleep(1000);
         }
         catch (InterruptedException ignored) {
 
         }
         finally {
-            Lift.setPosition(LIFT_IN_POS);
+            Lift.setPosition(Constants.LIFT_IN_POS);
             OM.setPower(0);
         }
     }
