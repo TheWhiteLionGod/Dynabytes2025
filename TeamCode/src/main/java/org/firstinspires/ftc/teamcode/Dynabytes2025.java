@@ -92,7 +92,8 @@ public class Dynabytes2025 extends Robot {
             }
 
             // Launcher Controls
-            if (gamepad1.right_trigger != 0) {
+            if ((gamepad1.right_trigger != 0) &&
+                    (SpinCarousel == null || !RunLauncher.isAlive())) {
                 if (RunLauncher == null || !RunLauncher.isAlive()) {
                     LauncherRunnable = new RunLauncherThread(OM, Lift);
                     RunLauncher = new Thread(LauncherRunnable);
@@ -104,7 +105,8 @@ public class Dynabytes2025 extends Robot {
             }
 
             // Carousel Controls
-            if (SpinCarousel == null || !SpinCarousel.isAlive()) {
+            if ((SpinCarousel == null || !SpinCarousel.isAlive())
+                    && (RunLauncher == null || !RunLauncher.isAlive())) {
                 Runnable run = null;
                 if (gamepad1.x) {
                     run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
