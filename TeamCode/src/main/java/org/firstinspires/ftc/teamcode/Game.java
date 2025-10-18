@@ -13,13 +13,12 @@ public class Game extends LinearOpMode {
     @Override
     public void runOpMode() {
         auto = new AutoPickAndShoot();
-        teleop = new Dynabytes2025();
+        teleop = new Controller();
 
         waitForStart();
 
         // Starting Autonomous
         auto.configure();
-
         auto.game = this;
         auto.run();
 

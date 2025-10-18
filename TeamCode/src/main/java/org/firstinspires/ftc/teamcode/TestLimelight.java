@@ -5,7 +5,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous(name="Limelight Test", group="Auto")
-public class LimelightTest extends Robot {
+public class TestLimelight extends Robot {
     Limelight3A limelight;
     @Override
     public void configure() {
