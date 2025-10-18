@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+@TeleOp(name="Controller", group="FTC2025")
 public class Controller extends Robot {
     @Override
     public void configure() {
@@ -115,10 +117,21 @@ public class Controller extends Robot {
                     SpinCarousel.start();
                 }
             }
+
+            sleep(50);
         }
 
-        Reset();
-        SpinCarousel.interrupt(); // Stopping Carousel Spinning
-        RunLauncher.interrupt(); // Stopping Shooting Mechanism
+        Reset(); // Stopping Drivetrain
+        stopIntake(); // Stopping Intake
+
+        // Stopping Carousel
+        if (SpinCarousel != null && SpinCarousel.isAlive()) {
+            SpinCarousel.interrupt(); // Stopping Carousel Spinning
+        }
+
+        // Stopping Launcher and Lift
+        if (RunLauncher != null && RunLauncher.isAlive()) {
+            RunLauncher.interrupt(); // Stopping Shooting Mechanism
+        }
     }
 }
