@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+@TeleOp(name="Controller", group="FTC2025")
 public class Controller extends Robot {
     @Override
     public void configure() {
@@ -95,11 +97,35 @@ public class Controller extends Robot {
                 else if (gamepad1.a) {
                     SpinCarousel = new FunctionThread(this::findPurpleBall, () -> {});
                 }
+                else if (gamepad1.dpad_left) {
+                    /* Creating Empty Thread as Calling Spin Carousel Function
+                    * In Main Body. We have to do this as FunctionThread can not
+                    * handle Functions with parameters. This is the Same for the
+                    * Next Two If Statements */
+                    SpinCarousel = new FunctionThread(() -> {Thread.sleep(500);}, () -> {});
+                    spinCarousel(Constants.CAROUSEL_POS_1);
+                }
+                else if (gamepad1.dpad_up) {
+                    SpinCarousel = new FunctionThread(() -> {Thread.sleep(500);}, () -> {});
+                    spinCarousel(Constants.CAROUSEL_POS_2);
+                }
+                else if (gamepad1.dpad_right) {
+                    SpinCarousel = new FunctionThread(() -> {Thread.sleep(500);}, () -> {});
+                    spinCarousel(Constants.CAROUSEL_POS_3);
+                }
+                else if (gamepad1.dpad_down) {
+                    /* Since this version of spinCarousel doesn't require parameters
+                    * we can run it in a thread */
+                    SpinCarousel = new FunctionThread(this::spinCarousel, () -> {});
+                }
+
 
                 if (SpinCarousel != null ) {
                     SpinCarousel.start();
                 }
             }
+
+            sleep(50);
         }
 
         Reset();

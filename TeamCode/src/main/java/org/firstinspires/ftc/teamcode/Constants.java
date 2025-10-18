@@ -5,8 +5,6 @@ public class Constants {
     public static final double MAX_GEAR = 3.0;
 
     // Carousel Color Detection
-    public static final int GREEN_BALL = 0;
-    public static final int PURPLE_BALL = 1;
     public static final int GREEN_HUE_MIN = 150;
     public static final int GREEN_HUE_MAX = 180;
     public static final int PURPLE_HUE_MIN = 200;
