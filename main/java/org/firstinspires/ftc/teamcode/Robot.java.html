@@ -25,9 +25,24 @@
 <span class='text-warning'>runOpMode(</span>
 <span class='text-warning'>);</span>
 </p>
+<p class='my-2'><span class='text-primary'>abstract public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>configure(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>abstract public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>run(</span>
+<span class='text-warning'>);</span>
+</p>
 <p class='my-2'><span class='text-primary'>public</span>
 <span class='text-success'>boolean</span>
 <span class='text-warning'>canRun(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>updateOdometry(</span>
 <span class='text-warning'>);</span>
 </p>
 <p class='my-2'><span class='text-primary'>public</span>
@@ -37,14 +52,105 @@
 <span class=''>traj</span>
 <span class='text-warning'>);</span>
 </p>
-<p class='my-2'><span class='text-primary'>abstract public</span>
+<p class='my-2'><span class='text-primary'>public</span>
 <span class='text-success'>void</span>
-<span class='text-warning'>configure(</span>
+<span class='text-warning'>goToRedBase(</span>
 <span class='text-warning'>);</span>
 </p>
-<p class='my-2'><span class='text-primary'>abstract public</span>
+<p class='my-2'><span class='text-primary'>public</span>
 <span class='text-success'>void</span>
-<span class='text-warning'>run(</span>
+<span class='text-warning'>goToBlueBase(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>changeGearMode(</span>
+<span class='text-success'>int</span>
+<span class=''>change_val</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>fieldDriveMove(</span>
+<span class='text-success'>double</span>
+<span class=''>pwr_x</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>pwr_y</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>Move(</span>
+<span class='text-success'>double</span>
+<span class=''>pwrx</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>pwry</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>Turn(</span>
+<span class='text-success'>double</span>
+<span class=''>pwr</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>Reset(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>forwardIntake(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>backwardIntake(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>stopIntake(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>updateHSV(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>spinCarousel(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>spinCarousel(</span>
+<span class='text-success'>double</span>
+<span class=''>new_pos</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>findGreenBall(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>findPurpleBall(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>startLauncher(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>stopLauncher(</span>
 <span class='text-warning'>);</span>
 </p>
 </div>
