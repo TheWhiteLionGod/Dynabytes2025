@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import android.graphics.Color;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -11,7 +10,6 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
@@ -68,7 +66,7 @@ public abstract class Robot extends LinearOpMode {
         }
 
         // Printing Deviation in Position Once Completed
-        telemetry.addData("Expected End Position: ", TrajectoryStorage.sample_traj.end());
+        telemetry.addData("Expected End Position: ", traj.end());
         telemetry.addData("Current Position: ", drive.getPoseEstimate());
         telemetry.update();
     }
@@ -76,27 +74,21 @@ public abstract class Robot extends LinearOpMode {
     // These Functions Make Robot Go To Base
     public void goToRedBase() {
         try {
-            drive.followTrajectory(
-                    drive.trajectoryBuilder(drive.getPoseEstimate())
-                            .splineToLinearHeading(new Pose2d(-3.25*12, 2.75*12, Math.toRadians(0)), 0)
-                            .build()
-            );
+            drive.followTrajectorySequence(Trajectories.GO_RED_BASE.getTrajectory(drive));
         }
         catch (EmptyPathSegmentException e) {
-            System.out.println("Empty Path Segment Exception has Occurred\nThis means that the robot is already at the defined position");
+            System.out.println("Empty Path Segment Exception has Occurred\n" +
+                    "This means that the robot is already at the defined position");
         }
     }
 
     public void goToBlueBase() {
         try {
-            drive.followTrajectory(
-                    drive.trajectoryBuilder(drive.getPoseEstimate())
-                            .splineToLinearHeading(new Pose2d(-3.25*12, -2.75*12, Math.toRadians(0)), 0)
-                            .build()
-            );
+            drive.followTrajectorySequence(Trajectories.GO_BLUE_BASE.getTrajectory(drive));
         }
         catch (EmptyPathSegmentException e) {
-            System.out.println("Empty Path Segment Exception has Occurred\nThis means that the robot is already at the defined position");
+            System.out.println("Empty Path Segment Exception has Occurred\n" +
+                    "This means that the robot is already at the defined position");
         }
     }
 
