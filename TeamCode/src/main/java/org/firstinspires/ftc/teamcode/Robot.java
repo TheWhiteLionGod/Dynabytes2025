@@ -119,11 +119,11 @@ public abstract class Robot extends LinearOpMode {
 
         /* At this point, Joystick X/Y (strafe/forward) vectors have been */
         /* rotated by the gyro angle, and can be sent to drive system */
-        Move(pwr_x, pwr_y);
+        moveDrivetrain(pwr_x, pwr_y);
     }
 
     // Regular Movement
-    public void Move(double pwrx, double pwry) {
+    public void moveDrivetrain(double pwrx, double pwry) {
         double gear_pwr = gear_mode / Constants.MAX_GEAR;
         BL.setPower(gear_pwr*(-pwrx-pwry));
         FR.setPower(gear_pwr*(-pwrx-pwry));
@@ -133,7 +133,7 @@ public abstract class Robot extends LinearOpMode {
     }
 
     // Turning
-    public void Turn(double pwr) {
+    public void turnDrivetrain(double pwr) {
         double gear_pwr = gear_mode / Constants.MAX_GEAR;
         BL.setPower(gear_pwr*pwr);
         FR.setPower(gear_pwr*-pwr);
@@ -143,7 +143,7 @@ public abstract class Robot extends LinearOpMode {
     }
 
     // Stopping Drivetrain
-    public void Reset() {
+    public void stopDrivetrain() {
         BL.setPower(0);
         FL.setPower(0);
         FR.setPower(0);

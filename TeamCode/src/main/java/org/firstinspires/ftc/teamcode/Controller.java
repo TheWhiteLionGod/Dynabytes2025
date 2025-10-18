@@ -46,12 +46,12 @@ public class Controller extends Robot {
                 fieldDriveMove(gamepad1.left_stick_x, gamepad1.left_stick_y);
             }
             else {
-                Reset();
+                stopDrivetrain();
             }
 
             // Turning
             if (gamepad1.right_stick_x != 0) {
-                Turn(gamepad1.right_stick_x);
+                turnDrivetrain(gamepad1.right_stick_x);
             }
 
             // Going to "Base"
@@ -121,7 +121,7 @@ public class Controller extends Robot {
             sleep(50);
         }
 
-        Reset(); // Stopping Drivetrain
+        stopDrivetrain(); // Stopping Drivetrain
         stopIntake(); // Stopping Intake
 
         // Stopping Carousel
