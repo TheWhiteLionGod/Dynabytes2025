@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.Color;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -24,8 +26,10 @@ public abstract class Robot extends LinearOpMode {
     public RunLauncherThread LauncherRunnable; // Runnable
     public LinearOpMode game = this; // Game Object
 
-    // TeleOp Related Variables
-    double yaw_angle;
+    double yaw_angle; // Yaw Angle Data
+    float[] hsvValues = {0F, 0F, 0F}; // Color Sensing Data
+
+    // Gear Mode Variables
     boolean on_gear_switch_cooldown = false;
     double gear_switch_time;
     double gear_mode = 3.0;
@@ -165,5 +169,34 @@ public abstract class Robot extends LinearOpMode {
 
     public void stopIntake() {
         IM.setPower(0);
+    }
+
+    // Updating Color Sensor
+    public void updateHSV() {
+        Color.RGBToHSV(
+                (colorSensor.red() * Constants.HUE_SCALE_FACTOR),
+                (colorSensor.green() * Constants.HUE_SCALE_FACTOR),
+                (colorSensor.blue() * Constants.HUE_SCALE_FACTOR),
+                hsvValues
+        );
+    }
+
+    // Rotating Carousel to Next Position
+    public void spinCarousel() {
+        double cur_pos = Carousel.getPosition();
+        if (cur_pos == Constants.CAROUSEL_POS_1) {
+            Carousel.setPosition(Constants.CAROUSEL_POS_2);
+        }
+        else if (cur_pos == Constants.CAROUSEL_POS_2) {
+            Carousel.setPosition(Constants.CAROUSEL_POS_3);
+        }
+        else if (cur_pos == Constants.CAROUSEL_POS_3) {
+            Carousel.setPosition(Constants.CAROUSEL_POS_1);
+        }
+    }
+
+    // Spinning Carousel to Given Position
+    public void spinCarousel(double new_pos) {
+        Carousel.setPosition(new_pos);
     }
 }
