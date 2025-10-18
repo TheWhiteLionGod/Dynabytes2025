@@ -8,10 +8,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 public class Controller extends Robot {
     @Override
     public void configure() {
-        BL = hardwareMap.dcMotor.get("back_left_motor");
-        FL = hardwareMap.dcMotor.get("front_left_motor");
-        FR = hardwareMap.dcMotor.get("front_right_motor");
-        BR = hardwareMap.dcMotor.get("back_right_motor");
+        BL = hardwareMap.dcMotor.get("BL");
+        FL = hardwareMap.dcMotor.get("FL");
+        FR = hardwareMap.dcMotor.get("FR");
+        BR = hardwareMap.dcMotor.get("BR");
 
         BL.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.REVERSE);
@@ -21,7 +21,7 @@ public class Controller extends Robot {
 
         Carousel = hardwareMap.servo.get("Carousel");
         Lift = hardwareMap.servo.get("Lift");
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
+        colorSensor = hardwareMap.get(ColorSensor.class, "ColorSensor");
 
         drive = new SampleMecanumDrive(hardwareMap);
     }
@@ -32,10 +32,10 @@ public class Controller extends Robot {
             updateOdometry();
 
             // Switching Gears
-            if (gamepad1.right_bumper) {
+            if (gamepad1.y) {
                 changeGearMode(1);
             }
-            else if (gamepad1.left_bumper) {
+            else if (gamepad1.a) {
                 changeGearMode(-1);
             }
 
@@ -53,11 +53,11 @@ public class Controller extends Robot {
             }
 
             // Going to "Base"
-            if (gamepad1.dpad_left) {
-                goToRedBase();
-            }
-            else if (gamepad1.dpad_right) {
+            if (gamepad1.left_stick_button) {
                 goToBlueBase();
+            }
+            else if (gamepad1.right_stick_button) {
+                goToRedBase();
             }
 
             // Roller Controls
@@ -92,8 +92,23 @@ public class Controller extends Robot {
                 if (gamepad1.x) {
                     SpinCarousel = new FunctionThread(this::findGreenBall, () -> {});
                 }
-                else if (gamepad1.a) {
+                else if (gamepad1.b) {
                     SpinCarousel = new FunctionThread(this::findPurpleBall, () -> {});
+                }
+                else if (gamepad1.dpad_down) {
+                    SpinCarousel = new FunctionThread(this::spinCarousel, () -> {});
+                }
+                else if (gamepad1.dpad_left) {
+                    SpinCarousel = new FunctionThread(() -> Thread.sleep(500), () -> {});
+                    spinCarousel(Constants.CAROUSEL_POS_1);
+                }
+                else if (gamepad1.dpad_up) {
+                    SpinCarousel = new FunctionThread(() -> Thread.sleep(500), () -> {});
+                    spinCarousel(Constants.CAROUSEL_POS_2);
+                }
+                else if (gamepad1.dpad_right) {
+                    SpinCarousel = new FunctionThread(() -> Thread.sleep(500), () -> {});
+                    spinCarousel(Constants.CAROUSEL_POS_3);
                 }
 
                 if (SpinCarousel != null ) {
