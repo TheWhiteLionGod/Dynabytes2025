@@ -5,7 +5,6 @@ import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -22,9 +21,6 @@ public class Dynabytes2025 extends Robot {
     double gear_mode = 3.0;
     boolean on_gear_switch_cooldown = false;
     double gear_switch_time;
-    final double MAX_GEAR = 3.0;
-    final int GREEN_BALL = 0;
-    final int PURPLE_BALL = 1;
 
     @Override
     public void configure() {
@@ -109,10 +105,10 @@ public class Dynabytes2025 extends Robot {
                     && (RunLauncher == null || !RunLauncher.isAlive())) {
                 Runnable run = null;
                 if (gamepad1.x) {
-                    run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
+                    run = new SpinCarouselThread(colorSensor, Carousel, Constants.GREEN_BALL);
                 }
                 else if (gamepad1.a) {
-                    run = new SpinCarouselThread(colorSensor, Carousel, PURPLE_BALL);
+                    run = new SpinCarouselThread(colorSensor, Carousel, Constants.PURPLE_BALL);
                 }
 
                 if (run != null) {
@@ -131,7 +127,7 @@ public class Dynabytes2025 extends Robot {
                 on_gear_switch_cooldown = false;
             }
         } else {
-            gear_mode = Math.min(Math.max(gear_mode + change_val, 1), MAX_GEAR);
+            gear_mode = Math.min(Math.max(gear_mode + change_val, 1), Constants.MAX_GEAR);
             on_gear_switch_cooldown = true;
             gear_switch_time = getRuntime();
 
@@ -168,7 +164,7 @@ public class Dynabytes2025 extends Robot {
     }
 
     public void Move(double pwrx, double pwry) {
-        double gear_pwr = gear_mode / MAX_GEAR;
+        double gear_pwr = gear_mode / Constants.MAX_GEAR;
         BL.setPower(gear_pwr*(-pwrx-pwry));
         FR.setPower(gear_pwr*(-pwrx-pwry));
 
@@ -189,7 +185,7 @@ public class Dynabytes2025 extends Robot {
     }
 
     public void Turn(double pwr) {
-        double gear_pwr = gear_mode / MAX_GEAR;
+        double gear_pwr = gear_mode / Constants.MAX_GEAR;
         BL.setPower(gear_pwr*pwr);
         FR.setPower(gear_pwr*-pwr);
 
