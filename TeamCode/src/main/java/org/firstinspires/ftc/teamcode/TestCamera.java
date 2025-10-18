@@ -10,7 +10,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import java.util.List;
 
 @TeleOp(name = "Camera Test", group = "Test")
-public class CameraTest extends Robot {
+public class TestCamera extends Robot {
     AprilTagProcessor aprilTag;
     VisionPortal visionPortal;
 
