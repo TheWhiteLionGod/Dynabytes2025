@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -103,15 +104,19 @@ public class Dynabytes2025 extends Robot {
             }
 
             // Carousel Controls
-            if (gamepad1.x && (SpinCarousel == null || !SpinCarousel.isAlive())) {
-                Runnable run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
-                SpinCarousel = new Thread(run);
-                SpinCarousel.start();
-            }
-            else if (gamepad1.a && (SpinCarousel == null || !SpinCarousel.isAlive())) {
-                Runnable run = new SpinCarouselThread(colorSensor, Carousel, PURPLE_BALL);
-                SpinCarousel = new Thread(run);
-                SpinCarousel.start();
+            if (SpinCarousel == null || !SpinCarousel.isAlive()) {
+                Runnable run = null;
+                if (gamepad1.x) {
+                    run = new SpinCarouselThread(colorSensor, Carousel, GREEN_BALL);
+                }
+                else if (gamepad1.a) {
+                    run = new SpinCarouselThread(colorSensor, Carousel, PURPLE_BALL);
+                }
+
+                if (run != null) {
+                    SpinCarousel = new Thread(run);
+                    SpinCarousel.start();
+                }
             }
             //ENDS
         }
