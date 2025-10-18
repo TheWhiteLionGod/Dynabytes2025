@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
@@ -22,8 +23,7 @@ public abstract class Robot extends LinearOpMode {
     public DcMotor OM, IM; // Intake Outtake Motors
     public Servo Carousel, Lift; // Carousel and Lift Servos
     public ColorSensor colorSensor; // Color Sensor
-    public Thread SpinCarousel, RunLauncher; // Threads
-    public RunLauncherThread LauncherRunnable; // Runnable
+    public FunctionThread SpinCarousel, RunLauncher; // Threads
     public LinearOpMode game = this; // Game Object
 
     double yaw_angle; // Yaw Angle Data
@@ -198,5 +198,44 @@ public abstract class Robot extends LinearOpMode {
     // Spinning Carousel to Given Position
     public void spinCarousel(double new_pos) {
         Carousel.setPosition(new_pos);
+    }
+
+    // Spinning Carousel for Specific Ball Color
+    public void findGreenBall() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            updateHSV();
+            if (hsvValues[0] >= Constants.GREEN_HUE_MIN
+                    && hsvValues[0] <= Constants.GREEN_HUE_MAX) {
+                return;
+            }
+
+            spinCarousel();
+            Thread.sleep(500);
+        }
+    }
+
+    public void findPurpleBall() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            updateHSV();
+            if (hsvValues[0] >= Constants.PURPLE_HUE_MIN
+                    && hsvValues[0] <= Constants.PURPLE_HUE_MAX) {
+                return;
+            }
+            spinCarousel();
+            Thread.sleep(500);
+        }
+    }
+
+    public void startLauncher() throws InterruptedException {
+        OM.setPower(1);
+        Thread.sleep(1000);
+
+        Lift.setPosition(Constants.LIFT_OUT_POS);
+        Thread.sleep(1000);
+    }
+
+    public void stopLauncher() {
+        Lift.setPosition(Constants.LIFT_IN_POS);
+        OM.setPower(0);
     }
 }

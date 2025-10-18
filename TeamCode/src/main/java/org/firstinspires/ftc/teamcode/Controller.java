@@ -64,19 +64,21 @@ public class Controller extends Robot {
             if (gamepad1.left_trigger != 0) {
                 forwardIntake();
             }
+            else if (gamepad1.left_bumper) {
+                backwardIntake();
+            }
             else {
                 stopIntake();
             }
 
             // Launcher Controls
-            if ((gamepad1.right_trigger != 0) &&
-                    (SpinCarousel == null || !RunLauncher.isAlive())) {
-                if (RunLauncher == null || !RunLauncher.isAlive()) {
-                    LauncherRunnable = new RunLauncherThread(OM, Lift);
-                    RunLauncher = new Thread(LauncherRunnable);
+            if ((RunLauncher == null || !RunLauncher.isAlive())
+                    && (SpinCarousel == null || !SpinCarousel.isAlive())) {
+                if (gamepad1.right_trigger != 0) {
+                    RunLauncher = new FunctionThread(this::startLauncher, this::stopLauncher);
                     RunLauncher.start();
                 }
-                else if (LauncherRunnable.canInterrupt) {
+                else if (gamepad1.right_bumper && RunLauncher != null) {
                     RunLauncher.interrupt();
                 }
             }
@@ -84,16 +86,17 @@ public class Controller extends Robot {
             // Carousel Controls
             if ((SpinCarousel == null || !SpinCarousel.isAlive())
                     && (RunLauncher == null || !RunLauncher.isAlive())) {
-                Runnable run = null;
+
+                SpinCarousel = null;
+
                 if (gamepad1.x) {
-                    run = new SpinCarouselThread(colorSensor, Carousel, Constants.GREEN_BALL);
+                    SpinCarousel = new FunctionThread(this::findGreenBall, () -> {});
                 }
                 else if (gamepad1.a) {
-                    run = new SpinCarouselThread(colorSensor, Carousel, Constants.PURPLE_BALL);
+                    SpinCarousel = new FunctionThread(this::findPurpleBall, () -> {});
                 }
 
-                if (run != null) {
-                    SpinCarousel = new Thread(run);
+                if (SpinCarousel != null ) {
                     SpinCarousel.start();
                 }
             }
