@@ -18,11 +18,11 @@ public class Controller extends Robot {
         BL.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.REVERSE);
 
-        OM = hardwareMap.dcMotor.get("OM");
-        IM = hardwareMap.dcMotor.get("IM");
+        launcher = hardwareMap.dcMotor.get("Launcher");
+        roller = hardwareMap.dcMotor.get("Roller");
 
-        Carousel = hardwareMap.servo.get("Carousel");
-        Lift = hardwareMap.servo.get("Lift");
+        carousel = hardwareMap.servo.get("Carousel");
+        lift = hardwareMap.servo.get("Lift");
         colorSensor = hardwareMap.get(ColorSensor.class, "ColorSensor");
 
         drive = new SampleMecanumDrive(hardwareMap);
@@ -74,42 +74,42 @@ public class Controller extends Robot {
             }
 
             // Launcher Controls
-            if ((RunLauncher == null || !RunLauncher.isAlive())
-                    && (SpinCarousel == null || !SpinCarousel.isAlive())) {
+            if ((runLauncherThread == null || !runLauncherThread.isAlive())
+                    && (spinCarouselThread == null || !spinCarouselThread.isAlive())) {
                 if (gamepad1.right_trigger != 0) {
-                    RunLauncher = new FunctionThread(this::startLauncher, this::stopLauncher);
-                    RunLauncher.start();
+                    runLauncherThread = new FunctionThread(this::startLauncher, this::stopLauncher);
+                    runLauncherThread.start();
                 }
-                else if (gamepad1.right_bumper && RunLauncher != null && RunLauncher.isAlive()) {
-                    RunLauncher.interrupt();
+                else if (gamepad1.right_bumper && runLauncherThread != null && runLauncherThread.isAlive()) {
+                    runLauncherThread.interrupt();
                 }
             }
 
             // Carousel Controls
-            if ((SpinCarousel == null || !SpinCarousel.isAlive())
-                    && (RunLauncher == null || !RunLauncher.isAlive())) {
+            if ((spinCarouselThread == null || !spinCarouselThread.isAlive())
+                    && (runLauncherThread == null || !runLauncherThread.isAlive())) {
 
                 if (gamepad1.x) {
-                    SpinCarousel = new FunctionThread(this::findGreenBall, () -> {});
+                    spinCarouselThread = new FunctionThread(this::findGreenBall, () -> {});
                 }
                 else if (gamepad1.b) {
-                    SpinCarousel = new FunctionThread(this::findPurpleBall, () -> {});
+                    spinCarouselThread = new FunctionThread(this::findPurpleBall, () -> {});
                 }
                 else if (gamepad1.dpad_down) {
-                    SpinCarousel = new FunctionThread(this::spinCarousel, () -> {});
+                    spinCarouselThread = new FunctionThread(this::spinCarousel, () -> {});
                 }
                 else if (gamepad1.dpad_left) {
-                    SpinCarousel = new FunctionThread(() -> spinCarousel(Constants.CAROUSEL_POS_1), () -> {});
+                    spinCarouselThread = new FunctionThread(() -> spinCarousel(Constants.CAROUSEL_POS_1), () -> {});
                 }
                 else if (gamepad1.dpad_up) {
-                    SpinCarousel = new FunctionThread(() -> spinCarousel(Constants.CAROUSEL_POS_2), () -> {});
+                    spinCarouselThread = new FunctionThread(() -> spinCarousel(Constants.CAROUSEL_POS_2), () -> {});
                 }
                 else if (gamepad1.dpad_right) {
-                    SpinCarousel = new FunctionThread(() -> spinCarousel(Constants.CAROUSEL_POS_3), () -> {});
+                    spinCarouselThread = new FunctionThread(() -> spinCarousel(Constants.CAROUSEL_POS_3), () -> {});
                 }
 
-                if (SpinCarousel != null)
-                    SpinCarousel.start();
+                if (spinCarouselThread != null)
+                    spinCarouselThread.start();
             }
 
             sleep(50);
@@ -119,13 +119,13 @@ public class Controller extends Robot {
         stopIntake(); // Stopping Intake
 
         // Stopping Carousel
-        if (SpinCarousel != null && SpinCarousel.isAlive()) {
-            SpinCarousel.interrupt(); // Stopping Carousel Spinning
+        if (spinCarouselThread != null && spinCarouselThread.isAlive()) {
+            spinCarouselThread.interrupt(); // Stopping Carousel Spinning
         }
 
         // Stopping Launcher and Lift
-        if (RunLauncher != null && RunLauncher.isAlive()) {
-            RunLauncher.interrupt(); // Stopping Shooting Mechanism
+        if (runLauncherThread != null && runLauncherThread.isAlive()) {
+            runLauncherThread.interrupt(); // Stopping Shooting Mechanism
         }
     }
 }
