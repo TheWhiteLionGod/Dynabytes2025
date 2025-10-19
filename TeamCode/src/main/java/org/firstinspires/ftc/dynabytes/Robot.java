@@ -2,6 +2,7 @@ package org.firstinspires.ftc.dynabytes;
 
 import android.graphics.Color;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.path.EmptyPathSegmentException;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -12,6 +13,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.dynabytes.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
+import java.util.List;
 
 @Disabled
 @TeleOp(name = "Robot", group = "FTC2025")
@@ -21,6 +27,8 @@ public abstract class Robot extends LinearOpMode {
     public DcMotor roller, launcher; // Intake Outtake Motors
     public Servo carousel, lift; // Carousel and Lift Servos
     public ColorSensor colorSensor; // Color Sensor
+    public AprilTagProcessor aprilTag;
+    public VisionPortal visionPortal;
     public FunctionThread spinCarouselThread, runLauncherThread; // Threads
     public LinearOpMode game = this; // Game Object
 
@@ -29,7 +37,7 @@ public abstract class Robot extends LinearOpMode {
 
     // Gear Mode Variables
     double gearSwitchTime = 0.0;
-    double curGearMode = 3.0;
+    double curGearMode = Constants.MAX_GEAR;
 
     @Override
     public void runOpMode() {
@@ -93,8 +101,8 @@ public abstract class Robot extends LinearOpMode {
 
     // Change Gear Mode of Robot
     public void changeGearMode(int change_val) {
-        if (getRuntime() - gearSwitchTime >= 0.25) {
-            curGearMode = Math.min(Math.max(curGearMode + change_val, 1), Constants.MAX_GEAR);
+        if (getRuntime() - gearSwitchTime >= Constants.GEAR_COOLDOWN) {
+            curGearMode = Math.min(Math.max(curGearMode + change_val, Constants.MIN_GEAR), Constants.MAX_GEAR);
             gearSwitchTime = getRuntime();
 
             telemetry.addData("Current Gear Mode", curGearMode);
@@ -155,6 +163,71 @@ public abstract class Robot extends LinearOpMode {
 
     public void stopIntake() {
         roller.setPower(0);
+    }
+
+    // Reading April Tags
+    public AprilTagDetection getAprilTag() {
+        List<AprilTagDetection> detections = aprilTag.getDetections();
+        if (detections == null || detections.isEmpty())
+            return null;
+
+        return detections.get(0);
+    }
+
+    public void updatePoseFromAprilTags() {
+        AprilTagDetection aprilTag = getAprilTag();
+        if (aprilTag == null)
+            return;
+
+        Pose2d tagFieldPos;
+        if (aprilTag.id == Constants.BLUE_TAG_ID) {
+            tagFieldPos = Positions.BLUE_TAG.getPose2D();
+        }
+        else if (aprilTag.id == Constants.RED_TAG_ID) {
+            tagFieldPos = Positions.RED_TAG.getPose2D();
+        }
+        else {
+            return;
+        }
+
+        // --- Step 1: Input and coordinate alignment ---
+        // Convert FTC camera coordinates to standard robot coordinates
+        Pose2d tagCamPos = new Pose2d(
+                aprilTag.ftcPose.y,
+                -aprilTag.ftcPose.x,
+                Math.toRadians(aprilTag.ftcPose.yaw)
+        );
+
+        // --- Step 2: Calculate the camera's field pose ---
+        // A. Invert the tag-camera pose to find the camera-tag pose
+        Pose2d camTagPos = new Pose2d(
+                -(tagCamPos.getX() * Math.cos(-tagCamPos.getHeading()) - tagCamPos.getY() * Math.sin(-tagCamPos.getHeading())),
+                -(tagCamPos.getX() * Math.sin(-tagCamPos.getHeading()) + tagCamPos.getY() * Math.cos(-tagCamPos.getHeading())),
+                -tagCamPos.getHeading()
+        );
+
+        // B. Transform the camera's tag-relative pose into a field-relative pose
+        Pose2d camFieldPos = new Pose2d(
+                tagFieldPos.getX() + camTagPos.getX() * Math.cos(tagFieldPos.getHeading()) - camTagPos.getY() * Math.sin(tagFieldPos.getHeading()),
+                tagFieldPos.getY() + camTagPos.getX() * Math.sin(tagFieldPos.getHeading()) + camTagPos.getY() * Math.cos(tagFieldPos.getHeading()),
+                tagFieldPos.getHeading() + camTagPos.getHeading()
+        );
+        
+        // --- Step 3: Calculate the robot's field pose ---
+        // Subtract the camera's offset to find the robot's center
+        Pose2d camRobotPos = Positions.CAMERA.getPose2D();
+        Pose2d robotPos = new Pose2d(
+                camFieldPos.getX() - (camRobotPos.getX() * Math.cos(camFieldPos.getHeading()) - camRobotPos.getY() * Math.sin(camFieldPos.getHeading())),
+                camFieldPos.getY() - (camRobotPos.getX() * Math.sin(camFieldPos.getHeading()) + camRobotPos.getY() * Math.cos(camFieldPos.getHeading())),
+                camFieldPos.getHeading() - camRobotPos.getHeading()
+        );
+
+        telemetry.addData("Robot Positon in Road Runner", drive.getPoseEstimate());
+        telemetry.addData("Robot Position in April Tag", robotPos);
+        telemetry.addData("Difference", drive.getPoseEstimate().minus(robotPos));
+        telemetry.update();
+
+        drive.setPoseEstimate(robotPos);
     }
 
     // Updating Color Sensor

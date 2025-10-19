@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 @TeleOp(name="Controller", group="FTC2025")
 public class Controller extends Robot {
@@ -24,6 +27,12 @@ public class Controller extends Robot {
         carousel = hardwareMap.servo.get("Carousel");
         lift = hardwareMap.servo.get("Lift");
         colorSensor = hardwareMap.get(ColorSensor.class, "ColorSensor");
+
+        aprilTag = new AprilTagProcessor.Builder().build();
+        visionPortal = new VisionPortal.Builder()
+                .setCamera(hardwareMap.get(WebcamName.class, "Camera"))
+                .addProcessor(aprilTag)
+                .build();
 
         drive = new SampleMecanumDrive(hardwareMap);
     }

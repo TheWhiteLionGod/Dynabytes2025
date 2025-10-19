@@ -44,13 +44,13 @@ public enum Trajectories {
             case SHOOT_RED:
                 return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
                         .lineToConstantHeading(new Vector2d(0, -1 * 12))
-                        .lineToLinearHeading(new Pose2d(4.5 * 12, -5 * 12, Math.toRadians(315)))
+                        .lineToLinearHeading(Positions.SCORE_RED.getPose2D())
                         .build();
                 
             case SHOOT_BLUE:
                 return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
                         .lineToConstantHeading(new Vector2d(0, 12))
-                        .lineToLinearHeading(new Pose2d(4.5 * 12, 5 * 12, Math.toRadians(45)))
+                        .lineToLinearHeading(Positions.SCORE_BLUE.getPose2D())
                         .build();
 
             case GO_RED_BASE:
