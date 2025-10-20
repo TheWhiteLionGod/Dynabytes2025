@@ -2,7 +2,6 @@ package org.firstinspires.ftc.dynabytes.auto;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.dynabytes.Constants;
@@ -10,8 +9,8 @@ import org.firstinspires.ftc.dynabytes.FunctionThread;
 import org.firstinspires.ftc.dynabytes.Positions;
 import org.firstinspires.ftc.dynabytes.Robot;
 import org.firstinspires.ftc.dynabytes.Trajectories;
-import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.dynabytes.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.roadrunner.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;

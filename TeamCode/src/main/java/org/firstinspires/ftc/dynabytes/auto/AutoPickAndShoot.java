@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.dynabytes.Robot;
 import org.firstinspires.ftc.dynabytes.Positions;
 import org.firstinspires.ftc.dynabytes.Trajectories;
-import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.roadrunner.drive.SampleMecanumDrive;
 
 @Autonomous(name = "AutoPickAndShoot", group = "FTC2025")
 public class AutoPickAndShoot extends Robot {

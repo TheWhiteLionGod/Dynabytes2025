@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.dynabytes.Robot;
 import org.firstinspires.ftc.dynabytes.Positions;
 import org.firstinspires.ftc.dynabytes.Trajectories;
-import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.roadrunner.drive.SampleMecanumDrive;
 
 @Disabled
 @TeleOp(name = "SampleAuto", group = "FTC2025")

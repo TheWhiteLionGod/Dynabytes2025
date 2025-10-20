@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.dynabytes.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.roadrunner.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
