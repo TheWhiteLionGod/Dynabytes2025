@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mx-4" id="root">
+
+<h4 class='mt-4'>src/main/java/org/firstinspires/ftc/dynabytes/trajectorysequence/TrajectorySequenceBuilder.java:</h4>
+<p class='mt-4'></p>
+<div class='row my-4 px-5 bg-body-secondary rounded'><div class='my-4'><span class='text-primary'>public</span>
+<span class='text-primary'>class</span>
+<span class='text-success'>TrajectorySequenceBuilder</span>
+<span class=''>{ </span>
+<br>
+<div class='mx-4'><p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineTo(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineTo(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineToConstantHeading(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineToConstantHeading(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineToLinearHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineToLinearHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineToSplineHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>lineToSplineHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>strafeTo(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>strafeTo(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>forward(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>forward(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>back(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>back(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>strafeLeft(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>strafeLeft(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>strafeRight(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>strafeRight(</span>
+<span class='text-success'>double</span>
+<span class=''>distance</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineTo(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineTo(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineToConstantHeading(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineToConstantHeading(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>endPosition</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineToLinearHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineToLinearHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineToSplineHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>splineToSplineHeading(</span>
+<span class='text-success'>Pose2d<></span>
+<span class=''>endPose</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>endHeading</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addPath(</span>
+<span class='text-success'>AddPathCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setTangent(</span>
+<span class='text-success'>double</span>
+<span class=''>tangent</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setTangentOffset(</span>
+<span class='text-success'>double</span>
+<span class=''>offset</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setReversed(</span>
+<span class='text-success'>boolean</span>
+<span class=''>reversed</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setConstraints(</span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class=''>, </span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>resetConstraints(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setVelConstraint(</span>
+<span class='text-success'>TrajectoryVelocityConstraint<></span>
+<span class=''>velConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>resetVelConstraint(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setAccelConstraint(</span>
+<span class='text-success'>TrajectoryAccelerationConstraint<></span>
+<span class=''>accelConstraint</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>resetAccelConstraint(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>setTurnConstraint(</span>
+<span class='text-success'>double</span>
+<span class=''>maxAngVel</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>maxAngAccel</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>resetTurnConstraint(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addTemporalMarker(</span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>UNSTABLE_addTemporalMarkerOffset(</span>
+<span class='text-success'>double</span>
+<span class=''>offset</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addTemporalMarker(</span>
+<span class='text-success'>double</span>
+<span class=''>time</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addTemporalMarker(</span>
+<span class='text-success'>double</span>
+<span class=''>scale</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>offset</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addTemporalMarker(</span>
+<span class='text-success'>TimeProducer<></span>
+<span class=''>time</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addSpatialMarker(</span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>point</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addDisplacementMarker(</span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>UNSTABLE_addDisplacementMarkerOffset(</span>
+<span class='text-success'>double</span>
+<span class=''>offset</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addDisplacementMarker(</span>
+<span class='text-success'>double</span>
+<span class=''>displacement</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addDisplacementMarker(</span>
+<span class='text-success'>double</span>
+<span class=''>scale</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>offset</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addDisplacementMarker(</span>
+<span class='text-success'>DisplacementProducer<></span>
+<span class=''>displacement</span>
+<span class=''>, </span>
+<span class='text-success'>MarkerCallback<></span>
+<span class=''>callback</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>turn(</span>
+<span class='text-success'>double</span>
+<span class=''>angle</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>turn(</span>
+<span class='text-success'>double</span>
+<span class=''>angle</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>maxAngVel</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>maxAngAccel</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>waitSeconds(</span>
+<span class='text-success'>double</span>
+<span class=''>seconds</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequenceBuilder<></span>
+<span class='text-warning'>addTrajectory(</span>
+<span class='text-success'>Trajectory<></span>
+<span class=''>trajectory</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>pushPath(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>newPath(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>public</span>
+<span class='text-success'>TrajectorySequence<></span>
+<span class='text-warning'>build(</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>List<></span>
+<span class='text-warning'>convertMarkersToGlobal(</span>
+<span class='text-success'>List<></span>
+<span class=''>sequenceSegments</span>
+<span class=''>, </span>
+<span class='text-success'>List<></span>
+<span class=''>temporalMarkers</span>
+<span class=''>, </span>
+<span class='text-success'>List<></span>
+<span class=''>displacementMarkers</span>
+<span class=''>, </span>
+<span class='text-success'>List<></span>
+<span class=''>spatialMarkers</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>void</span>
+<span class='text-warning'>projectGlobalMarkersToLocalSegments(</span>
+<span class='text-success'>List<></span>
+<span class=''>markers</span>
+<span class=''>, </span>
+<span class='text-success'>List<></span>
+<span class=''>sequenceSegments</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>Double<></span>
+<span class='text-warning'>motionProfileDisplacementToTime(</span>
+<span class='text-success'>MotionProfile<></span>
+<span class=''>profile</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>s</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>Double<></span>
+<span class='text-warning'>displacementToTime(</span>
+<span class='text-success'>List<></span>
+<span class=''>sequenceSegments</span>
+<span class=''>, </span>
+<span class='text-success'>double</span>
+<span class=''>s</span>
+<span class='text-warning'>);</span>
+</p>
+<p class='my-2'><span class='text-primary'>private</span>
+<span class='text-success'>Double<></span>
+<span class='text-warning'>pointToTime(</span>
+<span class='text-success'>List<></span>
+<span class=''>sequenceSegments</span>
+<span class=''>, </span>
+<span class='text-success'>Vector2d<></span>
+<span class=''>point</span>
+<span class='text-warning'>);</span>
+</p>
+</div>
+<br>
+<span class=''>}</span>
+</div>
+<div class='my-4'><span class='text-primary'></span>
+<span class='text-primary'>class</span>
+<span class='text-success'>ComparingPoints</span>
+<span class=''>{ </span>
+<br>
+<br>
+<span class=''>}</span>
+</div>
+</div>
+<div class='row my-4 px-5 bg-body-secondary rounded'><div class='my-4'><span class='text-primary'>private</span>
+<span class='text-primary'>interface</span>
+<span class='text-success'>AddPathCallback</span>
+<span class=''>{ </span>
+<br>
+<div class='mx-4'><p class='my-2'><span class='text-primary'></span>
+<span class='text-success'>void</span>
+<span class='text-warning'>run(</span>
+<span class='text-warning'>);</span>
+</p>
+</div>
+<br>
+<span class=''>}</span>
+</div>
+</div>
+    </div>
+</body>
+</html>
