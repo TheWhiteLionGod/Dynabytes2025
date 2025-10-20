@@ -8,9 +8,9 @@ import org.firstinspires.ftc.dynabytes.trajectorysequence.TrajectorySequence;
 
 public enum Trajectories {
     SAMPLE_TRAJ,
-    GET_RED_BALLS, GET_BLUE_BALLS,
     SHOOT_RED, SHOOT_BLUE,
-    GO_RED_BASE, GO_BLUE_BASE;
+    GO_RED_BASE, GO_BLUE_BASE,
+    READ_OBELISK;
 
     public TrajectorySequence getTrajectory(SampleMecanumDrive drive) {
         switch (this) {
@@ -27,18 +27,6 @@ public enum Trajectories {
 
                         .splineToSplineHeading(new Pose2d(4*12, 2*12, Math.toRadians(180)), Math.toRadians(180))
 
-                        .build();
-                
-            case GET_RED_BALLS:
-                return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                        .lineToLinearHeading(new Pose2d(-3 * 12, -4 * 12, Math.toRadians(270)))
-                        .waitSeconds(1)
-                        .build();
-                
-            case GET_BLUE_BALLS:
-                return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                        .lineToLinearHeading(new Pose2d(-3 * 12, 4 * 12, Math.toRadians(90)))
-                        .waitSeconds(1)
                         .build();
                 
             case SHOOT_RED:
@@ -62,9 +50,20 @@ public enum Trajectories {
                 return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
                         .splineToLinearHeading(Positions.BLUE_BASE.getPose2D(), 0)
                         .build();
+
+            case READ_OBELISK:
+                return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
+                        .lineToLinearHeading(Positions.START.getPose2D())
+                        .build();
                 
             default:
                 throw new IllegalStateException("Unknown trajectory type");
         }
+    }
+
+    public static TrajectorySequence trajectoryTo(Pose2d pose, SampleMecanumDrive drive) {
+        return drive.trajectorySequenceBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(pose)
+                .build();
     }
 }

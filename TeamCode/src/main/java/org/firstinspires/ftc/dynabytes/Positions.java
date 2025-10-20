@@ -12,8 +12,15 @@ public enum Positions {
     BLUE_BASE(-3.25*12, -2.75*12, Math.toRadians(0)),
     SCORE_RED(4*12, -4*12, Math.toRadians(315)),
     SCORE_BLUE(4 * 12, 4 * 12, Math.toRadians(45)),
-    BLUE_TAG(4.5 * 12, 4.5 * 12, Math.toRadians(45)),
-    RED_TAG(4.5 * 12, -4.5 * 12, Math.toRadians(315)),
+    BLUE_TAG(4.86 * 12, 4.64 * 12, Math.toRadians(45)),
+    RED_TAG(4.86 * 12, -4.64 * 12, Math.toRadians(315)),
+    OBELISK(6 * 12, 0, Math.toRadians(0)),
+    RED_GPP(-3 * 12, -5 * 12, Math.toRadians(270)),
+    RED_PGP(-1 * 12, -5 * 12, Math.toRadians(270)),
+    RED_PPG(12, -5 * 12, Math.toRadians(270)),
+    BLUE_PPG(-3 * 12, 5 * 12, Math.toRadians(90)),
+    BLUE_PGP(-1 * 12, 5 * 12, Math.toRadians(90)),
+    BLUE_GPP(12, 5 * 12, Math.toRadians(90)),
     CAMERA(0, 0, Math.toRadians(0));
 
 

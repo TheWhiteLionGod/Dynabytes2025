@@ -57,8 +57,9 @@ public abstract class Robot extends LinearOpMode {
 
     // Update Odometry via RoadRunner
     public void updateOdometry() {
-        drive.update();
-        yawAngle = Math.toDegrees(drive.getPoseEstimate().getHeading());
+        drive.update(); // Update Roadrunner
+        updatePoseFromAprilTags(); // Update April Tag
+        yawAngle = Math.toDegrees(drive.getPoseEstimate().getHeading()); // Update Yaw Angle
     }
 
     // Making Robot Follow Trajectory
@@ -185,6 +186,9 @@ public abstract class Robot extends LinearOpMode {
         }
         else if (aprilTag.id == Constants.RED_TAG_ID) {
             tagFieldPos = Positions.RED_TAG.getPose2D();
+        }
+        else if (aprilTag.id == Constants.GPP_TAG_ID || aprilTag.id == Constants.PGP_TAG_ID || aprilTag.id == Constants.PPG_TAG_ID) {
+            tagFieldPos = Positions.OBELISK.getPose2D();
         }
         else {
             return;

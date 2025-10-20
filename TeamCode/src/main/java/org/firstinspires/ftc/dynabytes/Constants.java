@@ -9,8 +9,13 @@ public class Constants {
     // Tag ID
     public static final int BLUE_TAG_ID = 20;
     public static final int RED_TAG_ID = 24;
+    public static final int GPP_TAG_ID = 21;
+    public static final int PGP_TAG_ID = 22;
+    public static final int PPG_TAG_ID = 23;
 
     // Carousel Color Detection
+    public static final int GREEN_BALL = 0;
+    public static final int PURPLE_BALL = 1;
     public static final int GREEN_HUE_MIN = 150;
     public static final int GREEN_HUE_MAX = 180;
     public static final int PURPLE_HUE_MIN = 200;

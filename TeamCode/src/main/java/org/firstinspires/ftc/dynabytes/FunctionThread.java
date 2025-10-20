@@ -2,9 +2,9 @@ package org.firstinspires.ftc.dynabytes;
 
 public class FunctionThread extends Thread {
     ThreadInterface execute;
-    Runnable cleanup;
+    ThreadInterface cleanup;
 
-    public FunctionThread(ThreadInterface execute, Runnable cleanup) {
+    public FunctionThread(ThreadInterface execute, ThreadInterface cleanup) {
         this.execute = execute;
         this.cleanup = cleanup;
     }
@@ -19,7 +19,11 @@ public class FunctionThread extends Thread {
             // Stopping Thread if Interrupted
         }
         finally {
-            cleanup.run();
+            try {
+                cleanup.run();
+            } catch (InterruptedException ignored) {
+
+            }
         }
     }
 }

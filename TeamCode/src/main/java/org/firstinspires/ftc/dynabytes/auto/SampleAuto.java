@@ -3,8 +3,8 @@ package org.firstinspires.ftc.dynabytes.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.dynabytes.Positions;
 import org.firstinspires.ftc.dynabytes.Robot;
+import org.firstinspires.ftc.dynabytes.Positions;
 import org.firstinspires.ftc.dynabytes.Trajectories;
 import org.firstinspires.ftc.dynabytes.drive.SampleMecanumDrive;
 

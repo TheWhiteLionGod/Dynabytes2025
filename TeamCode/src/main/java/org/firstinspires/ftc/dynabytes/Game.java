@@ -2,8 +2,7 @@ package org.firstinspires.ftc.dynabytes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import org.firstinspires.ftc.dynabytes.auto.*; // Importing All Autos
+import org.firstinspires.ftc.dynabytes.auto.*;
 
 @TeleOp(name="Game", group="FTC2025")
 public class Game extends LinearOpMode {
@@ -12,7 +11,7 @@ public class Game extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        auto = new AutoPickAndShoot();
+        auto = new AutoShootMotif();
         teleop = new Controller();
 
         waitForStart();
