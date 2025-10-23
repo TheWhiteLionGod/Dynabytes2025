@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: "Dynabytes2025"
+          submodules: recursive
+          fetch-depth: 0 
         
       - name: Cloning Documentation Generator
         uses: actions/checkout@v4
