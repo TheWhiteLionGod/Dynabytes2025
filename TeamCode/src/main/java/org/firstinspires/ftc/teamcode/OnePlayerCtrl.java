@@ -22,15 +22,14 @@ public class OnePlayerCtrl extends Dynawheels {
             // Outtake
             handleOuttake();
 
-            camera.getTagId();
-            camera.getTagXYArea();
-
             telemetry.update();
             sleep(50);
         }
     }
 
     public void handleDrivetrain() {
+        roadRunner.update();
+
         if (gamepad1.left_stick_y != 0 ||
                 gamepad1.left_stick_x != 0 ||
                 gamepad1.right_stick_x != 0) {
@@ -47,21 +46,15 @@ public class OnePlayerCtrl extends Dynawheels {
         }
 
         // Go to Red Base
-        if (gamepad1.x) {
+        if (gamepad1.left_stick_button && roadRunner.isIdle()) {
             roadRunner.followTraj(
                     Trajectories.trajTo(Positions.RED_BASE.get(), roadRunner)
             );
         }
         // Go to Blue Base
-        else if (gamepad1.b) {
+        else if (gamepad1.right_stick_button && roadRunner.isIdle()) {
             roadRunner.followTraj(
                     Trajectories.trajTo(Positions.BLUE_BASE.get(), roadRunner)
-            );
-        }
-        // Cancel Trajectory
-        else if (gamepad1.a) {
-            roadRunner.followTraj(
-                    Trajectories.trajTo(roadRunner.getPose(), roadRunner)
             );
         }
     }
@@ -105,7 +98,7 @@ public class OnePlayerCtrl extends Dynawheels {
     public void handleOuttake() {
         // Update State
         shooter.updateState();
-        
+
         // Lift
         if (gamepad1.y) {
             shooter.lift.up();

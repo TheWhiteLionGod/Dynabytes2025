@@ -24,13 +24,11 @@ public enum Trajectories {
                 
             case SHOOT_RED:
                 return roadRunner.trajSeqBuilder(roadRunner.getPose())
-                        .lineToLinearHeading(Positions.START.get())
                         .lineToLinearHeading(Positions.SCORE_RED.get())
                         .build();
                 
             case SHOOT_BLUE:
                 return roadRunner.trajSeqBuilder(roadRunner.getPose())
-                        .lineToLinearHeading(Positions.START.get())
                         .lineToLinearHeading(Positions.SCORE_BLUE.get())
                         .build();
                 

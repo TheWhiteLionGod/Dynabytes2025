@@ -60,6 +60,6 @@ public class RoadRunner {
     }
 
     public void stop() {
-        followTraj(Trajectories.trajTo(getPose(), this));
+        drive.breakFollowing();
     }
 }

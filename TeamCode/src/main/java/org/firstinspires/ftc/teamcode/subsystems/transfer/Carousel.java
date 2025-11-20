@@ -107,7 +107,9 @@ public class Carousel {
                     break;
                 }
 
+                state = States.IDLE;
                 spin();
+
                 returnState = States.FINDING_GREEN;
                 attempts++;
                 break;
@@ -118,8 +120,11 @@ public class Carousel {
                     break;
                 }
 
+                state = States.IDLE;
                 spin();
+
                 returnState = States.FINDING_PURPLE;
+                attempts++;
                 break;
         }
     }
