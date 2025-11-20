@@ -3,6 +3,10 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 public class Constants {
+    public static boolean approxEqualTo(double a, double b) {
+        return Math.abs(a - b) < 0.0001;
+    }
+
     // Carousel Position
     public static final double CAROUSEL_POS_1 = 0.04;
     public static final double CAROUSEL_POS_2 = 0.51;

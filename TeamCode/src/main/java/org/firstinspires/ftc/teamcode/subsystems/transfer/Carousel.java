@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
 
@@ -25,22 +26,27 @@ public class Carousel {
     int attempts = 0;
 
     public Carousel(HardwareMap hardwareMap, Telemetry telemetry) {
-        carousel = hardwareMap.get(Servo.class, "Carousel");
+        carousel = hardwareMap.get(Servo.class, "Servo");
+        carousel.setPosition(Constants.CAROUSEL_POS_1);
+
         colorSensor = new ColorInput(hardwareMap, telemetry);
         headLight = new HeadLight(hardwareMap, telemetry);
+
         this.telemetry = telemetry;
     }
 
     public void spin() {
         if (state == States.IDLE) {
             double curPos = carousel.getPosition();
-            if (curPos == Constants.CAROUSEL_POS_1) {
+
+            // Checking if Approx Equal To due to Floating Point Error
+            if (Constants.approxEqualTo(curPos, Constants.CAROUSEL_POS_1)) {
                 carousel.setPosition(Constants.CAROUSEL_POS_2);
             }
-            else if (curPos == Constants.CAROUSEL_POS_2) {
+            else if (Constants.approxEqualTo(curPos, Constants.CAROUSEL_POS_2)) {
                 carousel.setPosition(Constants.CAROUSEL_POS_3);
             }
-            else if (curPos == Constants.CAROUSEL_POS_3) {
+            else if (Constants.approxEqualTo(curPos, Constants.CAROUSEL_POS_3)) {
                 carousel.setPosition(Constants.CAROUSEL_POS_1);
             }
             else {
