@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems.odometry;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+
 import org.firstinspires.ftc.roadrunner.trajectorysequence.TrajectorySequence;
 
 public enum Trajectories {
@@ -21,17 +22,17 @@ public enum Trajectories {
 
                         .splineToSplineHeading(new Pose2d(4*12, 2*12, Math.toRadians(180)), Math.toRadians(180))
                         .build();
-                
+
             case SHOOT_RED:
                 return roadRunner.trajSeqBuilder(roadRunner.getPose())
                         .lineToLinearHeading(Positions.SCORE_RED.get())
                         .build();
-                
+
             case SHOOT_BLUE:
                 return roadRunner.trajSeqBuilder(roadRunner.getPose())
                         .lineToLinearHeading(Positions.SCORE_BLUE.get())
                         .build();
-                
+
             default:
                 throw new IllegalStateException("Unknown trajectory type");
         }
@@ -39,7 +40,7 @@ public enum Trajectories {
 
     public static TrajectorySequence trajTo(Pose2d pose, RoadRunner roadRunner) {
         return roadRunner.trajSeqBuilder(roadRunner.getPose())
-                .lineToLinearHeading(pose)
+                .lineToSplineHeading(pose)
                 .build();
     }
 }
