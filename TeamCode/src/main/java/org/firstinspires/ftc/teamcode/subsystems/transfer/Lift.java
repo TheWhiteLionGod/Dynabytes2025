@@ -1,0 +1,33 @@
+package org.firstinspires.ftc.teamcode.subsystems.transfer;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Constants;
+
+public class Lift {
+    private final Servo leftLift, rightLift;
+    private final Telemetry telemetry;
+
+    public Lift(HardwareMap hardwareMap, Telemetry telemetry) {
+        leftLift = hardwareMap.get(Servo.class, "LeftLift");
+        rightLift = hardwareMap.get(Servo.class, "RightLift");
+        rightLift.setDirection(Servo.Direction.REVERSE);
+        this.telemetry = telemetry;
+    }
+
+    public void up() {
+        leftLift.setPosition(Constants.LIFT_UP_POS);
+        try { Thread.sleep(Constants.LIFT_UP_TIME); }
+        catch (InterruptedException ignored) {}
+        rightLift.setPosition(Constants.LIFT_UP_POS);
+        telemetry.addLine("Lift Up");
+    }
+
+    public void down() {
+        leftLift.setPosition(Constants.LIFT_DOWN_POS);
+        rightLift.setPosition(Constants.LIFT_DOWN_POS);
+        telemetry.addLine("Lift Down");
+    }
+}

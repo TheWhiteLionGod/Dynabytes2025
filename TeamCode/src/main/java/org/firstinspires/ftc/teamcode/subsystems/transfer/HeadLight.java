@@ -1,0 +1,38 @@
+package org.firstinspires.ftc.teamcode.subsystems.transfer;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+public class HeadLight {
+    private final Servo greenLight, purpleLight;
+    private final Telemetry telemetry;
+
+    public HeadLight(HardwareMap hardwareMap, Telemetry telemetry) {
+        greenLight = hardwareMap.get(Servo.class, "GreenLight");
+        purpleLight = hardwareMap.get(Servo.class, "PurpleLight");
+        this.telemetry = telemetry;
+    }
+
+    public void greenOn() {
+        greenLight.setPosition(1);
+        purpleLight.setPosition(0);
+
+        telemetry.addLine("Green On");
+    }
+
+    public void purpleOn() {
+        purpleLight.setPosition(1);
+        greenLight.setPosition(0);
+
+        telemetry.addLine("Purple On");
+    }
+
+    public void stop() {
+        greenLight.setPosition(0);
+        purpleLight.setPosition(0);
+
+        telemetry.addLine("Lights Off");
+    }
+}
