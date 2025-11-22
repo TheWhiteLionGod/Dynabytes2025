@@ -15,7 +15,7 @@ public class ShootMotif extends Dynawheels {
         roadRunner.setPose(Positions.BLUE_DOWN.get());
 
         // Shooting Preloaded Balls
-        roadRunner.followTraj(Trajectories.SHOOT_BLUE.build(roadRunner));
+        roadRunner.followTraj(Trajectories.trajTo(Positions.SCORE_BLUE.get(), roadRunner));
         for (int i = 0; i < 3; i++) {
             shooter.start();
             while (!shooter.isIdle()) {
@@ -57,7 +57,7 @@ public class ShootMotif extends Dynawheels {
         if (shootOrder[0] == 1) carousel.findGreenBall();
         else carousel.findPurpleBall();
 
-        roadRunner.followTrajAsync(Trajectories.SHOOT_BLUE.build(roadRunner));
+        roadRunner.followTrajAsync(Trajectories.trajTo(Positions.SCORE_BLUE.get(), roadRunner));
         // Updating Roadrunner and Carousel is Still Moving
         while (!carousel.isIdle() || !roadRunner.isIdle()) {
             carousel.updateState();

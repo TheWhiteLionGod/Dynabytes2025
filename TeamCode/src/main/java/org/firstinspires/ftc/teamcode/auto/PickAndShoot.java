@@ -19,7 +19,7 @@ public class PickAndShoot extends Dynawheels {
         roller.stop();
 
         // Going to Shooting Zone
-        roadRunner.followTraj(Trajectories.SHOOT_BLUE.build(roadRunner));
+        roadRunner.followTraj(Trajectories.trajTo(Positions.SCORE_BLUE.get(), roadRunner));
 
         // Shooting All Three Balls
         for (int i = 0; i < 3; i++) {

@@ -1,18 +1,30 @@
 package org.firstinspires.ftc.teamcode.subsystems.odometry;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 
 import java.util.List;
 
 public class Camera {
     private final Limelight3A limelight;
+    private final IMU imu;
     private final Telemetry telemetry;
     public Camera(HardwareMap hardwareMap, Telemetry telemetry) {
+        imu = hardwareMap.get(IMU.class, "imu");
+        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
+        )));
+        imu.resetYaw();
+
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
         limelight.pipelineSwitch(0);
@@ -21,24 +33,28 @@ public class Camera {
         this.telemetry = telemetry;
     }
 
-    public List<LLResultTypes.FiducialResult> getDetection() {
+    public LLResult getDetection() {
         LLResult result = limelight.getLatestResult();
         if (result == null || !result.isValid()) return null;
-        return result.getFiducialResults();
+        return result;
     }
 
     public int getTagId() {
-        int id = getDetection().get(0).getFiducialId();
+        LLResult detection = getDetection();
+        if (detection == null || detection.getFiducialResults() == null || detection.getFiducialResults().isEmpty()) return 0;
+        int id = detection.getFiducialResults().get(0).getFiducialId();
         telemetry.addData("April Tag Id", id);
         return id;
     }
 
     public double[] getTagXYArea() {
-        List<LLResultTypes.FiducialResult> detection = getDetection();
+        LLResult detection = getDetection();
+        if (detection == null) return new double[] {0, 0, 0};
+
         double[] xyArea = new double[] {
-                detection.get(0).getTargetXPixels(),
-                detection.get(0).getTargetYPixels(),
-                detection.get(0).getTargetArea()
+                detection.getTx(),
+                detection.getTy(),
+                detection.getTa()
         };
 
         telemetry.addData("Target X", xyArea[0]);
@@ -46,6 +62,24 @@ public class Camera {
         telemetry.addData("Target Area", xyArea[2]);
 
         return xyArea;
+    }
+
+    public Pose2d getBotPose() {
+        LLResult detection = getDetection();
+        if (detection == null) return null;
+
+        double yawAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+        limelight.updateRobotOrientation(yawAngle);
+
+        Pose3D botPose = detection.getBotpose();
+        if (botPose == null) return null;
+
+        // Returning in Roadrunner Coordinates
+        return new Pose2d(
+                botPose.getPosition().x,
+                -botPose.getPosition().y,
+                botPose.getOrientation().getYaw(AngleUnit.RADIANS)
+        );
     }
 
     public void stop() {
