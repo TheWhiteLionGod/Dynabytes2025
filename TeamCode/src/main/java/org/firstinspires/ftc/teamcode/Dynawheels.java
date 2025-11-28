@@ -46,6 +46,7 @@ public abstract class Dynawheels extends LinearOpMode {
         roadRunner.stop();
         roller.stop();
         carousel.stop();
+        shooter.stopMotor = true;
         shooter.stop();
         camera.stop();
         Constants.currentPose = roadRunner.getPose();

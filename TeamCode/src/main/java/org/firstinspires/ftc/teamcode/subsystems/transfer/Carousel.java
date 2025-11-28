@@ -27,7 +27,7 @@ public class Carousel {
     int attempts = 0;
 
     public Carousel(HardwareMap hardwareMap, Telemetry telemetry) {
-        carousel = hardwareMap.get(Servo.class, "Servo");
+        carousel = hardwareMap.get(Servo.class, "Carousel");
         carousel.setPosition(Constants.CAROUSEL_POS_1);
 
         colorSensor = new ColorInput(hardwareMap, telemetry);
@@ -137,13 +137,13 @@ public class Carousel {
     }
 
     public boolean isGreen() {
-        return colorSensor.hue() > Constants.GREEN_MIN &&
-                colorSensor.hue() < Constants.GREEN_MAX;
+        return Constants.GREEN_MIN <= colorSensor.hue()
+                && colorSensor.hue() <= Constants.GREEN_MAX;
     }
 
     public boolean isPurple() {
-        return colorSensor.hue() > Constants.PURPLE_MIN &&
-                colorSensor.hue() < Constants.PURPLE_MAX;
+        return Constants.PURPLE_MIN <= colorSensor.hue()
+                && colorSensor.hue() <= Constants.PURPLE_MAX;
     }
 
     public boolean isIdle() {

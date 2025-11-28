@@ -11,8 +11,8 @@ public class Lift {
     private final Telemetry telemetry;
 
     public Lift(HardwareMap hardwareMap, Telemetry telemetry) {
-        leftLift = hardwareMap.get(Servo.class, "LeftLift");
-        rightLift = hardwareMap.get(Servo.class, "RightLift");
+        leftLift = hardwareMap.get(Servo.class, "LeftLIFT");
+        rightLift = hardwareMap.get(Servo.class, "RightLIFT");
         rightLift.setDirection(Servo.Direction.REVERSE);
 
         leftLift.setPosition(Constants.LIFT_DOWN_POS);
@@ -21,10 +21,10 @@ public class Lift {
     }
 
     public void up() {
-        leftLift.setPosition(Constants.LIFT_UP_POS);
-        try { Thread.sleep(Constants.LIFT_UP_TIME); }
-        catch (InterruptedException ignored) {}
         rightLift.setPosition(Constants.LIFT_UP_POS);
+        try { Thread.sleep(Constants.LIFT_DELAY_TIME); }
+        catch (InterruptedException ignored) {}
+        leftLift.setPosition(Constants.LIFT_UP_POS);
         telemetry.addLine("Lift Up");
     }
 

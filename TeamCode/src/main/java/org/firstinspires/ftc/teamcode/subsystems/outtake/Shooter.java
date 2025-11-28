@@ -18,9 +18,11 @@ public class Shooter {
     private final Telemetry telemetry;
     private Instant shootTime = Instant.now();
     private States state = States.IDLE;
+    public boolean stopMotor = true;
 
     public Shooter(HardwareMap hardwareMap, Telemetry telemetry) {
-        shooter = hardwareMap.get(DcMotorEx.class, "Shooter");
+        shooter = hardwareMap.get(DcMotorEx.class, "Launcher");
+        shooter.setDirection(DcMotorEx.Direction.REVERSE);
         lift = new Lift(hardwareMap, telemetry);
         this.telemetry = telemetry;
     }
@@ -34,7 +36,7 @@ public class Shooter {
 
     public void stop() {
         state = States.IDLE;
-        shooter.setPower(0);
+        if (stopMotor) shooter.setPower(0);
         lift.down();
     }
 
@@ -56,7 +58,7 @@ public class Shooter {
                 }
                 // Telemetry if Shooter is Spinning
                 else {
-                    shooter.setPower(1);
+                    shooter.setPower(0.9);
                     telemetry.addData("Spinning Shooter", 1);
                 }
                 break;

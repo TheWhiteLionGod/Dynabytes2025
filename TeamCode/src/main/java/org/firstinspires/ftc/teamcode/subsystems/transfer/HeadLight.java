@@ -16,14 +16,14 @@ public class HeadLight {
     }
 
     public void greenOn() {
-        greenLight.setPosition(1);
+        greenLight.setPosition(0.5);
         purpleLight.setPosition(0);
 
         telemetry.addLine("Green On");
     }
 
     public void purpleOn() {
-        purpleLight.setPosition(1);
+        purpleLight.setPosition(0.5);
         greenLight.setPosition(0);
 
         telemetry.addLine("Purple On");

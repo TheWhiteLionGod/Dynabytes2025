@@ -30,19 +30,19 @@ public class FieldDrive {
 
     // Auto Commands
     public void forward(double curYaw) {
-        fieldDrive(1, 0, 0, curYaw);
+        fieldDrive(-0.7, 0, 0, curYaw);
     }
 
     public void backward(double curYaw) {
-        fieldDrive(-1, 0, 0, curYaw);
+        fieldDrive(0.7, 0, 0, curYaw);
     }
 
     public void left(double curYaw) {
-        fieldDrive(0, 1, 0, curYaw);
+        fieldDrive(0, -0.7, 0, curYaw);
     }
 
     public void right(double curYaw) {
-        fieldDrive(0, -1, 0, curYaw);
+        fieldDrive(0, 0.7, 0, curYaw);
     }
 
 
@@ -85,10 +85,10 @@ public class FieldDrive {
     public void turnTo(ImuSensor imu, double targetYaw) {
         double err = imu.getYawDegrees() - targetYaw;
 
-        while (Math.abs(err) > 1) {
+        while (Math.abs(err) > 5) {
             System.out.println("Error: " + err);
             err = imu.getYawDegrees() - targetYaw;
-            robotDrive(0, 0, err * 0.005);
+            robotDrive(0, 0, 0.35 * (err > 180 ? -1 : 1));
         }
     }
 

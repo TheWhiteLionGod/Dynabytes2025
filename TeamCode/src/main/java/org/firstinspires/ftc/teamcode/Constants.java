@@ -14,14 +14,15 @@ public class Constants {
 
     // Lift Position
     public static final double LIFT_DOWN_POS = 0.0;
-    public static final double LIFT_UP_POS = 0.22;
+    public static final double LIFT_UP_POS = 0.33;
 
     // Carousel Spin Time
-    public static final int CAROUSEL_SPIN_TIME = 250;
+    public static final int CAROUSEL_SPIN_TIME = 750;
     // Shooter Spin Time
-    public static final int SHOOTER_SPIN_TIME = 1000;
+    public static final int SHOOTER_SPIN_TIME = 2000;
     // Lift Up Time
-    public static final int LIFT_UP_TIME = 100;
+    public static final int LIFT_DELAY_TIME = 100;
+    public static final int LIFT_UP_TIME = 750;
 
     // Hue Values
     public static final int GREEN_MIN = 157;

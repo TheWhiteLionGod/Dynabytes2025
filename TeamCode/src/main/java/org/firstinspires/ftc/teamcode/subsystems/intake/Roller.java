@@ -10,7 +10,7 @@ public class Roller {
     private final Telemetry telemetry;
 
     public Roller(HardwareMap hardwareMap, Telemetry telemetry) {
-        roller = hardwareMap.get(DcMotorEx.class, "Roller");
+        roller = hardwareMap.get(DcMotorEx.class, "IntakeRoller");
         roller.setDirection(DcMotorEx.Direction.REVERSE);
         this.telemetry = telemetry;
     }

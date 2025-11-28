@@ -27,8 +27,8 @@ public class BlueDownManual extends Dynawheels {
     @Override
     public void run() {
         // Going to Shooting Zone
-        drivetrain.fieldDrive(1, 0, 0, imu.getYawRadians());
-        sleep(2250);
+        drivetrain.forward(imu.getYawRadians());
+        sleep(1050);
 
         // Reading Obelisk
         int tagId = Constants.PGP_TAG;
@@ -49,7 +49,9 @@ public class BlueDownManual extends Dynawheels {
         }
 
         drivetrain.turnTo(imu, 225);
+        drivetrain.stop();
 
+        shooter.stopMotor = false;
         for (int i = 0; i < 3; i++) {
             // Sorting Ball
             if (shootingOrder[i] == 1) carousel.findGreenBall();
@@ -57,33 +59,40 @@ public class BlueDownManual extends Dynawheels {
 
             while (!carousel.isIdle()) {
                 carousel.updateState();
+                telemetry.update();
             }
 
             // Shooting First Ball
             shooter.start();
-            while (shooter.isIdle()) {
+            while (!shooter.isIdle()) {
                 shooter.updateState();
+                telemetry.update();
             }
         }
+        shooter.stopMotor = true;
+        shooter.stop();
 
         drivetrain.backward(imu.getYawRadians());
         sleep(500);
 
         drivetrain.turnTo(imu, 90);
+        drivetrain.stop();
 
         drivetrain.left(imu.getYawRadians());
         roller.forward();
-        sleep(1500);
+        sleep(1000);
 
         roller.stop();
         drivetrain.right(imu.getYawRadians());
-        sleep(1500);
+        sleep(1000);
 
         drivetrain.forward(imu.getYawRadians());
-        sleep(500);
+        sleep(600);
 
         drivetrain.turnTo(imu, 225);
+        drivetrain.stop();
 
+        shooter.stopMotor = false;
         for (int i = 0; i < 3; i++) {
             // Sorting Ball
             if (shootingOrder[i] == 1) carousel.findGreenBall();
@@ -91,14 +100,18 @@ public class BlueDownManual extends Dynawheels {
 
             while (!carousel.isIdle()) {
                 carousel.updateState();
+                telemetry.update();
             }
 
             // Shooting First Ball
             shooter.start();
-            while (shooter.isIdle()) {
+            while (!shooter.isIdle()) {
                 shooter.updateState();
+                telemetry.update();
             }
         }
+        shooter.stopMotor = true;
+        shooter.stop();
 
         drivetrain.backward(imu.getYawRadians());
         sleep(600);
@@ -109,6 +122,7 @@ public class BlueDownManual extends Dynawheels {
         drivetrain.stop();
         roller.stop();
         carousel.stop();
+        shooter.stopMotor = true;
         shooter.stop();
     }
 }
