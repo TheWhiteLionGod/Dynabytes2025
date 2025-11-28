@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
 

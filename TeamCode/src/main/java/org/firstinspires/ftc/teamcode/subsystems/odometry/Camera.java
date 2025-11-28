@@ -5,25 +5,20 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
 import java.util.List;
 
 public class Camera {
     private final Limelight3A limelight;
-    private final IMU imu;
+    private final ImuSensor imu;
     private final Telemetry telemetry;
     public Camera(HardwareMap hardwareMap, Telemetry telemetry) {
-        imu = hardwareMap.get(IMU.class, "imu");
-        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
-        )));
-        imu.resetYaw();
+        imu = new ImuSensor(hardwareMap, telemetry);
 
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
@@ -68,7 +63,7 @@ public class Camera {
         LLResult detection = getDetection();
         if (detection == null) return null;
 
-        double yawAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+        double yawAngle = imu.getYawDegrees();
         limelight.updateRobotOrientation(yawAngle);
 
         Pose3D botPose = detection.getBotpose();

@@ -24,8 +24,8 @@ public class Constants {
     public static final int LIFT_UP_TIME = 100;
 
     // Hue Values
-    public static final int GREEN_MIN = 150;
-    public static final int GREEN_MAX = 180;
+    public static final int GREEN_MIN = 157;
+    public static final int GREEN_MAX = 159;
     public static final int PURPLE_MIN = 200;
     public static final int PURPLE_MAX = 240;
     // April Tag Id

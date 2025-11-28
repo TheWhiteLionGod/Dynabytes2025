@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems.transfer;
+package org.firstinspires.ftc.teamcode.subsystems.sensor;
 
 import android.graphics.Color;
 
