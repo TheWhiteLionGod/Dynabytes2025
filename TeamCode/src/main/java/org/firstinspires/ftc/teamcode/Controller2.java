@@ -39,9 +39,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@TeleOp(name="Controller1", group="Linear OpMode")
+@TeleOp(name="Controller-2Player", group="Linear OpMode")
 //@Disabled
-public class Controller1 extends LinearOpMode {
+public class Controller2 extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -59,9 +59,10 @@ public class Controller1 extends LinearOpMode {
     private ColorSensor colorSensor = null;
     public double FirstLiftPos = 0;
     public double LastLiftPos = 0.33;
-    public double pos = 0.04;
-    public double launcherSpeed = -0.9;
+    public double pos = 0.11;
+
     public double current_servo_pos = 0.0;
+    public double launcherSpeed = -0.9;
 
 //    private DcMotor frontLeftDrive = null;
 //    private DcMotor backLeftDrive = null;
@@ -88,10 +89,12 @@ public class Controller1 extends LinearOpMode {
 
         RLift.setDirection(Servo.Direction.REVERSE);
 
+        BLDrive.setDirection(DcMotor.Direction.REVERSE);
+        FLDrive.setDirection(DcMotor.Direction.REVERSE);
         BRDrive.setDirection(DcMotor.Direction.REVERSE);
         FRDrive.setDirection(DcMotor.Direction.REVERSE);
 
-        carousel.setPosition(pos);
+
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -115,6 +118,7 @@ public class Controller1 extends LinearOpMode {
         runtime.reset();
         LLift.setPosition(FirstLiftPos);
         RLift.setPosition(FirstLiftPos);
+        carousel.setPosition(.04);
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -149,9 +153,9 @@ public class Controller1 extends LinearOpMode {
                 double max;
 
                 // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-                double axial = gamepad1.left_stick_y*0.85;  // Note: pushing stick forward gives negative value
-                double lateral = -gamepad1.left_stick_x*0.85;
-                double yaw = -gamepad1.right_stick_x*.5;
+                double axial = gamepad2.left_stick_y;  // Note: pushing stick forward gives negative value
+                double lateral = gamepad2.left_stick_x;
+                double yaw = gamepad2.right_stick_x;
 
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
                 // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -180,12 +184,18 @@ public class Controller1 extends LinearOpMode {
                 BLDrive.setPower(leftBackPower);
                 BRDrive.setPower(rightBackPower);
 
+                if (gamepad2.right_stick_x > 0) {
+                    turn_right();
+                } else if (gamepad2.right_stick_x < 0) {
+                    turn_left();
+                }
                 if (gamepad1.left_trigger > 0) {
                     roll_in();
                 } else if (gamepad1.left_bumper) {
                     roll_out();
                 } else if (gamepad1.right_stick_y > 0) {
                     roll_stop();
+
                 }
                 if (gamepad1.right_trigger > 0) {
                     launch();
@@ -204,7 +214,7 @@ public class Controller1 extends LinearOpMode {
                         pos = 0.94;
                         carousel.setPosition(pos);
                     }
-                    else if(pos == 0.94){
+                    else{
                         pos = 0.04;
                         carousel.setPosition(pos);
                     }
@@ -309,15 +319,15 @@ public class Controller1 extends LinearOpMode {
 
     public void turn_left() {
         FLDrive.setPower(0.5);
-        BLDrive.setPower(0.5);
-        FRDrive.setPower(-0.5);
+        FRDrive.setPower(0.5);
+        BLDrive.setPower(-0.5);
         BRDrive.setPower(-0.5);
     }
 
     public void turn_right() {
         FLDrive.setPower(-0.5);
-        BLDrive.setPower(-0.5);
-        FRDrive.setPower(0.5);
+        FRDrive.setPower(-0.5);
+        BLDrive.setPower(0.5);
         BRDrive.setPower(0.5);
     }
 
@@ -365,6 +375,7 @@ public class Controller1 extends LinearOpMode {
     public void launch_stop(){
         launcher.setPower(0);
     }
+
     public void increaseLauncherSpeed() {
         launcherSpeed -= 0.005;
         launch();

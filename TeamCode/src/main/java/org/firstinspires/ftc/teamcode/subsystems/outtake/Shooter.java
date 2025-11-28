@@ -19,6 +19,7 @@ public class Shooter {
     private Instant shootTime = Instant.now();
     private States state = States.IDLE;
     public boolean stopMotor = true;
+    public double speed = 0.9;
 
     public Shooter(HardwareMap hardwareMap, Telemetry telemetry) {
         shooter = hardwareMap.get(DcMotorEx.class, "Launcher");
@@ -38,6 +39,14 @@ public class Shooter {
         state = States.IDLE;
         if (stopMotor) shooter.setPower(0);
         lift.down();
+    }
+
+    public void increaseSpeed() {
+        speed += 0.1;
+    }
+
+    public void decreaseSpeed() {
+        speed -= 0.1;
     }
 
     public boolean isIdle() {

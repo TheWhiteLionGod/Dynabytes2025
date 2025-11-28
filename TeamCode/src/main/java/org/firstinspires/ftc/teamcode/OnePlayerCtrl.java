@@ -2,11 +2,30 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
+import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
+import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.Positions;
+import org.firstinspires.ftc.teamcode.subsystems.odometry.RoadRunner;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.Trajectories;
+import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
 @TeleOp(name="1 Player Controller", group="FTC2026")
 public class OnePlayerCtrl extends Dynawheels {
+    ImuSensor imu;
+    @Override
+    public void config() {
+        drivetrain = new FieldDrive(hardwareMap, telemetry);
+        imu = new ImuSensor(hardwareMap, telemetry);
+        roller = new Roller(hardwareMap, telemetry);
+        carousel = new Carousel(hardwareMap, telemetry);
+        shooter = new Shooter(hardwareMap, telemetry);
+
+        telemetry.update();
+    }
+
     @Override
     public void run() {
         while (opModeIsActive()) {
@@ -28,8 +47,6 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     public void handleDrivetrain() {
-        roadRunner.update();
-
         if (gamepad1.left_stick_y != 0 ||
                 gamepad1.left_stick_x != 0 ||
                 gamepad1.right_stick_x != 0) {
@@ -38,7 +55,7 @@ public class OnePlayerCtrl extends Dynawheels {
                     -gamepad1.left_stick_y,
                     gamepad1.left_stick_x,
                     gamepad1.right_stick_x,
-                    roadRunner.getPose().getHeading()
+                    imu.getYawRadians()
             );
         }
         else {
@@ -114,5 +131,13 @@ public class OnePlayerCtrl extends Dynawheels {
         else if (gamepad1.right_bumper) {
             shooter.stop();
         }
+    }
+
+    public void cleanup() {
+        drivetrain.stop();
+        roller.stop();
+        carousel.stop();
+        shooter.stopMotor = true;
+        shooter.stop();
     }
 }
