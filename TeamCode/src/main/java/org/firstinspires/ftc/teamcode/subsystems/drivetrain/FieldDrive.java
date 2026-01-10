@@ -29,32 +29,28 @@ public class FieldDrive {
     }
 
     // Auto Commands
-    public void forward(double curYaw) {
-        fieldDrive(-0.7, 0, 0, curYaw);
+    public void forward() {
+        robotDrive(0.7, 0, 0);
     }
 
-    public void backward(double curYaw) {
-        fieldDrive(0.7, 0, 0, curYaw);
+    public void backward() {
+        robotDrive(-0.7, 0, 0);
     }
 
-    public void left(double curYaw) {
-        fieldDrive(0, -0.7, 0, curYaw);
+    public void left() {
+        robotDrive(0, -0.7, 0);
     }
 
-    public void right(double curYaw) {
-        fieldDrive(0, 0.7, 0, curYaw);
+    public void right() {
+        robotDrive(0, 0.7, 0);
     }
-
 
     // Field Drive Movement
     public void fieldDrive(double forward, double strafe, double turn, double curYaw) {
-        /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
         double temp = forward * Math.cos(curYaw) + strafe * Math.sin(curYaw);
         strafe = -forward * Math.sin(curYaw) + strafe * Math.cos(curYaw);
         forward = temp;
 
-        /* At this point, Joystick X/Y (strafe/forward) vectors have been */
-        /* rotated by the gyro angle, and can be sent to drive system */
         robotDrive(forward, strafe, turn);
     }
 
@@ -65,8 +61,10 @@ public class FieldDrive {
         double frontRight = forward - strafe - turn;
         double backRight = forward + strafe - turn;
 
-        double max = Math.max(Math.abs(frontLeft), Math.max(Math.abs(backLeft),
-                Math.max(Math.abs(frontRight), Math.abs(backRight))));
+        double max = Math.max(
+                Math.max(Math.abs(frontLeft), Math.abs(backLeft)),
+                Math.max(Math.abs(frontRight), Math.abs(backRight))
+        );
 
         if (max > 1.0) {
             frontLeft /= max;
@@ -86,7 +84,6 @@ public class FieldDrive {
         double err = imu.getYawDegrees() - targetYaw;
 
         while (Math.abs(err) > 5) {
-            System.out.println("Error: " + err);
             err = imu.getYawDegrees() - targetYaw;
             robotDrive(0, 0, 0.35 * (err > 180 ? -1 : 1));
         }
