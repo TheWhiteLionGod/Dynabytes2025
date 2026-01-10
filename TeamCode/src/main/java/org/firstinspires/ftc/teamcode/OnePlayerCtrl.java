@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
-import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.outtake.ShooterOld;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 @Disabled
@@ -17,7 +17,7 @@ public class OnePlayerCtrl extends Dynawheels {
         imu = new ImuSensor(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
         carousel = new Carousel(hardwareMap, telemetry);
-        shooter = new Shooter(hardwareMap, telemetry);
+        shooter = new ShooterOld(hardwareMap, telemetry);
 
         telemetry.update();
     }

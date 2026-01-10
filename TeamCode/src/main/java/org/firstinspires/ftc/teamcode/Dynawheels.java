@@ -6,8 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
-import org.firstinspires.ftc.teamcode.subsystems.odometry.RoadRunner;
-import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.outtake.ShooterOld;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
@@ -16,7 +15,7 @@ public abstract class Dynawheels extends LinearOpMode {
     public FieldDrive drivetrain;
     public Roller roller;
     public Carousel carousel;
-    public Shooter shooter;
+    public ShooterOld shooter;
     public Camera camera;
     public ImuSensor imu;
 
@@ -32,7 +31,7 @@ public abstract class Dynawheels extends LinearOpMode {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
         carousel = new Carousel(hardwareMap, telemetry);
-        shooter = new Shooter(hardwareMap, telemetry);
+        shooter = new ShooterOld(hardwareMap, telemetry);
         camera = new Camera(hardwareMap, telemetry);
         imu = new ImuSensor(hardwareMap, telemetry);
 
