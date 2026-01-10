@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -52,8 +53,8 @@ public class Controller1 extends LinearOpMode {
     private DcMotor FRDrive = null;
     private DcMotor BLDrive = null;
     private DcMotor BRDrive = null;
-    private DcMotor launcher = null;
-    private DcMotor intake = null;
+    private DcMotorEx launcher = null;
+    private DcMotorEx intake = null;
     private Servo greenLight = null;
     private Servo purpleLight = null;
     private ColorSensor colorSensor = null;
@@ -80,8 +81,8 @@ public class Controller1 extends LinearOpMode {
         LLift = hardwareMap.get(Servo.class, "LeftLIFT");
         RLift = hardwareMap.get(Servo.class, "RightLIFT");
         carousel = hardwareMap.get(Servo.class, "Carousel");
-        launcher = hardwareMap.get(DcMotor.class, "Launcher");
-        intake = hardwareMap.get(DcMotor.class, "IntakeRoller");
+        launcher = hardwareMap.get(DcMotorEx.class, "Launcher");
+        intake = hardwareMap.get(DcMotorEx.class, "IntakeRoller");
         greenLight = hardwareMap.get(Servo.class, "GreenLight");
         purpleLight = hardwareMap.get(Servo.class, "PurpleLight");
         colorSensor = hardwareMap.get(ColorSensor.class, "ColorSensor");
@@ -91,6 +92,7 @@ public class Controller1 extends LinearOpMode {
         BRDrive.setDirection(DcMotor.Direction.REVERSE);
         FRDrive.setDirection(DcMotor.Direction.REVERSE);
 
+        boolean blink_flag= false;
         carousel.setPosition(pos);
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -150,7 +152,7 @@ public class Controller1 extends LinearOpMode {
 
                 // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
                 double axial = gamepad1.left_stick_y*0.85;  // Note: pushing stick forward gives negative value
-                double lateral = -gamepad1.left_stick_x*0.85;
+                double lateral = gamepad1.left_stick_x*0.85;
                 double yaw = -gamepad1.right_stick_x*.5;
 
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
@@ -194,6 +196,8 @@ public class Controller1 extends LinearOpMode {
                 } else if (gamepad1.right_stick_x > 0) {
                     launch_stop();
                 }
+
+
                 if (gamepad1.dpad_down) {
                     lift_down();
                     if(pos == .04){
@@ -208,12 +212,6 @@ public class Controller1 extends LinearOpMode {
                         pos = 0.04;
                         carousel.setPosition(pos);
                     }
-                } else if (gamepad1.dpad_left) {
-                    rotate_pos1();
-                } else if (gamepad1.dpad_right) {
-                    rotate_pos3();
-                } else if (gamepad1.dpad_up){
-                    rotate_pos2();
                 }
 
                 if (gamepad1.x) {
@@ -235,6 +233,7 @@ public class Controller1 extends LinearOpMode {
                 float[] hsv = new float[3];
                 Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
                 float hue = hsv[0];
+
                 if (Constants.GREEN_MIN <= hue && hue <= Constants.GREEN_MAX) {
                     greenLight.setPosition(0.5);
                     purpleLight.setPosition(0);
@@ -247,7 +246,21 @@ public class Controller1 extends LinearOpMode {
                     purpleLight.setPosition(0);
                 }
 
-                if (gamepad2.dpad_left) {
+                if (LLift.getPosition()==LastLiftPos){
+                    // blinking
+
+                    if(blink_flag==false){
+                        greenLight.setPosition(0.5);
+                        purpleLight.setPosition(0.5);
+                        blink_flag=true;
+                    }
+                    else{
+                        greenLight.setPosition(0);
+                        purpleLight.setPosition(0);
+                        blink_flag=false;
+                    }
+                }
+                if (gamepad1.dpad_left) {
                     for (int i = 0; i < 3; i++) {
                         Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
                         hue = hsv[0];
@@ -258,7 +271,7 @@ public class Controller1 extends LinearOpMode {
                         sleep(750);
                     }
                 }
-                else if (gamepad2.dpad_right) {
+                else if (gamepad1.dpad_right) {
                     for (int i = 0; i < 3; i++) {
                         Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
                         hue = hsv[0];
@@ -270,7 +283,10 @@ public class Controller1 extends LinearOpMode {
                     }
                 }
 
+                telemetry.addData("Intake TPS", intake.getVelocity());
+                telemetry.addData("Launcher TPS", launcher.getVelocity());
                 telemetry.addData("Hue", hue);
+                telemetry.addData("Shooter Power", launcherSpeed);
                 telemetry.addData("Back  left/Right", "%4.2f, %4.2f", current_servo_pos, LLift.getPosition());
                 telemetry.update();
 
@@ -348,10 +364,10 @@ public class Controller1 extends LinearOpMode {
         carousel.setPosition(.94);
     }
     public void roll_in(){
-        intake.setPower(0.7);
+        intake.setPower(1);
     }
     public void roll_out(){
-        intake.setPower(-0.7);
+        intake.setPower(-1);
     }
     public void roll_stop(){
         intake.setPower(0);
@@ -367,10 +383,12 @@ public class Controller1 extends LinearOpMode {
     }
     public void increaseLauncherSpeed() {
         launcherSpeed -= 0.005;
+        launcherSpeed = Math.max(-1, launcherSpeed);
         launch();
     }
     public void decreaseLauncherSpeed() {
         launcherSpeed += 0.005;
+        launcherSpeed = Math.min(0, launcherSpeed);
         launch();
     }
     public void robot_stop(){

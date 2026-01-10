@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
-@TeleOp(name="Turn Test", group="TEST")
+@Disabled
+//@TeleOp(name="Turn Test", group="TEST")
 public class TurnTest extends Dynawheels {
     ImuSensor imu;
     @Override

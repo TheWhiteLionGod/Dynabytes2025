@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
 
-@TeleOp(name="Headlight TEST", group="TEST")
+@Disabled
+//@TeleOp(name="Headlight TEST", group="TEST")
 public class HeadlightTest extends Dynawheels {
     HeadLight headLight;
 

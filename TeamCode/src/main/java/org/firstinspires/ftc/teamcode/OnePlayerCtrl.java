@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
@@ -11,8 +12,8 @@ import org.firstinspires.ftc.teamcode.subsystems.odometry.Trajectories;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
-
-@TeleOp(name="1 Player Controller", group="FTC2026")
+@Disabled
+//@TeleOp(name="1 Player Controller", group="FTC2026")
 public class OnePlayerCtrl extends Dynawheels {
     ImuSensor imu;
     @Override

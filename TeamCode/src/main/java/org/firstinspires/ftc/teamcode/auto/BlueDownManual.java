@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
-@Autonomous(name="Blue Down Manual", group="FTC2026")
+@Autonomous(name="Blue Auto", group="FTC2026")
 public class BlueDownManual extends Dynawheels {
     ImuSensor imu;
 

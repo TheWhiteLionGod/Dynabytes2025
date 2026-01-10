@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
 
-@TeleOp(name="CAMERA TEST", group="TEST")
+@Disabled
+//@TeleOp(name="CAMERA TEST", group="TEST")
 public class CameraTest extends Dynawheels {
     @Override
     public void config() {

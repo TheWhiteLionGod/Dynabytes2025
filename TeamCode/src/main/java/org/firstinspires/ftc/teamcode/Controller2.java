@@ -64,6 +64,15 @@ public class Controller2 extends LinearOpMode {
     public double current_servo_pos = 0.0;
     public double launcherSpeed = -0.9;
 
+    public double pos1color = 0;
+    public double pos2color = 0;
+    public double pos3color = 0;
+    float[] hsv = new float[3];
+    float hue = hsv[0];
+
+
+    boolean blink_flag = false;
+
 //    private DcMotor frontLeftDrive = null;
 //    private DcMotor backLeftDrive = null;
 //    private DcMotor frontRightDrive = null;
@@ -89,8 +98,8 @@ public class Controller2 extends LinearOpMode {
 
         RLift.setDirection(Servo.Direction.REVERSE);
 
-        BLDrive.setDirection(DcMotor.Direction.REVERSE);
-        FLDrive.setDirection(DcMotor.Direction.REVERSE);
+        //BLDrive.setDirection(DcMotor.Direction.REVERSE);
+        // FLDrive.setDirection(DcMotor.Direction.REVERSE);
         BRDrive.setDirection(DcMotor.Direction.REVERSE);
         FRDrive.setDirection(DcMotor.Direction.REVERSE);
 
@@ -153,9 +162,9 @@ public class Controller2 extends LinearOpMode {
                 double max;
 
                 // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-                double axial = gamepad2.left_stick_y;  // Note: pushing stick forward gives negative value
-                double lateral = gamepad2.left_stick_x;
-                double yaw = gamepad2.right_stick_x;
+                double axial = -gamepad2.left_stick_y*0.85;  // Note: pushing stick forward gives negative value
+                double lateral = -gamepad2.left_stick_x*0.85;
+                double yaw = -gamepad2.right_stick_x*.5;
 
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
                 // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -184,10 +193,61 @@ public class Controller2 extends LinearOpMode {
                 BLDrive.setPower(leftBackPower);
                 BRDrive.setPower(rightBackPower);
 
-                if (gamepad2.right_stick_x > 0) {
-                    turn_right();
-                } else if (gamepad2.right_stick_x < 0) {
-                    turn_left();
+                if (pos == .04){
+                    get_color();
+                    if (Constants.GREEN_MIN <= hue && hue <= Constants.GREEN_MAX) {
+                        pos1color = 1;
+                    }
+                    else if (Constants.PURPLE_MIN <= hue && hue <= Constants.PURPLE_MAX){
+                        pos1color = 2;
+                    }
+                } else if (pos == .51) {
+                    if (Constants.GREEN_MIN <= hue && hue <= Constants.GREEN_MAX) {
+                        pos2color = 1;
+                    }
+                    else if(Constants.PURPLE_MIN <= hue && hue <= Constants.PURPLE_MAX) {
+                        pos2color = 2;
+                    }
+                }
+                else if (pos == .94){
+                    if (Constants.GREEN_MIN <= hue && hue <= Constants.GREEN_MAX) {
+                        pos3color = 1;
+                    }
+                    else if(Constants.PURPLE_MIN <= hue && hue <= Constants.PURPLE_MAX) {
+                        pos3color = 2;
+                    }
+                }
+                if (gamepad1.dpad_left){
+                    if (pos1color == 2){
+                        lift_down();
+                        sleep(50);
+                        carousel.setPosition(.04);
+                    } else if (pos2color == 2) {
+                        lift_down();
+                        sleep(50);
+                        carousel.setPosition(0.51);
+                    }
+                    else if (pos3color == 2){
+                        lift_down();
+                        sleep(50);
+                        carousel.setPosition(0.94);
+                    }
+                }
+                if (gamepad1.dpad_right){
+                    if (pos1color == 1){
+                        lift_down();
+                        sleep(50);
+                        carousel.setPosition(.04);
+                    }else if (pos2color == 1) {
+                        lift_down();
+                        sleep(50);
+                        carousel.setPosition(0.51);
+                    }
+                    else if (pos3color == 1){
+                        lift_down();
+                        sleep(50);
+                        carousel.setPosition(0.94);
+                    }
                 }
                 if (gamepad1.left_trigger > 0) {
                     roll_in();
@@ -218,16 +278,18 @@ public class Controller2 extends LinearOpMode {
                         pos = 0.04;
                         carousel.setPosition(pos);
                     }
-                } else if (gamepad1.dpad_left) {
-                    rotate_pos1();
-                } else if (gamepad1.dpad_right) {
-                    rotate_pos3();
-                } else if (gamepad1.dpad_up){
-                    rotate_pos2();
                 }
 
                 if (gamepad1.x) {
                     lift_up();
+                    if (pos == 0.04){
+                        pos1color = 0;
+                    }
+                    else if (pos == 0.51){
+                        pos2color = 0;
+                    } else if (pos == .94) {
+                        pos3color = 0;
+                    }
                 }
                 if (gamepad1.b){
                     lift_down();
@@ -242,9 +304,7 @@ public class Controller2 extends LinearOpMode {
                     increaseLauncherSpeed();
                 }
 
-                float[] hsv = new float[3];
-                Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
-                float hue = hsv[0];
+                get_color();
                 if (Constants.GREEN_MIN <= hue && hue <= Constants.GREEN_MAX) {
                     greenLight.setPosition(0.5);
                     purpleLight.setPosition(0);
@@ -257,30 +317,24 @@ public class Controller2 extends LinearOpMode {
                     purpleLight.setPosition(0);
                 }
 
-                if (gamepad2.dpad_left) {
-                    for (int i = 0; i < 3; i++) {
-                        Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
-                        hue = hsv[0];
+                if (LLift.getPosition()==LastLiftPos){
+                    // blinking
 
-                        if (Constants.GREEN_MIN <= hue && hue <= Constants.GREEN_MAX) {
-                            break;
-                        }
-                        sleep(750);
+                    if(!blink_flag){
+                        greenLight.setPosition(0.5);
+                        purpleLight.setPosition(0.5);
+                        blink_flag=true;
+                    }
+                    else{
+                        greenLight.setPosition(0);
+                        purpleLight.setPosition(0);
+                        blink_flag=false;
                     }
                 }
-                else if (gamepad2.dpad_right) {
-                    for (int i = 0; i < 3; i++) {
-                        Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
-                        hue = hsv[0];
 
-                        if (Constants.PURPLE_MIN <= hue && hue <= Constants.PURPLE_MAX) {
-                            break;
-                        }
-                        sleep(750);
-                    }
-                }
 
                 telemetry.addData("Hue", hue);
+                telemetry.addData("Shooter Power", launcherSpeed*-1);
                 telemetry.addData("Back  left/Right", "%4.2f, %4.2f", current_servo_pos, LLift.getPosition());
                 telemetry.update();
 
@@ -298,9 +352,9 @@ public class Controller2 extends LinearOpMode {
     }
 
     public void lift_down() {
-        RLift.setPosition(FirstLiftPos);
-        sleep(100);
         LLift.setPosition(FirstLiftPos);
+        sleep(150);
+        RLift.setPosition(FirstLiftPos);
     }
 
     public void move_forward() {
@@ -347,21 +401,24 @@ public class Controller2 extends LinearOpMode {
     }
     public void rotate_pos1(){
         lift_down();
+        sleep(50);
         carousel.setPosition(0.04);
     }
     public void rotate_pos2(){
         lift_down();
+        sleep(50);
         carousel.setPosition(.51);
     }
     public void rotate_pos3(){
         lift_down();
+        sleep(50);
         carousel.setPosition(.94);
     }
     public void roll_in(){
-        intake.setPower(0.7);
+        intake.setPower(1);
     }
     public void roll_out(){
-        intake.setPower(-0.7);
+        intake.setPower(-1);
     }
     public void roll_stop(){
         intake.setPower(0);
@@ -378,10 +435,12 @@ public class Controller2 extends LinearOpMode {
 
     public void increaseLauncherSpeed() {
         launcherSpeed -= 0.005;
+        launcherSpeed = Math.max(-1, launcherSpeed);
         launch();
     }
     public void decreaseLauncherSpeed() {
         launcherSpeed += 0.005;
+        launcherSpeed = Math.min(0, launcherSpeed);
         launch();
     }
     public void robot_stop(){
@@ -390,4 +449,10 @@ public class Controller2 extends LinearOpMode {
         BLDrive.setPower(0);
         BRDrive.setPower(0);
     }
+    public void get_color(){
+        hsv = new float[3];
+        Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsv);
+        hue = hsv[0];
+    }
+
 }

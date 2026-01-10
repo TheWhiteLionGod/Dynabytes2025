@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
-
-@TeleOp(name="Color Sensor Test", group="TEST")
+@Disabled
+//@TeleOp(name="Color Sensor Test", group="TEST")
 public class ColorTest extends Dynawheels {
     HeadLight headLight;
     @Override
