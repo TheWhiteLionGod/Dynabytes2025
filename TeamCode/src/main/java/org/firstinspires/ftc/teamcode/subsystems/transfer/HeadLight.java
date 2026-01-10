@@ -13,26 +13,27 @@ public class HeadLight {
         greenLight = hardwareMap.get(Servo.class, "GreenLight");
         purpleLight = hardwareMap.get(Servo.class, "PurpleLight");
         this.telemetry = telemetry;
+        telemetry.addData("HeadLights", "Initialized");
     }
 
     public void greenOn() {
         greenLight.setPosition(0.5);
         purpleLight.setPosition(0);
 
-        telemetry.addLine("Green On");
+        telemetry.addData("HeadLights", "Green");
     }
 
     public void purpleOn() {
         purpleLight.setPosition(0.5);
         greenLight.setPosition(0);
 
-        telemetry.addLine("Purple On");
+        telemetry.addData("HeadLights", "Purple");
     }
 
     public void stop() {
         greenLight.setPosition(0);
         purpleLight.setPosition(0);
 
-        telemetry.addLine("Lights Off");
+        telemetry.addData("HeadLights", "Off");
     }
 }

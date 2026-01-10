@@ -26,6 +26,7 @@ public class FieldDrive {
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         this.telemetry = telemetry;
+        telemetry.addData("Drivetrain", "Initialized");
     }
 
     // Auto Commands
@@ -77,7 +78,7 @@ public class FieldDrive {
         FL.setPower(frontLeft);
         FR.setPower(frontRight);
         BR.setPower(backRight);
-        telemetry.addLine("Drivetrain Moving");
+        telemetry.addData("Drivetrain", "Moving");
     }
 
     public void turnTo(ImuSensor imu, double targetYaw) {
@@ -94,6 +95,6 @@ public class FieldDrive {
         FL.setPower(0);
         FR.setPower(0);
         BR.setPower(0);
-        telemetry.addLine("Stopped Drivetrain");
+        telemetry.addData("Drivetrain", "Stopped");
     }
 }

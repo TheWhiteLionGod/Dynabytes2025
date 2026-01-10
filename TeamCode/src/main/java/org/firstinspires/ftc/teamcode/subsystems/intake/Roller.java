@@ -13,20 +13,21 @@ public class Roller {
         roller = hardwareMap.get(DcMotorEx.class, "IntakeRoller");
         roller.setDirection(DcMotorEx.Direction.REVERSE);
         this.telemetry = telemetry;
+        telemetry.addData("Roller", "Initialized");
     }
 
     public void forward() {
         roller.setPower(1);
-        telemetry.addLine("Roller Moving Forward");
+        telemetry.addData("Roller", "Forward");
     }
 
     public void reverse() {
         roller.setPower(-1);
-        telemetry.addLine("Roller Moving Reverse");
+        telemetry.addData("Roller", "Reverse");
     }
 
     public void stop() {
         roller.setPower(0);
-        telemetry.addLine("Roller Stopped");
+        telemetry.addData("Roller", "Stopped");
     }
 }

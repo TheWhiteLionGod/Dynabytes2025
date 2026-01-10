@@ -18,6 +18,7 @@ public class Lift {
         leftLift.setPosition(Constants.LIFT_DOWN_POS);
         rightLift.setPosition(Constants.LIFT_DOWN_POS);
         this.telemetry = telemetry;
+        telemetry.addData("Lift", "Initialized");
     }
 
     public void up() {
@@ -25,12 +26,12 @@ public class Lift {
         try { Thread.sleep(Constants.LIFT_DELAY_TIME); }
         catch (InterruptedException ignored) {}
         leftLift.setPosition(Constants.LIFT_UP_POS);
-        telemetry.addLine("Lift Up");
+        telemetry.addData("Lift", "Up");
     }
 
     public void down() {
         leftLift.setPosition(Constants.LIFT_DOWN_POS);
         rightLift.setPosition(Constants.LIFT_DOWN_POS);
-        telemetry.addLine("Lift Down");
+        telemetry.addData("Lift", "Down");
     }
 }
