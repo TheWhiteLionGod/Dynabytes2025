@@ -5,8 +5,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
-public class Lift {
+public class Lift implements Subsystem {
     private final Servo leftLift, rightLift;
     private final Telemetry telemetry;
 

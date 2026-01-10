@@ -4,8 +4,9 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
-public class Shooter {
+public class Shooter implements Subsystem {
     private final DcMotorEx shooter;
     private final Telemetry telemetry;
     double motorPwr = 0.9;
