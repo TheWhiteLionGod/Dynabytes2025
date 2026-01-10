@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
+import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
@@ -34,9 +35,10 @@ public class TurnTest extends Dynawheels {
             drivetrain.stop();
         }
 
-        if (gamepad1.x) drivetrain.turnTo(imu, 90);
-        else if (gamepad1.a) drivetrain.turnTo(imu, 180);
-        else if (gamepad1.b) drivetrain.turnTo(imu, 270);
-        else if (gamepad1.y) drivetrain.turnTo(imu, 0);
+        TurnDrivetrainTo action;
+        if (gamepad1.x) action = new TurnDrivetrainTo(90, drivetrain, imu);
+        else if (gamepad1.a) action = new TurnDrivetrainTo(180, drivetrain, imu);
+        else if (gamepad1.b) action = new TurnDrivetrainTo(270, drivetrain, imu);
+        else if (gamepad1.y) action = new TurnDrivetrainTo(360, drivetrain, imu);
     }
 }

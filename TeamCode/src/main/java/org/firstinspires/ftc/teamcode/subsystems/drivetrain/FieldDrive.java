@@ -5,9 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
-public class FieldDrive {
+public class FieldDrive implements Subsystem {
     private final DcMotorEx BL, FL, FR, BR;
     private final Telemetry telemetry;
 
@@ -56,7 +57,7 @@ public class FieldDrive {
     }
 
     // Regular Movement
-    public void robotDrive(double forward, double strafe, double turn) {
+    public synchronized void robotDrive(double forward, double strafe, double turn) {
         double frontLeft = forward + strafe + turn;
         double backLeft = forward - strafe + turn;
         double frontRight = forward - strafe - turn;
@@ -78,19 +79,11 @@ public class FieldDrive {
         FL.setPower(frontLeft);
         FR.setPower(frontRight);
         BR.setPower(backRight);
+
         telemetry.addData("Drivetrain", "Moving");
     }
 
-    public void turnTo(ImuSensor imu, double targetYaw) {
-        double err = imu.getYawDegrees() - targetYaw;
-
-        while (Math.abs(err) > 5) {
-            err = imu.getYawDegrees() - targetYaw;
-            robotDrive(0, 0, 0.35 * (err > 180 ? -1 : 1));
-        }
-    }
-
-    public void stop() {
+    public synchronized void stop() {
         BL.setPower(0);
         FL.setPower(0);
         FR.setPower(0);

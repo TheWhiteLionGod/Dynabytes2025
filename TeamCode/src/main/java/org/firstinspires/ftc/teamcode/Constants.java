@@ -24,6 +24,9 @@ public class Constants {
     public static final int LIFT_DELAY_TIME = 100;
     public static final int LIFT_UP_TIME = 750;
 
+    // Drivetrain Turning Kp
+    public static final double DRIVETRAIN_TURN_KP = 0.05;
+
     // Hue Values
     public static final int GREEN_MIN = 157;
     public static final int GREEN_MAX = 159;
