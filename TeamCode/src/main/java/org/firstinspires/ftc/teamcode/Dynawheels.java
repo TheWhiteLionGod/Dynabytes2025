@@ -8,16 +8,17 @@ import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.RoadRunner;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
 @Disabled
 public abstract class Dynawheels extends LinearOpMode {
     public FieldDrive drivetrain;
-    public RoadRunner roadRunner;
     public Roller roller;
     public Carousel carousel;
     public Shooter shooter;
     public Camera camera;
+    public ImuSensor imu;
 
     @Override
     public void runOpMode() {
@@ -29,13 +30,12 @@ public abstract class Dynawheels extends LinearOpMode {
 
     public void config() {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
-        roadRunner = new RoadRunner(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
         carousel = new Carousel(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap, telemetry);
         camera = new Camera(hardwareMap, telemetry);
+        imu = new ImuSensor(hardwareMap, telemetry);
 
-        roadRunner.setPose(Constants.currentPose);
         telemetry.update();
     }
 
@@ -43,12 +43,10 @@ public abstract class Dynawheels extends LinearOpMode {
 
     public void cleanup() {
         drivetrain.stop();
-        roadRunner.stop();
         roller.stop();
         carousel.stop();
         shooter.stopMotor = true;
         shooter.stop();
         camera.stop();
-        Constants.currentPose = roadRunner.getPose();
     }
 }

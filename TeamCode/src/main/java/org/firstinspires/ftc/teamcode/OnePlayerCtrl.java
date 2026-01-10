@@ -1,14 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
-import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
-import org.firstinspires.ftc.teamcode.subsystems.odometry.Positions;
-import org.firstinspires.ftc.teamcode.subsystems.odometry.RoadRunner;
-import org.firstinspires.ftc.teamcode.subsystems.odometry.Trajectories;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
@@ -56,13 +51,14 @@ public class OnePlayerCtrl extends Dynawheels {
                     -gamepad1.left_stick_y,
                     gamepad1.left_stick_x,
                     gamepad1.right_stick_x,
-                    imu.getYawRadians()
+                    imu.getYaw()
             );
         }
         else {
             drivetrain.stop();
         }
 
+        /*
         // Go to Red Base
         if (gamepad1.left_stick_button && roadRunner.isIdle()) {
             roadRunner.followTraj(
@@ -75,6 +71,7 @@ public class OnePlayerCtrl extends Dynawheels {
                     Trajectories.trajTo(Positions.BLUE_BASE.get(), roadRunner)
             );
         }
+        */
     }
 
     public void handleIntake() {

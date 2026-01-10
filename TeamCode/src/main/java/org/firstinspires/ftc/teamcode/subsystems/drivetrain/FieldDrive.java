@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Coords;
 import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
-import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
 public class FieldDrive implements Subsystem {
     private final DcMotorEx BL, FL, FR, BR;
@@ -48,7 +48,9 @@ public class FieldDrive implements Subsystem {
     }
 
     // Field Drive Movement
-    public void fieldDrive(double forward, double strafe, double turn, double curYaw) {
+    public void fieldDrive(double forward, double strafe, double turn, Coords coords) {
+        double curYaw = Math.toRadians(coords.toRoadRunner().yaw);
+
         double temp = forward * Math.cos(curYaw) + strafe * Math.sin(curYaw);
         strafe = -forward * Math.sin(curYaw) + strafe * Math.cos(curYaw);
         forward = temp;

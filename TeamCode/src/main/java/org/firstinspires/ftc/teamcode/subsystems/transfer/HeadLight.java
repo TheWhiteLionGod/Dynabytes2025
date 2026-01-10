@@ -16,21 +16,21 @@ public class HeadLight {
         telemetry.addData("HeadLights", "Initialized");
     }
 
-    public void greenOn() {
+    public synchronized void greenOn() {
         greenLight.setPosition(0.5);
         purpleLight.setPosition(0);
 
         telemetry.addData("HeadLights", "Green");
     }
 
-    public void purpleOn() {
+    public synchronized void purpleOn() {
         purpleLight.setPosition(0.5);
         greenLight.setPosition(0);
 
         telemetry.addData("HeadLights", "Purple");
     }
 
-    public void stop() {
+    public synchronized void stop() {
         greenLight.setPosition(0);
         purpleLight.setPosition(0);
 

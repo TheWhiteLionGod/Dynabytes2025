@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.Coords;
 import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
 public class ImuSensor implements Subsystem {
@@ -23,13 +24,9 @@ public class ImuSensor implements Subsystem {
         this.telemetry = telemetry;
     }
 
-    public double getYawDegrees() {
+    public Coords getYaw() {
         double yaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
-        return yaw < 0 ? 360 + yaw : yaw;
-    }
-
-    public double getYawRadians() {
-        return Math.toRadians(getYawDegrees());
+        return new Coords(yaw, Coords.Unit.Imu);
     }
 
 }

@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-
 public class Constants {
     public static boolean approxEqualTo(double a, double b) {
         return Math.abs(a - b) < 0.0001;
@@ -24,9 +22,6 @@ public class Constants {
     public static final int LIFT_DELAY_TIME = 100;
     public static final int LIFT_UP_TIME = 750;
 
-    // Drivetrain Turning Kp
-    public static final double DRIVETRAIN_TURN_KP = 0.05;
-
     // Hue Values
     public static final int GREEN_MIN = 157;
     public static final int GREEN_MAX = 159;
@@ -39,5 +34,5 @@ public class Constants {
     public static final int PGP_TAG = 22;
     public static final int PPG_TAG = 23;
     // Auto TeleOp Position Transfer
-    public static Pose2d currentPose = new Pose2d();
+    public static Coords currentPose = new Coords();
 }

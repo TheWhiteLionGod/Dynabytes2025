@@ -59,7 +59,7 @@ public class Controller1 extends LinearOpMode {
     private Servo purpleLight = null;
     private ColorSensor colorSensor = null;
     public double FirstLiftPos = 0;
-    public double LastLiftPos = 0.33;
+    public double LastLiftPos = 0.22;
     public double pos = 0.04;
     public double launcherSpeed = -0.9;
     public double current_servo_pos = 0.0;

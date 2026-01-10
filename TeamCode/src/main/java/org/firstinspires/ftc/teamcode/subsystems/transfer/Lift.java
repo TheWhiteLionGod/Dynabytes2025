@@ -21,7 +21,7 @@ public class Lift {
         telemetry.addData("Lift", "Initialized");
     }
 
-    public void up() {
+    public synchronized void up() {
         rightLift.setPosition(Constants.LIFT_UP_POS);
         try { Thread.sleep(Constants.LIFT_DELAY_TIME); }
         catch (InterruptedException ignored) {}
@@ -29,7 +29,7 @@ public class Lift {
         telemetry.addData("Lift", "Up");
     }
 
-    public void down() {
+    public synchronized void down() {
         leftLift.setPosition(Constants.LIFT_DOWN_POS);
         rightLift.setPosition(Constants.LIFT_DOWN_POS);
         telemetry.addData("Lift", "Down");

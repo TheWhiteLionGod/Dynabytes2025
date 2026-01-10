@@ -3,15 +3,12 @@ package org.firstinspires.ftc.teamcode.subsystems.odometry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
-
-import java.util.List;
 
 public class Camera {
     private final Limelight3A limelight;
@@ -63,7 +60,7 @@ public class Camera {
         LLResult detection = getDetection();
         if (detection == null) return null;
 
-        double yawAngle = imu.getYawDegrees();
+        double yawAngle = imu.getYaw().yaw;
         limelight.updateRobotOrientation(yawAngle);
 
         Pose3D botPose = detection.getBotpose();
