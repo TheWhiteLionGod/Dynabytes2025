@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
-import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.CarouselOld;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
 
 @Disabled
@@ -18,7 +18,7 @@ public class OnePlayerCtrl extends Dynawheels {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
         imu = new ImuSensor(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
-        carousel = new Carousel(hardwareMap, telemetry);
+        carousel = new CarouselOld(hardwareMap, telemetry);
         lift = new Lift(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap, telemetry);
 

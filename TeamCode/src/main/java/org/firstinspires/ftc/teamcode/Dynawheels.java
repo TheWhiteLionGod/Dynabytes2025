@@ -8,14 +8,14 @@ import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
 import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
-import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.CarouselOld;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
 
 @Disabled
 public abstract class Dynawheels extends LinearOpMode {
     public FieldDrive drivetrain;
     public Roller roller;
-    public Carousel carousel;
+    public CarouselOld carousel;
     public Lift lift;
     public Shooter shooter;
     public Camera camera;
@@ -32,7 +32,7 @@ public abstract class Dynawheels extends LinearOpMode {
     public void config() {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
-        carousel = new Carousel(hardwareMap, telemetry);
+        carousel = new CarouselOld(hardwareMap, telemetry);
         lift = new Lift(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap, telemetry);
         camera = new Camera(hardwareMap, telemetry);
