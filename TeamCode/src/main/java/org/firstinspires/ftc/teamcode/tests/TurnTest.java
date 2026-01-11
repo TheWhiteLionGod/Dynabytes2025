@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.tests;
 
-import androidx.annotation.Nullable;
-
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Coords;
@@ -14,6 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 @TeleOp(name="Turn Test", group="TEST")
 public class TurnTest extends Dynawheels {
     ImuSensor imu;
+    TurnDrivetrainTo action;
     Coords FORWARD = new Coords(360, Coords.Unit.RoadRunner),
             LEFT = new Coords(90, Coords.Unit.RoadRunner),
             BACKWARD = new Coords(180, Coords.Unit.RoadRunner),
@@ -48,15 +47,14 @@ public class TurnTest extends Dynawheels {
                 drivetrain.stop();
             }
 
-            TurnDrivetrainTo action = handleTurn();
-            if (action != null) action.run();
+            handleAction();
+            if (action == null || action.run()) {
+                action = null;
+            }
         }
     }
 
-    @Nullable
-    private TurnDrivetrainTo handleTurn() {
-        TurnDrivetrainTo action = null;
-
+    private void handleAction() {
         if (gamepad1.x) action = new TurnDrivetrainTo(drivetrain, imu, LEFT);
         else if (gamepad1.a) action = new TurnDrivetrainTo(drivetrain, imu, BACKWARD);
         else if (gamepad1.b) action = new TurnDrivetrainTo(drivetrain, imu, RIGHT);
@@ -65,7 +63,6 @@ public class TurnTest extends Dynawheels {
         else if (gamepad1.dpad_up) action = new TurnDrivetrainTo(drivetrain, imu, B1_A2);
         else if (gamepad1.dpad_right) action = new TurnDrivetrainTo(drivetrain, imu, B1_A3);
         else if (gamepad1.dpad_down) action = new TurnDrivetrainTo(drivetrain, imu, B1_A4);
-        return action;
     }
 
     @Override

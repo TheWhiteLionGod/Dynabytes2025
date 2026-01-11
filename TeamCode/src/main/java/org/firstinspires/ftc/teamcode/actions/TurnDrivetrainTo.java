@@ -15,16 +15,11 @@ public class TurnDrivetrainTo implements Action {
     }
 
     @Override
-    public void run() {
-        double err, turnPwr;
+    public boolean run() {
+        double err = imu.getYaw().yaw - targetYaw.yaw;
+        double turnPwr = Math.copySign(0.5, err);
 
-        do {
-            err = imu.getYaw().yaw - targetYaw.yaw;
-            turnPwr = Math.copySign(0.5, err);
-
-            drivetrain.robotDrive(0, 0, turnPwr);
-        } while (Math.abs(err) > 5);
-
-        drivetrain.stop();
+        drivetrain.robotDrive(0, 0, turnPwr);
+        return Math.abs(err) <= 5;
     }
 }

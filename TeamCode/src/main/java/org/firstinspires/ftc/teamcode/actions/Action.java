@@ -6,5 +6,5 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public interface Action {
-    public void run();
+    public boolean run();
 }
