@@ -4,15 +4,16 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
-import org.firstinspires.ftc.teamcode.subsystems.transfer.CarouselOld;
+import org.firstinspires.ftc.teamcode.actions.FindColorBall;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
 @Disabled
 //@TeleOp(name="Color Sensor Test", group="TEST")
 public class ColorTest extends Dynawheels {
-    HeadLight headLight;
+    FindColorBall findColorBall;
     @Override
     public void config() {
-        carousel = new CarouselOld(hardwareMap, telemetry);
+        carousel = new Carousel(hardwareMap, telemetry);
         telemetry.update();
     }
 
@@ -31,17 +32,19 @@ public class ColorTest extends Dynawheels {
             carousel.spin(Constants.CAROUSEL_POS_3);
         }
         else if (gamepad1.x) {
-            carousel.findGreenBall();
+            findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
         }
         else if (gamepad1.b) {
-            carousel.findPurpleBall();
+            findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.PURPLE);
         }
 
-        carousel.updateState();
+        if (findColorBall == null || findColorBall.run()) {
+            findColorBall = null;
+        }
     }
 
     @Override
     public void cleanup() {
-        carousel.stop();
+
     }
 }

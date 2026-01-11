@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
 @Disabled
 //@TeleOp(name="CAMERA TEST", group="TEST")
 public class CameraTest extends Dynawheels {
+    Camera camera;
     @Override
     public void config() {
         camera = new Camera(hardwareMap, telemetry);

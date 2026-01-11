@@ -2,23 +2,26 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
-import org.firstinspires.ftc.teamcode.subsystems.transfer.CarouselOld;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
 
 @Disabled
 //@TeleOp(name="1 Player Controller", group="FTC2026")
 public class OnePlayerCtrl extends Dynawheels {
     ImuSensor imu;
+    FindColorBall findColorBall;
+
     @Override
     public void config() {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
         imu = new ImuSensor(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
-        carousel = new CarouselOld(hardwareMap, telemetry);
+        carousel = new Carousel(hardwareMap, telemetry);
         lift = new Lift(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap, telemetry);
 
@@ -90,9 +93,6 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     public void handleCarousel() {
-        // Updating Carousel State
-        carousel.updateState();
-
         if (gamepad1.dpad_left) {
             carousel.spin(Constants.CAROUSEL_POS_1);
         }
@@ -106,10 +106,14 @@ public class OnePlayerCtrl extends Dynawheels {
             carousel.spin();
         }
         else if (gamepad1.x) {
-            carousel.findGreenBall();
+            findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
         }
         else if (gamepad1.b) {
-            carousel.findPurpleBall();
+            findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        }
+
+        if (findColorBall == null || findColorBall.run()) {
+            findColorBall = null;
         }
     }
 
@@ -121,13 +125,5 @@ public class OnePlayerCtrl extends Dynawheels {
         // Shooter
         if (gamepad1.right_trigger != 0) shooter.forward();
         else if (gamepad1.right_bumper) shooter.stop();
-    }
-
-    public void cleanup() {
-        drivetrain.stop();
-        roller.stop();
-        carousel.stop();
-        shooter.stop();
-        lift.down();
     }
 }
