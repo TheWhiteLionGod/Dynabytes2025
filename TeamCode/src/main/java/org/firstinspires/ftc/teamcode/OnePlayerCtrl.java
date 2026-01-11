@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
-import org.firstinspires.ftc.teamcode.subsystems.outtake.ShooterOld;
+import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
+
 @Disabled
 //@TeleOp(name="1 Player Controller", group="FTC2026")
 public class OnePlayerCtrl extends Dynawheels {
@@ -17,7 +19,8 @@ public class OnePlayerCtrl extends Dynawheels {
         imu = new ImuSensor(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
         carousel = new Carousel(hardwareMap, telemetry);
-        shooter = new ShooterOld(hardwareMap, telemetry);
+        lift = new Lift(hardwareMap, telemetry);
+        shooter = new Shooter(hardwareMap, telemetry);
 
         telemetry.update();
     }
@@ -111,31 +114,20 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     public void handleOuttake() {
-        // Update State
-        shooter.updateState();
-
         // Lift
-        if (gamepad1.y) {
-            shooter.lift.up();
-        }
-        else if (gamepad1.a) {
-            shooter.lift.down();
-        }
+        if (gamepad1.y) lift.up();
+        else if (gamepad1.a) lift.down();
 
         // Shooter
-        if (gamepad1.right_trigger != 0) {
-            shooter.start();
-        }
-        else if (gamepad1.right_bumper) {
-            shooter.stop();
-        }
+        if (gamepad1.right_trigger != 0) shooter.forward();
+        else if (gamepad1.right_bumper) shooter.stop();
     }
 
     public void cleanup() {
         drivetrain.stop();
         roller.stop();
         carousel.stop();
-        shooter.stopMotor = true;
         shooter.stop();
+        lift.down();
     }
 }
