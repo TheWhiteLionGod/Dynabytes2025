@@ -6,8 +6,8 @@ import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 
 @Disabled
-//@TeleOp(name="One Player Controller", group="FTC2026")
-public class OnePlayerCtrl extends Dynawheels {
+//@TeleOp(name="Two Player Controller", group="FTC2026")
+public class TwoPlayerCtrl extends Dynawheels {
     Action findColorBall;
 
     @Override
@@ -26,8 +26,8 @@ public class OnePlayerCtrl extends Dynawheels {
 
     private void handleDrivetrain() {
         if (gamepad1.left_stick_y != 0||
-                gamepad1.left_stick_x != 0 ||
-                gamepad1.right_stick_x != 0) {
+            gamepad1.left_stick_x != 0 ||
+            gamepad1.right_stick_x != 0) {
 
             drivetrain.fieldDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x, imu.getYaw());
         }
@@ -37,29 +37,29 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     private void handleIntake() {
-        if (gamepad1.left_trigger != 0) roller.forward();
-        else if (gamepad1.left_bumper) roller.reverse();
+        if (gamepad2.left_trigger != 0) roller.forward();
+        else if (gamepad2.left_bumper) roller.reverse();
         else roller.stop();
     }
 
     private void handleCarousel() {
-        if (gamepad1.dpad_down) carousel.spin();
-        else if (gamepad1.x) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
-        else if (gamepad1.b) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        if (gamepad2.dpad_down) carousel.spin();
+        else if (gamepad2.x) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        else if (gamepad2.b) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;
     }
 
     private void handleOuttake() {
-        if (gamepad1.a) lift.down();
-        else if (gamepad1.y) lift.up();
+        if (gamepad2.a) lift.down();
+        else if (gamepad2.y) lift.up();
 
-        if (gamepad1.right_trigger != 0) {
-            shooter.setPwr(hyperbola(gamepad1.right_trigger));
+        if (gamepad2.right_trigger != 0) {
+            shooter.setPwr(hyperbola(gamepad2.right_trigger));
             shooter.start();
         }
-        else if (gamepad1.right_bumper) shooter.stop();
+        else if (gamepad2.right_bumper) shooter.stop();
     }
 
     private double hyperbola(double x) {

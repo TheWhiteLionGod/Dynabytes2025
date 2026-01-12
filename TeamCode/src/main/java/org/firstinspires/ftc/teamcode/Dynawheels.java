@@ -19,8 +19,8 @@ public abstract class Dynawheels extends LinearOpMode {
     public Carousel carousel;
     public Lift lift;
     public Shooter shooter;
-    public ColorInput colorSensor;
     public ImuSensor imu;
+    public ColorInput colorSensor;
 
     @Override
     public void runOpMode() {
@@ -33,11 +33,13 @@ public abstract class Dynawheels extends LinearOpMode {
     public void config() {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
         roller = new Roller(hardwareMap, telemetry);
+
         carousel = new Carousel(hardwareMap, telemetry);
         lift = new Lift(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap, telemetry);
-        colorSensor = new ColorInput(hardwareMap, telemetry);
+
         imu = new ImuSensor(hardwareMap, telemetry);
+        colorSensor = new ColorInput(hardwareMap, telemetry);
 
         telemetry.update();
     }

@@ -29,7 +29,7 @@ public class ShootBall implements Action {
                 break;
 
             case SPINNING:
-                shooter.forward();
+                shooter.start();
                 if (Duration.between(timer, Instant.now()).toMillis() > Constants.SHOOTER_SPIN_TIME) {
                     state = State.READY;
                     timer = Instant.now();
