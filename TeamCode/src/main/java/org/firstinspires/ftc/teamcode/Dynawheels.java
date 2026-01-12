@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
 
 @Disabled
@@ -19,6 +20,7 @@ public abstract class Dynawheels extends LinearOpMode {
     public Carousel carousel;
     public Lift lift;
     public Shooter shooter;
+    public HeadLight headLight;
     public ImuSensor imu;
     public ColorInput colorSensor;
 
@@ -38,6 +40,7 @@ public abstract class Dynawheels extends LinearOpMode {
         lift = new Lift(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap, telemetry);
 
+        headLight = new HeadLight(hardwareMap, telemetry);
         imu = new ImuSensor(hardwareMap, telemetry);
         colorSensor = new ColorInput(hardwareMap, telemetry);
 

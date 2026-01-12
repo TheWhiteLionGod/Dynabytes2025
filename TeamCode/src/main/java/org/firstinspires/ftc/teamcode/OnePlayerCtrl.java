@@ -4,11 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.FindColorBall;
+import org.firstinspires.ftc.teamcode.actions.UpdateHeadLight;
 
 @Disabled
-//@TeleOp(name="One Player Controller", group="FTC2026")
+//@TeleOp(name="Two Player Controller", group="FTC2026")
 public class OnePlayerCtrl extends Dynawheels {
-    Action findColorBall;
+    Action findColorBall,
+            updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
 
     @Override
     public void run() {
@@ -19,6 +21,7 @@ public class OnePlayerCtrl extends Dynawheels {
             handleCarousel();
             handleOuttake();
 
+            handleLights();
             telemetry.update();
             sleep(50);
         }
@@ -60,6 +63,10 @@ public class OnePlayerCtrl extends Dynawheels {
             shooter.start();
         }
         else if (gamepad1.right_bumper) shooter.stop();
+    }
+
+    private void handleLights() {
+        updateHeadLight.run();
     }
 
     private double hyperbola(double x) {

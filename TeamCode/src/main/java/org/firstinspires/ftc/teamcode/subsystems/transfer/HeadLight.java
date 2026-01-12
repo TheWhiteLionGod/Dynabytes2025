@@ -16,6 +16,14 @@ public class HeadLight {
         telemetry.addData("HeadLights", "Initialized");
     }
 
+    public boolean isGreen() {
+        return greenLight.getPosition() == 0.5;
+    }
+
+    public boolean isPurple() {
+        return purpleLight.getPosition() == 0.5;
+    }
+
     public synchronized void greenOn() {
         greenLight.setPosition(0.5);
         purpleLight.setPosition(0);

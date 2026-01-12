@@ -22,6 +22,10 @@ public class Lift implements Subsystem {
         telemetry.addData("Lift", "Initialized");
     }
 
+    public boolean isUp() {
+        return leftLift.getPosition() == Constants.LIFT_UP_POS;
+    }
+
     public synchronized void up() {
         rightLift.setPosition(Constants.LIFT_UP_POS);
         try { Thread.sleep(Constants.LIFT_DELAY_TIME); }
