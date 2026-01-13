@@ -41,14 +41,14 @@ public class OnePlayerCtrl extends Dynawheels {
 
     private void handleIntake() {
         if (gamepad1.left_trigger != 0) roller.forward();
-        else if (gamepad1.left_bumper) roller.reverse();
+        else if (gamepad1.leftBumperWasPressed()) roller.reverse();
         else roller.stop();
     }
 
     private void handleCarousel() {
-        if (gamepad1.dpad_down) carousel.spin();
-        else if (gamepad1.x) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
-        else if (gamepad1.b) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        if (gamepad1.dpadDownWasPressed()) carousel.spin();
+        else if (gamepad1.xWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        else if (gamepad1.bWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;
@@ -62,7 +62,7 @@ public class OnePlayerCtrl extends Dynawheels {
             shooter.setPwr(hyperbola(gamepad1.right_trigger));
             shooter.start();
         }
-        else if (gamepad1.right_bumper) shooter.stop();
+        else if (gamepad1.rightBumperWasPressed()) shooter.stop();
     }
 
     private void handleLights() {

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Coords;
 import org.firstinspires.ftc.teamcode.Dynawheels;
+import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
@@ -11,8 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 //@Disabled
 @TeleOp(name="Turn Test", group="TEST")
 public class TurnTest extends Dynawheels {
-    ImuSensor imu;
-    TurnDrivetrainTo action;
+    Action turnDrivetrainTo;
     Coords FORWARD = new Coords(360, Coords.Unit.RoadRunner),
             LEFT = new Coords(90, Coords.Unit.RoadRunner),
             BACKWARD = new Coords(180, Coords.Unit.RoadRunner),
@@ -27,6 +27,7 @@ public class TurnTest extends Dynawheels {
     public void config() {
         drivetrain = new FieldDrive(hardwareMap, telemetry);
         imu = new ImuSensor(hardwareMap, telemetry);
+        telemetry.update();
     }
 
     @Override
@@ -48,21 +49,21 @@ public class TurnTest extends Dynawheels {
             }
 
             handleAction();
-            if (action == null || action.run()) {
-                action = null;
+            if (turnDrivetrainTo == null || turnDrivetrainTo.run()) {
+                turnDrivetrainTo = null;
             }
         }
     }
 
     private void handleAction() {
-        if (gamepad1.x) action = new TurnDrivetrainTo(drivetrain, imu, LEFT);
-        else if (gamepad1.a) action = new TurnDrivetrainTo(drivetrain, imu, BACKWARD);
-        else if (gamepad1.b) action = new TurnDrivetrainTo(drivetrain, imu, RIGHT);
-        else if (gamepad1.y) action = new TurnDrivetrainTo(drivetrain, imu, FORWARD);
-        else if (gamepad1.dpad_left) action = new TurnDrivetrainTo(drivetrain, imu, B1_A1);
-        else if (gamepad1.dpad_up) action = new TurnDrivetrainTo(drivetrain, imu, B1_A2);
-        else if (gamepad1.dpad_right) action = new TurnDrivetrainTo(drivetrain, imu, B1_A3);
-        else if (gamepad1.dpad_down) action = new TurnDrivetrainTo(drivetrain, imu, B1_A4);
+        if (gamepad1.x) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, LEFT);
+        else if (gamepad1.a) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, BACKWARD);
+        else if (gamepad1.b) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, RIGHT);
+        else if (gamepad1.y) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, FORWARD);
+        else if (gamepad1.dpad_left) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, B1_A1);
+        else if (gamepad1.dpad_up) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, B1_A2);
+        else if (gamepad1.dpad_right) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, B1_A3);
+        else if (gamepad1.dpad_down) turnDrivetrainTo = new TurnDrivetrainTo(drivetrain, imu, B1_A4);
     }
 
     @Override

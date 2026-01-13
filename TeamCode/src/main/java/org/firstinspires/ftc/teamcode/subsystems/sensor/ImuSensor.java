@@ -22,6 +22,7 @@ public class ImuSensor implements Subsystem {
         imu.resetYaw();
 
         this.telemetry = telemetry;
+        telemetry.addData("IMU", "Initialized");
     }
 
     public Coords getYaw() {

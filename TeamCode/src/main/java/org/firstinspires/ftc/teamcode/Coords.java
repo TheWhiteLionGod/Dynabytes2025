@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+
 public class Coords {
     public enum Unit {
         Imu, RoadRunner
@@ -29,5 +31,9 @@ public class Coords {
     public Coords toRoadRunner() {
         if (unit == Unit.RoadRunner) return this;
         return new Coords(x, y, (yaw >= 0) ? yaw : yaw + 360, Unit.RoadRunner);
+    }
+
+    public Pose2d toPose() {
+        return new Pose2d(x, y, Math.toRadians(this.toRoadRunner().yaw));
     }
 }

@@ -4,13 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
+import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
 @Disabled
 //@TeleOp(name="Color Sensor Test", group="TEST")
 public class ColorTest extends Dynawheels {
-    FindColorBall findColorBall;
+    Action findColorBall;
     @Override
     public void config() {
         carousel = new Carousel(hardwareMap, telemetry);
@@ -44,7 +45,5 @@ public class ColorTest extends Dynawheels {
     }
 
     @Override
-    public void cleanup() {
-
-    }
+    public void cleanup() {}
 }

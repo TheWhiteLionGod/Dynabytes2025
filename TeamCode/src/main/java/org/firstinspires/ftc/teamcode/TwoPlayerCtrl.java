@@ -9,8 +9,13 @@ import org.firstinspires.ftc.teamcode.actions.UpdateHeadLight;
 @Disabled
 //@TeleOp(name="Two Player Controller", group="FTC2026")
 public class TwoPlayerCtrl extends Dynawheels {
-    Action findColorBall,
-            updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
+    Action findColorBall, updateHeadLight;
+
+    @Override
+    public void config() {
+        super.config();
+        updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
+    }
 
     @Override
     public void run() {
@@ -41,28 +46,28 @@ public class TwoPlayerCtrl extends Dynawheels {
 
     private void handleIntake() {
         if (gamepad2.left_trigger != 0) roller.forward();
-        else if (gamepad2.left_bumper) roller.reverse();
+        else if (gamepad2.leftBumperWasPressed()) roller.reverse();
         else roller.stop();
     }
 
     private void handleCarousel() {
-        if (gamepad2.dpad_down) carousel.spin();
-        else if (gamepad2.x) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
-        else if (gamepad2.b) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        if (gamepad2.dpadDownWasPressed()) carousel.spin();
+        else if (gamepad2.xWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        else if (gamepad2.bWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;
     }
 
     private void handleOuttake() {
-        if (gamepad2.a) lift.down();
-        else if (gamepad2.y) lift.up();
+        if (gamepad2.aWasPressed()) lift.down();
+        else if (gamepad2.yWasPressed()) lift.up();
 
         if (gamepad2.right_trigger != 0) {
             shooter.setPwr(hyperbola(gamepad2.right_trigger));
             shooter.start();
         }
-        else if (gamepad2.right_bumper) shooter.stop();
+        else if (gamepad2.rightBumperWasPressed()) shooter.stop();
     }
 
     private void handleLights() {

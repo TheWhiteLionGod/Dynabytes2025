@@ -49,7 +49,7 @@ public class FieldDrive implements Subsystem {
 
     // Field Drive Movement
     public void fieldDrive(double forward, double strafe, double turn, Coords coords) {
-        double curYaw = Math.toRadians(coords.toRoadRunner().yaw);
+        double curYaw = Math.toRadians(-coords.toRoadRunner().yaw);
 
         double temp = forward * Math.cos(curYaw) + strafe * Math.sin(curYaw);
         strafe = -forward * Math.sin(curYaw) + strafe * Math.cos(curYaw);
