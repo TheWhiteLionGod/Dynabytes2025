@@ -13,13 +13,13 @@ import org.firstinspires.ftc.teamcode.Dynawheels;
 public class PIDFTest extends Dynawheels {
     DcMotorEx shooter;
 
-    double P = 0.0;
-    double F = 0.0;
+    double P = 1.0;
+    double F = 12.051;
 
     PIDFCoefficients PIDF = new PIDFCoefficients(P, 0, 0, F);
 
-    double highTargetVel = 3000;
-    double lowTargetVel = 1000;
+    double highTargetVel = 2500;
+    double lowTargetVel = 0;
     double curTargetVel = lowTargetVel;
 
     double[] stepSize = new double[]{100, 10, 1, 0.1, 0.01, 0.001};

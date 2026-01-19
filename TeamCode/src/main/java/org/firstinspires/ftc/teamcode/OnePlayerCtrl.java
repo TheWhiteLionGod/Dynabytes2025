@@ -58,10 +58,7 @@ public class OnePlayerCtrl extends Dynawheels {
         if (gamepad1.a) lift.down();
         else if (gamepad1.y) lift.up();
 
-        if (gamepad1.right_trigger != 0) {
-            shooter.setPwr(hyperbola(gamepad1.right_trigger));
-            shooter.start();
-        }
+        if (gamepad1.right_trigger != 0) shooter.start();
         else if (gamepad1.rightBumperWasPressed()) shooter.stop();
     }
 

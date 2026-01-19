@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+
 public class Constants {
     public static boolean approxEqualTo(double a, double b) {
         return Math.abs(a - b) < 0.0001;
@@ -35,4 +37,7 @@ public class Constants {
     public static final int PPG_TAG = 23;
     // Auto TeleOp Position Transfer
     public static Coords currentPose = new Coords();
+    // Shooter PIDF Coefficients
+    public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(1.0, 0, 0, 12.051);
+    public static final double shooterMaxVel = 2500;
 }

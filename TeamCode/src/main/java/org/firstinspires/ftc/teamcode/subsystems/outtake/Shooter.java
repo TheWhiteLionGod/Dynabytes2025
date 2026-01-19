@@ -1,32 +1,36 @@
 package org.firstinspires.ftc.teamcode.subsystems.outtake;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
 public class Shooter implements Subsystem {
     private final DcMotorEx shooter;
     private final Telemetry telemetry;
-    double motorPwr = 0.9;
+    public double motorPwr = 0.9;
 
     public Shooter(HardwareMap hardwareMap, Telemetry telemetry) {
         shooter = hardwareMap.get(DcMotorEx.class, "Launcher");
         shooter.setDirection(DcMotorEx.Direction.REVERSE);
+        shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, Constants.shooterPIDF);
 
         this.telemetry = telemetry;
         telemetry.addData("Shooter", "Initialized");
     }
 
     public synchronized void start() {
-        shooter.setPower(motorPwr);
+        shooter.setVelocity(Constants.shooterMaxVel*motorPwr);
         telemetry.addData("Shooter", "Forward");
     }
 
     public synchronized void stop() {
-        shooter.setPower(0);
+        shooter.setVelocity(0);
         telemetry.addData("Shooter", "Stopped");
     }
 
