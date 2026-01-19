@@ -37,27 +37,35 @@ public class PIDFTest extends Dynawheels {
 
     @Override
     public void run() {
-        if (gamepad1.aWasPressed()) curTargetVel = lowTargetVel;
-        else if (gamepad1.yWasPressed()) curTargetVel = highTargetVel;
+        while (opModeIsActive()) {
+            if (gamepad1.aWasPressed()) curTargetVel = lowTargetVel;
+            else if (gamepad1.yWasPressed()) curTargetVel = highTargetVel;
+            shooter.setVelocity(curTargetVel);
 
-        if (gamepad1.dpad_up) P += stepSize[stepSizePtr];
-        else if (gamepad1.dpad_down) P -= stepSize[stepSizePtr];
+            if (gamepad1.dpad_up) P += stepSize[stepSizePtr];
+            else if (gamepad1.dpad_down) P -= stepSize[stepSizePtr];
 
-        if (gamepad1.dpad_left) F += stepSize[stepSizePtr];
-        else if (gamepad1.dpad_right) F -= stepSize[stepSizePtr];
+            if (gamepad1.dpad_left) F += stepSize[stepSizePtr];
+            else if (gamepad1.dpad_right) F -= stepSize[stepSizePtr];
 
-        if (gamepad1.xWasPressed()) stepSizePtr = (stepSizePtr + 1) % stepSize.length;
-        else if (gamepad1.bWasPressed()) stepSizePtr = (stepSizePtr - 1) % stepSize.length;
+            if (gamepad1.xWasPressed()) stepSizePtr = (stepSizePtr + 1) % stepSize.length;
+            else if (gamepad1.bWasPressed()) stepSizePtr = (stepSizePtr - 1) % stepSize.length;
 
-        PIDF = new PIDFCoefficients(P, 0, 0, F);
-        shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, PIDF);
+            PIDF = new PIDFCoefficients(P, 0, 0, F);
+            shooter.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, PIDF);
 
-        telemetry.addData("P", P);
-        telemetry.addData("F", F);
-        telemetry.addData("Current Velocity", shooter.getVelocity());
-        telemetry.addData("Target Velocity", curTargetVel);
-        telemetry.addData("Step Size", stepSize[stepSizePtr]);
-        telemetry.update();
-        sleep(10);
+            telemetry.addData("P", P);
+            telemetry.addData("F", F);
+            telemetry.addData("Current Velocity", shooter.getVelocity());
+            telemetry.addData("Target Velocity", curTargetVel);
+            telemetry.addData("Step Size", stepSize[stepSizePtr]);
+            telemetry.update();
+            sleep(10);
+        }
+    }
+
+    @Override
+    public void cleanup() {
+        shooter.setPower(0);
     }
 }
