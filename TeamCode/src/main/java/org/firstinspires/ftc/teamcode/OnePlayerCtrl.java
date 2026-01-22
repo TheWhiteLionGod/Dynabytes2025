@@ -13,6 +13,12 @@ public class OnePlayerCtrl extends Dynawheels {
     Action findColorBall, updateHeadLight;
 
     @Override
+    public void config() {
+        super.config();
+        updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
+    }
+
+    @Override
     public void run() {
         while (opModeIsActive()) {
             handleDrivetrain();
@@ -41,14 +47,14 @@ public class OnePlayerCtrl extends Dynawheels {
 
     private void handleIntake() {
         if (gamepad1.left_trigger != 0) roller.forward();
-        else if (gamepad1.leftBumperWasPressed()) roller.reverse();
+        else if (gamepad1.left_bumper) roller.reverse();
         else roller.stop();
     }
 
     private void handleCarousel() {
-        if (gamepad1.dpadDownWasPressed()) carousel.spin();
-        else if (gamepad1.xWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
-        else if (gamepad1.bWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.PURPLE);
+        if (gamepad1.dpad_down) carousel.spin();
+        else if (gamepad1.x) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        else if (gamepad1.b) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.PURPLE);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;
@@ -59,11 +65,10 @@ public class OnePlayerCtrl extends Dynawheels {
         else if (gamepad1.y) lift.up();
 
         if (gamepad1.right_trigger != 0) shooter.start();
-        else if (gamepad1.rightBumperWasPressed()) shooter.stop();
+        else if (gamepad1.right_bumper) shooter.stop();
     }
 
     private void handleLights() {
-        updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
         updateHeadLight.run();
     }
 }
