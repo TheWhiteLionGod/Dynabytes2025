@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -52,13 +53,13 @@ public class Controller2 extends LinearOpMode {
     private DcMotor FRDrive = null;
     private DcMotor BLDrive = null;
     private DcMotor BRDrive = null;
-    private DcMotor launcher = null;
+    private DcMotorEx launcher = null;
     private DcMotor intake = null;
     private Servo greenLight = null;
     private Servo purpleLight = null;
     private ColorSensor colorSensor = null;
     public double FirstLiftPos = 0;
-    public double LastLiftPos = 0.33;
+    public double LastLiftPos = Constants.LIFT_UP_POS;
     public double pos = 0.11;
 
     public double current_servo_pos = 0.0;
@@ -90,18 +91,21 @@ public class Controller2 extends LinearOpMode {
         LLift = hardwareMap.get(Servo.class, "LeftLIFT");
         RLift = hardwareMap.get(Servo.class, "RightLIFT");
         carousel = hardwareMap.get(Servo.class, "Carousel");
-        launcher = hardwareMap.get(DcMotor.class, "Launcher");
+        launcher = hardwareMap.get(DcMotorEx.class, "Launcher");
         intake = hardwareMap.get(DcMotor.class, "IntakeRoller");
         greenLight = hardwareMap.get(Servo.class, "GreenLight");
         purpleLight = hardwareMap.get(Servo.class, "PurpleLight");
         colorSensor = hardwareMap.get(ColorSensor.class, "ColorSensor");
 
-        RLift.setDirection(Servo.Direction.REVERSE);
+        LLift.setDirection(Servo.Direction.REVERSE);
 
         //BLDrive.setDirection(DcMotor.Direction.REVERSE);
         // FLDrive.setDirection(DcMotor.Direction.REVERSE);
         BRDrive.setDirection(DcMotor.Direction.REVERSE);
         FRDrive.setDirection(DcMotor.Direction.REVERSE);
+
+        launcher.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, Constants.shooterPIDF);
 
 
         // ########################################################################################
@@ -424,7 +428,7 @@ public class Controller2 extends LinearOpMode {
         intake.setPower(0);
     }
     public void launch(){
-        launcher.setPower(launcherSpeed);
+        launcher.setVelocity(launcherSpeed*Constants.shooterMaxVel);
     }
     public void launch_reverse(){
         launcher.setPower(0.7);

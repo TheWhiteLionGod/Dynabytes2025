@@ -1,16 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 import org.firstinspires.ftc.teamcode.actions.UpdateHeadLight;
 
-@Disabled
-//@TeleOp(name="Two Player Controller", group="FTC2026")
+//@Disabled
+@TeleOp(name="One Player Controller", group="FTC2026")
 public class OnePlayerCtrl extends Dynawheels {
-    Action findColorBall,
-            updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
+    Action findColorBall, updateHeadLight;
 
     @Override
     public void run() {
@@ -48,7 +48,7 @@ public class OnePlayerCtrl extends Dynawheels {
     private void handleCarousel() {
         if (gamepad1.dpadDownWasPressed()) carousel.spin();
         else if (gamepad1.xWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
-        else if (gamepad1.bWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+        else if (gamepad1.bWasPressed()) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.PURPLE);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;
@@ -63,10 +63,7 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     private void handleLights() {
+        updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
         updateHeadLight.run();
-    }
-
-    private double hyperbola(double x) {
-        return Math.max((4*x) / ((3*x) + 1), 0.6);
     }
 }

@@ -17,11 +17,14 @@ public class TurnTest extends Dynawheels {
             LEFT = new Coords(90, Coords.Unit.RoadRunner),
             BACKWARD = new Coords(180, Coords.Unit.RoadRunner),
             RIGHT = new Coords(270, Coords.Unit.RoadRunner),
-            B1_A1 = new Coords(23.4, Coords.Unit.Imu),
+            B1_A1 = new Coords(17, Coords.Unit.Imu),
             B1_A2 = new Coords(45, Coords.Unit.Imu),
-            B1_A3 = new Coords(31, Coords.Unit.Imu),
+            B1_A3 = new Coords(25, Coords.Unit.Imu),
             B1_A4 = new Coords(0, Coords.Unit.Imu),
-            B1_A5 = new Coords(15, Coords.Unit.Imu);
+            R1_A1 = new Coords(-17, Coords.Unit.Imu),
+            R1_A2 = new Coords(-45, Coords.Unit.Imu),
+            R1_A3 = new Coords(-25, Coords.Unit.Imu),
+            R1_A4 = new Coords(0, Coords.Unit.Imu);
 
     @Override
     public void config() {

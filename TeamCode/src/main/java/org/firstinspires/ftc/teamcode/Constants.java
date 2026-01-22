@@ -14,7 +14,7 @@ public class Constants {
 
     // Lift Position
     public static final double LIFT_DOWN_POS = 0.0;
-    public static final double LIFT_UP_POS = 0.33;
+    public static final double LIFT_UP_POS = 0.095;
 
     // Carousel Spin Time
     public static final int CAROUSEL_SPIN_TIME = 750;

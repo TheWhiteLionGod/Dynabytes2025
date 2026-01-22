@@ -14,7 +14,7 @@ public class Lift implements Subsystem {
     public Lift(HardwareMap hardwareMap, Telemetry telemetry) {
         leftLift = hardwareMap.get(Servo.class, "LeftLIFT");
         rightLift = hardwareMap.get(Servo.class, "RightLIFT");
-        rightLift.setDirection(Servo.Direction.REVERSE);
+        leftLift.setDirection(Servo.Direction.REVERSE);
 
         leftLift.setPosition(Constants.LIFT_DOWN_POS);
         rightLift.setPosition(Constants.LIFT_DOWN_POS);
