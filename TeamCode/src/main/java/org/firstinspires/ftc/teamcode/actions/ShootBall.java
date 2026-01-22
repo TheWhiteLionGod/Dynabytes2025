@@ -26,6 +26,7 @@ public class ShootBall implements Action {
         switch (state) {
             case IDLE:
                 state = State.SPINNING;
+                timer = Instant.now();
                 break;
 
             case SPINNING:
@@ -34,6 +35,7 @@ public class ShootBall implements Action {
                     state = State.READY;
                     timer = Instant.now();
                 }
+                break;
 
             case READY:
                 lift.up();

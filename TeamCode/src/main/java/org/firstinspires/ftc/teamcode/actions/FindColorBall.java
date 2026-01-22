@@ -51,6 +51,7 @@ public class FindColorBall implements Action {
                 if (colorSensor.isGreen() || attempts >= 3) return true;
 
                 state = State.SPINNING;
+                timer = Instant.now();
                 attempts++;
                 break;
 
@@ -58,6 +59,7 @@ public class FindColorBall implements Action {
                 if (colorSensor.isPurple() || attempts >= 3) return true;
 
                 state = State.SPINNING;
+                timer = Instant.now();
                 attempts++;
                 break;
         }

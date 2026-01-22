@@ -27,6 +27,7 @@ public class ImuSensor implements Subsystem {
 
     public Coords getYaw() {
         double yaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+        telemetry.addData("IMU", "Yaw of " + yaw);
         return new Coords(yaw, Coords.Unit.Imu);
     }
 
