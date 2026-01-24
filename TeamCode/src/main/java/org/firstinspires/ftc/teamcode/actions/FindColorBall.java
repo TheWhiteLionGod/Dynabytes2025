@@ -12,7 +12,7 @@ public class FindColorBall implements Action {
     }
 
     public enum Color {
-        GREEN, PURPLE
+        GREEN, PURPLE, EMPTY
     }
 
     Carousel carousel;
