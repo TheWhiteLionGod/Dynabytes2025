@@ -6,15 +6,14 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 
 public class Carousel {
     private final Servo carousel;
     private final Telemetry telemetry;
 
-    public FindColorBall.Color pos1Color;
-    public FindColorBall.Color pos2Color;
-    public FindColorBall.Color pos3Color;
+    public BallColor pos1Color;
+    public BallColor pos2Color;
+    public BallColor pos3Color;
 
 
     public Carousel(HardwareMap hardwareMap, Telemetry telemetry) {

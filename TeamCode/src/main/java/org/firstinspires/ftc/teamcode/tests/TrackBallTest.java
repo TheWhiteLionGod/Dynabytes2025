@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 import org.firstinspires.ftc.teamcode.actions.FindColorBallNew;
 import org.firstinspires.ftc.teamcode.actions.TrackBall;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
 public class TrackBallTest extends Dynawheels {
@@ -22,9 +23,9 @@ public class TrackBallTest extends Dynawheels {
         // Handling Inputs
         if (gamepad1.dpad_down) carousel.spin();
         else if (gamepad1.dpad_left)
-            findColorBallAction = new FindColorBallNew(carousel, colorSensor, FindColorBall.Color.GREEN);
+            findColorBallAction = new FindColorBallNew(carousel, colorSensor, BallColor.GREEN);
         else if (gamepad1.dpad_right)
-            findColorBallAction = new FindColorBallNew(carousel, colorSensor, FindColorBall.Color.PURPLE);
+            findColorBallAction = new FindColorBallNew(carousel, colorSensor, BallColor.PURPLE);
         else if (gamepad1.dpad_up)
             trackBallAction = new TrackBall(carousel, colorSensor);
 

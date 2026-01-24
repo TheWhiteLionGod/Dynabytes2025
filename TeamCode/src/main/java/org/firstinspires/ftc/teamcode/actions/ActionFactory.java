@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.actions;
 
 import org.firstinspires.ftc.teamcode.Coords;
 import org.firstinspires.ftc.teamcode.Dynawheels;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 
 public final class ActionFactory {
     private static Action updateHeadLights;
@@ -19,7 +20,7 @@ public final class ActionFactory {
         return new ShootBall(robot.shooter, robot.lift);
     }
 
-    public static Action findColorBall(Dynawheels robot, FindColorBall.Color color) {
+    public static Action findColorBall(Dynawheels robot, BallColor color) {
         return new FindColorBall(robot.carousel, robot.colorSensor, color);
     }
 }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.actions;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
@@ -70,13 +71,13 @@ public class TrackBall implements Action {
         }
     }
 
-    private FindColorBall.Color detectColor() {
-        if (colorSensor.isPurple()) return FindColorBall.Color.PURPLE;
-        if (colorSensor.isGreen()) return FindColorBall.Color.GREEN;
-        return FindColorBall.Color.EMPTY;
+    private BallColor detectColor() {
+        if (colorSensor.isPurple()) return BallColor.PURPLE;
+        if (colorSensor.isGreen()) return BallColor.GREEN;
+        return BallColor.EMPTY;
     }
 
-    private void setColorForPosition(int position, FindColorBall.Color color) {
+    private void setColorForPosition(int position, BallColor color) {
         switch (position) {
             case 1:
                 carousel.pos1Color = color;

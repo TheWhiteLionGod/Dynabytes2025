@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.FindColorBall;
 import org.firstinspires.ftc.teamcode.actions.UpdateHeadLight;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 
 //@Disabled
 @TeleOp(name="One Player Controller", group="FTC2026")
@@ -53,8 +53,8 @@ public class OnePlayerCtrl extends Dynawheels {
 
     private void handleCarousel() {
         if (gamepad1.dpad_down) carousel.spin();
-        else if (gamepad1.x) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
-        else if (gamepad1.b) findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.PURPLE);
+        else if (gamepad1.x) findColorBall = new FindColorBall(carousel, colorSensor, BallColor.GREEN);
+        else if (gamepad1.b) findColorBall = new FindColorBall(carousel, colorSensor, BallColor.PURPLE);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;

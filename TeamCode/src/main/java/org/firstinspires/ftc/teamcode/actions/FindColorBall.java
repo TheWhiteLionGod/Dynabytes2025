@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.actions;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
@@ -11,18 +12,14 @@ public class FindColorBall implements Action {
         IDLE, SPINNING, FINDING_GREEN, FINDING_PURPLE
     }
 
-    public enum Color {
-        GREEN, PURPLE, EMPTY
-    }
-
     Carousel carousel;
     ColorInput colorSensor;
     State state = State.IDLE;
-    Color ballColor;
+    BallColor ballColor;
     Instant timer = Instant.now();
     int attempts = 0;
 
-    public FindColorBall(Carousel carousel, ColorInput colorSensor, Color ballColor) {
+    public FindColorBall(Carousel carousel, ColorInput colorSensor, BallColor ballColor) {
         this.carousel = carousel;
         this.colorSensor = colorSensor;
         this.ballColor = ballColor;
@@ -32,10 +29,10 @@ public class FindColorBall implements Action {
     public boolean run() {
         switch (state) {
             case IDLE:
-                if (ballColor == Color.GREEN) {
+                if (ballColor == BallColor.GREEN) {
                     state = State.FINDING_GREEN;
                 }
-                else if (ballColor == Color.PURPLE) {
+                else if (ballColor == BallColor.PURPLE) {
                     state = State.FINDING_PURPLE;
                 }
                 break;

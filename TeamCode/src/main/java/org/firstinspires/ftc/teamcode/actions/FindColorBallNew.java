@@ -2,15 +2,16 @@ package org.firstinspires.ftc.teamcode.actions;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
 public class FindColorBallNew implements Action {
     Carousel carousel;
     ColorInput colorSensor;
-    FindColorBall.Color ballColor;
+    BallColor ballColor;
     TrackBall trackBallAction;
 
-    public FindColorBallNew(Carousel carousel, ColorInput colorSensor, FindColorBall.Color ballColor) {
+    public FindColorBallNew(Carousel carousel, ColorInput colorSensor, BallColor ballColor) {
         this.carousel = carousel;
         this.colorSensor = colorSensor;
         this.ballColor = ballColor;

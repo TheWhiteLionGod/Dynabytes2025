@@ -6,8 +6,9 @@ import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.FindColorBall;
+import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
-import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
+
 @Disabled
 //@TeleOp(name="Color Sensor Test", group="TEST")
 public class ColorTest extends Dynawheels {
@@ -33,10 +34,10 @@ public class ColorTest extends Dynawheels {
             carousel.spin(Constants.CAROUSEL_POS_3);
         }
         else if (gamepad1.x) {
-            findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.GREEN);
+            findColorBall = new FindColorBall(carousel, colorSensor, BallColor.GREEN);
         }
         else if (gamepad1.b) {
-            findColorBall = new FindColorBall(carousel, colorSensor, FindColorBall.Color.PURPLE);
+            findColorBall = new FindColorBall(carousel, colorSensor, BallColor.PURPLE);
         }
 
         if (findColorBall == null || findColorBall.run()) {
