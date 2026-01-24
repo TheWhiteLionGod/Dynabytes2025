@@ -41,4 +41,10 @@ public class Carousel {
         carousel.setPosition(Range.clip(pos, 0, 1));
         telemetry.addData("Carousel", "Spinning to " + pos);
     }
+
+    public boolean allPositionsFilled() {
+        return pos1Color != null
+                && pos2Color != null
+                && pos3Color != null;
+    }
 }

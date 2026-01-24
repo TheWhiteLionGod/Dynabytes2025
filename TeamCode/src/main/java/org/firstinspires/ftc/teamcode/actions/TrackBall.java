@@ -23,7 +23,7 @@ public class TrackBall implements Action {
             resetState();
         }
 
-        if (allPositionsFilled()) {
+        if (carousel.allPositionsFilled()) {
             return true;
         }
 
@@ -44,12 +44,6 @@ public class TrackBall implements Action {
         carousel.pos3Color = null;
         timer = Instant.now();
         initialized = true;
-    }
-
-    private boolean allPositionsFilled() {
-        return carousel.pos1Color != null
-                && carousel.pos2Color != null
-                && carousel.pos3Color != null;
     }
 
     private boolean hasSpinTimeElapsed() {
