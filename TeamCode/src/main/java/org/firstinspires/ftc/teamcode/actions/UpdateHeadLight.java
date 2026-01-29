@@ -29,8 +29,8 @@ public class UpdateHeadLight implements Action {
         }
 
         // Color Detection
-        else if (colorSensor.isGreen()) headLight.greenOn();
-        else if (colorSensor.isPurple()) headLight.purpleOn();
+        else if (colorSensor.isGreen()[0]) headLight.greenOn();
+        else if (colorSensor.isPurple()[0]) headLight.purpleOn();
         else headLight.stop();
 
         return true;

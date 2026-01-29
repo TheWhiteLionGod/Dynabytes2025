@@ -44,29 +44,21 @@ public class ColorInput {
         return hue;
     }
 
-    @Deprecated
-    public boolean isGreen() {
-        return Constants.GREEN_MIN <= hue()[0] && hue()[0] <= Constants.GREEN_MAX;
-    }
-
-    @Deprecated
-    public boolean isPurple() {
-        return Constants.PURPLE_MIN <= hue()[0] && hue()[0] <= Constants.PURPLE_MAX;
-    }
-
-    public boolean[] isGreenV2() {
-        return new boolean[]{
-                Constants.GREEN_MIN <= hue()[0] && hue()[0] <= Constants.GREEN_MAX,
-                Constants.GREEN_MIN <= hue()[1] && hue()[1] <= Constants.GREEN_MAX,
-                Constants.GREEN_MIN <= hue()[2] && hue()[2] <= Constants.GREEN_MAX
+    public boolean[] isGreen() {
+        hue();
+        return new boolean[] {
+                Constants.GREEN_MIN <= hue[0] && hue[0] <= Constants.GREEN_MAX,
+                Constants.GREEN_MIN <= hue[1] && hue[1] <= Constants.GREEN_MAX,
+                Constants.GREEN_MIN <= hue[2] && hue[2] <= Constants.GREEN_MAX
         };
     }
 
-    public boolean[] isPurpleV2() {
-        return new boolean[]{
-                Constants.PURPLE_MIN <= hue()[0] && hue()[0] <= Constants.PURPLE_MAX,
-                Constants.PURPLE_MIN <= hue()[1] && hue()[1] <= Constants.PURPLE_MAX,
-                Constants.PURPLE_MIN <= hue()[2] && hue()[2] <= Constants.PURPLE_MAX
+    public boolean[] isPurple() {
+        hue();
+        return new boolean[] {
+                Constants.PURPLE_MIN <= hue[0] && hue[0] <= Constants.PURPLE_MAX,
+                Constants.PURPLE_MIN <= hue[1] && hue[1] <= Constants.PURPLE_MAX,
+                Constants.PURPLE_MIN <= hue[2] && hue[2] <= Constants.PURPLE_MAX
         };
     }
 }

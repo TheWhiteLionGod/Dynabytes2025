@@ -15,8 +15,8 @@ public class TrackBall implements Action {
 
     @Override
     public boolean run() {
-        boolean[] isGreen = colorSensor.isGreenV2();
-        boolean[] isPurple = colorSensor.isPurpleV2();
+        boolean[] isGreen = colorSensor.isGreen();
+        boolean[] isPurple = colorSensor.isPurple();
 
         BallColor[] ballColors = new BallColor[3];
 
