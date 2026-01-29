@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.intake.Roller;
-import org.firstinspires.ftc.teamcode.subsystems.odometry.Camera;
 import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
@@ -52,7 +51,8 @@ public abstract class Dynawheels extends LinearOpMode {
     public void cleanup() {
         drivetrain.stop();
         roller.stop();
-        shooter.stop();
         lift.down();
+        shooter.stop();
+        headLight.stop();
     }
 }

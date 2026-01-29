@@ -3,12 +3,14 @@ WATCH THIS VIDEO BEFORE TUNING: https://www.youtube.com/watch?v=aPNCpZzCTKg
 */
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
 
+@Disabled
 @TeleOp(name="PIDF Test", group="TEST")
 public class PIDFTest extends Dynawheels {
     DcMotorEx shooter;

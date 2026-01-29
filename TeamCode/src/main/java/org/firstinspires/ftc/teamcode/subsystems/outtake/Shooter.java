@@ -23,12 +23,12 @@ public class Shooter implements Subsystem {
         telemetry.addData("Shooter", "Initialized");
     }
 
-    public synchronized void start() {
+    public void start() {
         shooter.setVelocity(Constants.shooterMaxVel*motorPwr);
         telemetry.addData("Shooter", "Forward");
     }
 
-    public synchronized void stop() {
+    public void stop() {
         shooter.setVelocity(0);
         telemetry.addData("Shooter", "Stopped");
     }

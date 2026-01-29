@@ -26,7 +26,7 @@ public class Lift implements Subsystem {
         return leftLift.getPosition() == Constants.LIFT_UP_POS;
     }
 
-    public synchronized void up() {
+    public void up() {
         rightLift.setPosition(Constants.LIFT_UP_POS);
         try { Thread.sleep(Constants.LIFT_DELAY_TIME); }
         catch (InterruptedException ignored) {}
@@ -34,7 +34,7 @@ public class Lift implements Subsystem {
         telemetry.addData("Lift", "Up");
     }
 
-    public synchronized void down() {
+    public void down() {
         leftLift.setPosition(Constants.LIFT_DOWN_POS);
         rightLift.setPosition(Constants.LIFT_DOWN_POS);
         telemetry.addData("Lift", "Down");

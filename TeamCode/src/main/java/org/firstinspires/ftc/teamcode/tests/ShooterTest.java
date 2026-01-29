@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
@@ -7,6 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.outtake.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
 
+@Disabled
 @TeleOp(name="Shooter Test", group="TEST")
 public class ShooterTest extends Dynawheels {
     @Override

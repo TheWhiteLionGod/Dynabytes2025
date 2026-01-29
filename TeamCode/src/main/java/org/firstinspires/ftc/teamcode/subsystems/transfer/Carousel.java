@@ -36,7 +36,7 @@ public class Carousel {
         else spin(Constants.CAROUSEL_POS_1);
     }
 
-    public synchronized void spin(double pos) {
+    public void spin(double pos) {
         carousel.setPosition(Range.clip(pos, 0, 1));
         telemetry.addData("Carousel", "Spinning to " + pos);
     }

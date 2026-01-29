@@ -24,21 +24,21 @@ public class HeadLight {
         return purpleLight.getPosition() == 0.5;
     }
 
-    public synchronized void greenOn() {
+    public void greenOn() {
         greenLight.setPosition(0.5);
         purpleLight.setPosition(0);
 
         telemetry.addData("HeadLights", "Green");
     }
 
-    public synchronized void purpleOn() {
+    public void purpleOn() {
         purpleLight.setPosition(0.5);
         greenLight.setPosition(0);
 
         telemetry.addData("HeadLights", "Purple");
     }
 
-    public synchronized void stop() {
+    public void stop() {
         greenLight.setPosition(0);
         purpleLight.setPosition(0);
 

@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
 
 @Disabled
-//@TeleOp(name="Headlight TEST", group="TEST")
+@TeleOp(name="Headlight TEST", group="TEST")
 public class HeadlightTest extends Dynawheels {
     @Override
     public void config() {

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
 @Disabled
-//@TeleOp(name="Color Sensor Test", group="TEST")
+@TeleOp(name="Color Sensor Test", group="TEST")
 public class ColorTest extends Dynawheels {
     Action findColorBall;
     @Override

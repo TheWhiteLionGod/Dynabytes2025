@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
 
-import java.util.HashMap;
-
 public class ColorInput {
     private final ColorSensor[] colorSensors;
     private final float[] hsv;

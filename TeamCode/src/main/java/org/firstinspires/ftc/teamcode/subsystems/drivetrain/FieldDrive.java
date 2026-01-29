@@ -59,7 +59,7 @@ public class FieldDrive implements Subsystem {
     }
 
     // Regular Movement
-    public synchronized void robotDrive(double forward, double strafe, double turn) {
+    public void robotDrive(double forward, double strafe, double turn) {
         double frontLeft = forward + strafe + turn;
         double backLeft = forward - strafe + turn;
         double frontRight = forward - strafe - turn;
@@ -85,7 +85,7 @@ public class FieldDrive implements Subsystem {
         telemetry.addData("Drivetrain", "Moving");
     }
 
-    public synchronized void stop() {
+    public void stop() {
         BL.setPower(0);
         FL.setPower(0);
         FR.setPower(0);

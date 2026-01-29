@@ -16,17 +16,17 @@ public class Roller {
         telemetry.addData("Roller", "Initialized");
     }
 
-    public synchronized void forward() {
+    public void forward() {
         roller.setPower(1);
         telemetry.addData("Roller", "Forward");
     }
 
-    public synchronized void reverse() {
+    public void reverse() {
         roller.setPower(-1);
         telemetry.addData("Roller", "Reverse");
     }
 
-    public synchronized void stop() {
+    public void stop() {
         roller.setPower(0);
         telemetry.addData("Roller", "Stopped");
     }

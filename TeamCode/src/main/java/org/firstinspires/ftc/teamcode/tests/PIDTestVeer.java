@@ -1,14 +1,15 @@
 package org.firstinspires.ftc.teamcode.tests;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+@Deprecated
+@Disabled
 @TeleOp(name="PID TestVeer", group="TEST")
-public class PIDTestVeet extends LinearOpMode {
+public class PIDTestVeer extends LinearOpMode {
     public DcMotorEx launcher;
     public double target_tics = 2300;
     public double target_speed = 3000;

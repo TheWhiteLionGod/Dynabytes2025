@@ -9,6 +9,11 @@ public class UpdateHeadLight implements Action {
     ColorInput colorSensor;
     Lift lift;
 
+    public UpdateHeadLight(HeadLight headLight, ColorInput colorSensor) {
+        this.headLight = headLight;
+        this.colorSensor = colorSensor;
+    }
+
     public UpdateHeadLight(HeadLight headLight, ColorInput colorSensor, Lift lift) {
         this.headLight = headLight;
         this.colorSensor = colorSensor;
@@ -18,7 +23,7 @@ public class UpdateHeadLight implements Action {
     @Override
     public boolean run() {
         // Flickering if Lift is Up
-        if (lift.isUp()) {
+        if (lift != null && lift.isUp()) {
             if (headLight.isGreen()) headLight.purpleOn();
             else headLight.greenOn();
         }
