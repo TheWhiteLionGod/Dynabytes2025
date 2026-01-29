@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.actions.Action;
-import org.firstinspires.ftc.teamcode.actions.FindColorBallNewV2;
-import org.firstinspires.ftc.teamcode.actions.TrackBallV2;
+import org.firstinspires.ftc.teamcode.actions.FindColorBall;
+import org.firstinspires.ftc.teamcode.actions.TrackBall;
 import org.firstinspires.ftc.teamcode.actions.UpdateHeadLight;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
@@ -24,7 +24,7 @@ public class TrackBallTest extends Dynawheels {
         lift = new Lift(hardwareMap, telemetry);
         headLight = new HeadLight(hardwareMap, telemetry);
         updateHeadLight = new UpdateHeadLight(headLight, colorSensor, lift);
-        trackBallAction = new TrackBallV2(carousel, colorSensor);
+        trackBallAction = new TrackBall(carousel, colorSensor);
         telemetry.update();
     }
 
@@ -34,9 +34,9 @@ public class TrackBallTest extends Dynawheels {
             // Handling Inputs
             if (gamepad1.dpad_down) carousel.spin();
             else if (gamepad1.dpad_left)
-                findColorBallAction = new FindColorBallNewV2(carousel, colorSensor, BallColor.GREEN);
+                findColorBallAction = new FindColorBall(carousel, colorSensor, BallColor.GREEN);
             else if (gamepad1.dpad_right)
-                findColorBallAction = new FindColorBallNewV2(carousel, colorSensor, BallColor.PURPLE);
+                findColorBallAction = new FindColorBall(carousel, colorSensor, BallColor.PURPLE);
 
             // Handling Actions
             if (findColorBallAction != null && findColorBallAction.run())

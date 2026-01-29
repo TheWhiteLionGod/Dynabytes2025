@@ -1,18 +1,12 @@
 package org.firstinspires.ftc.teamcode.actions;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
-import org.threeten.bp.Duration;
-import org.threeten.bp.Instant;
 
-@Deprecated
 public class TrackBall implements Action {
     Carousel carousel;
     ColorInput colorSensor;
-    Instant timer = Instant.now();
-    boolean initialized = false;
 
     public TrackBall(Carousel carousel, ColorInput colorSensor) {
         this.carousel = carousel;
@@ -21,79 +15,21 @@ public class TrackBall implements Action {
 
     @Override
     public boolean run() {
-        if (!initialized) {
-            resetState();
+        boolean[] isGreen = colorSensor.isGreenV2();
+        boolean[] isPurple = colorSensor.isPurpleV2();
+
+        BallColor[] ballColors = new BallColor[3];
+
+        for (int i = 0; i < 3; i++) {
+            if (isGreen[i]) ballColors[i] = BallColor.GREEN;
+            else if (isPurple[i]) ballColors[i] = BallColor.PURPLE;
+            else ballColors[i] = BallColor.EMPTY;
         }
 
-        if (carousel.allPositionsFilled()) {
-            return true;
-        }
+        carousel.pos1Color = ballColors[0];
+        carousel.pos2Color = ballColors[1];
+        carousel.pos3Color = ballColors[2];
 
-        int currentPos = getNextEmptyPosition();
-        carousel.spin(getCarouselTarget(currentPos));
-
-        if (hasSpinTimeElapsed()) {
-            setColorForPosition(currentPos, detectColor());
-            timer = Instant.now();
-        }
-
-        return false;
-    }
-
-    private void resetState() {
-        carousel.pos1Color = null;
-        carousel.pos2Color = null;
-        carousel.pos3Color = null;
-        timer = Instant.now();
-        initialized = true;
-    }
-
-    private boolean hasSpinTimeElapsed() {
-        return Duration.between(timer, Instant.now()).toMillis()
-                >= Constants.CAROUSEL_SPIN_TIME;
-    }
-
-    private int getNextEmptyPosition() {
-        if (carousel.pos1Color == null) return 1;
-        if (carousel.pos2Color == null) return 2;
-        return 3;
-    }
-
-    private double getCarouselTarget(int position) {
-        switch (position) {
-            case 1:
-                return Constants.CAROUSEL_POS_1;
-            case 2:
-                return Constants.CAROUSEL_POS_2;
-            case 3:
-                return Constants.CAROUSEL_POS_3;
-            default:
-                throw new IllegalStateException("Invalid carousel position");
-        }
-    }
-
-    private BallColor detectColor() {
-        if (colorSensor.isPurple()) return BallColor.PURPLE;
-        if (colorSensor.isGreen()) return BallColor.GREEN;
-        return BallColor.EMPTY;
-    }
-
-    private void setColorForPosition(int position, BallColor color) {
-        switch (position) {
-            case 1:
-                carousel.pos1Color = color;
-                break;
-
-            case 2:
-                carousel.pos2Color = color;
-                break;
-
-            case 3:
-                carousel.pos3Color = color;
-                break;
-
-            default:
-                throw new IllegalStateException("Invalid carousel position");
-        }
+        return true;
     }
 }

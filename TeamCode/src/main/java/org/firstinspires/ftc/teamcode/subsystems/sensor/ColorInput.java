@@ -46,10 +46,12 @@ public class ColorInput {
         return hue;
     }
 
+    @Deprecated
     public boolean isGreen() {
         return Constants.GREEN_MIN <= hue()[0] && hue()[0] <= Constants.GREEN_MAX;
     }
 
+    @Deprecated
     public boolean isPurple() {
         return Constants.PURPLE_MIN <= hue()[0] && hue()[0] <= Constants.PURPLE_MAX;
     }
