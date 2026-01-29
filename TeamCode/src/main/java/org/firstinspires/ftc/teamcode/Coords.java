@@ -36,4 +36,15 @@ public class Coords {
     public Pose2d toPose() {
         return new Pose2d(x, y, Math.toRadians(this.toRoadRunner().yaw));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Coords)) return false;
+        Coords coords = (Coords) obj;
+
+        return coords.x == this.x &&
+                coords.y == this.y &&
+                coords.yaw == this.yaw &&
+                coords.unit == this.unit;
+    }
 }

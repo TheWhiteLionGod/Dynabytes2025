@@ -11,9 +11,9 @@ public class Carousel {
     private final Servo carousel;
     private final Telemetry telemetry;
 
-    public BallColor pos1Color;
-    public BallColor pos2Color;
-    public BallColor pos3Color;
+    public BallColor pos1Color = BallColor.EMPTY;
+    public BallColor pos2Color = BallColor.EMPTY;
+    public BallColor pos3Color = BallColor.EMPTY;
 
 
     public Carousel(HardwareMap hardwareMap, Telemetry telemetry) {

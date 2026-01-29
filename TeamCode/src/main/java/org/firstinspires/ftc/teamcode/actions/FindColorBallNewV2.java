@@ -5,14 +5,12 @@ import org.firstinspires.ftc.teamcode.subsystems.sensor.ColorInput;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 
-@Deprecated
-public class FindColorBallNew implements Action {
+public class FindColorBallNewV2 implements Action {
     Carousel carousel;
     ColorInput colorSensor;
     BallColor ballColor;
-    TrackBall trackBallAction;
 
-    public FindColorBallNew(Carousel carousel, ColorInput colorSensor, BallColor ballColor) {
+    public FindColorBallNewV2(Carousel carousel, ColorInput colorSensor, BallColor ballColor) {
         this.carousel = carousel;
         this.colorSensor = colorSensor;
         this.ballColor = ballColor;
@@ -22,14 +20,7 @@ public class FindColorBallNew implements Action {
     @Override
     public boolean run() {
         // REQUIRES TRACK BALL ACTION TO LOCATE BALL COLORS
-        if (!carousel.allPositionsFilled()) {
-            if (trackBallAction == null) {
-                trackBallAction = new TrackBall(carousel, colorSensor);
-            }
-
-            trackBallAction.run();
-            return false;
-        }
+        (new TrackBallV2(carousel, colorSensor)).run();
 
         if (carousel.pos1Color == ballColor)
             carousel.spin(Constants.CAROUSEL_POS_1);

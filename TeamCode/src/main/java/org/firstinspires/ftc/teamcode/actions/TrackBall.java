@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
 
+@Deprecated
 public class TrackBall implements Action {
     Carousel carousel;
     ColorInput colorSensor;
