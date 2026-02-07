@@ -10,6 +10,13 @@ import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 @Autonomous(name="AutoBlue", group="Auto")
 public class AutoBlue extends Dynawheels {
     @Override
+    public void config() {
+        super.config();
+
+        Coords.setCurrentPos(new Coords(-60, -60, 225, Coords.Unit.RoadRunner));
+    }
+
+    @Override
     public void run() {
         // Turning On Shooter
         shooter.start();
@@ -41,12 +48,12 @@ public class AutoBlue extends Dynawheels {
         // Moving Out Of Shooting Zone
         Action turnDrivetrain = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(-45, Coords.Unit.Imu)
+                new Coords(180, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
         while (turnDrivetrain.run()) {
-            telemetry.addData("Turning to -45", imu.getYaw().yaw);
+            telemetry.addData("Turning to 180", imu.getYaw().toRoadRunner().yaw);
             telemetry.update();
         }
 
@@ -57,12 +64,12 @@ public class AutoBlue extends Dynawheels {
         // Turning to Balls
         turnDrivetrain = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(-135, Coords.Unit.Imu)
+                new Coords(90, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
         while (turnDrivetrain.run()) {
-            telemetry.addData("Turning to -135", imu.getYaw().yaw);
+            telemetry.addData("Turning to 90", imu.getYaw().toRoadRunner().yaw);
             telemetry.update();
         }
 
@@ -81,5 +88,11 @@ public class AutoBlue extends Dynawheels {
         drivetrain.stop();
 
         roller.stop();
+    }
+
+    @Override
+    public void cleanup() {
+        super.cleanup();
+        Coords.setCurrentPos(new Coords(-60, 12, 90, Coords.Unit.RoadRunner));
     }
 }

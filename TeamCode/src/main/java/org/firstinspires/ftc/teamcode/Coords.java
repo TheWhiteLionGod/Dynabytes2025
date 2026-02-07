@@ -3,6 +3,16 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 public class Coords {
+    private static Coords currentPos = new Coords(0, 0, 0, Unit.RoadRunner);
+
+    public static Coords getCurrentPos() {
+        return currentPos;
+    }
+
+    public static void setCurrentPos(Coords currentPos) {
+        Coords.currentPos = currentPos;
+    }
+
     public enum Unit {
         Imu, RoadRunner
     }
