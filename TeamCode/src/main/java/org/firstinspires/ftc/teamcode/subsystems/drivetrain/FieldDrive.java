@@ -32,19 +32,27 @@ public class FieldDrive implements Subsystem {
 
     // Auto Commands
     public void forward() {
-        robotDrive(0.7, 0, 0);
+        robotDrive(0.5, 0, 0);
     }
 
     public void backward() {
-        robotDrive(-0.7, 0, 0);
+        robotDrive(-0.5, 0, 0);
     }
 
     public void left() {
-        robotDrive(0, -0.7, 0);
+        robotDrive(0, -0.5, 0);
     }
 
     public void right() {
-        robotDrive(0, 0.7, 0);
+        robotDrive(0, 0.5, 0);
+    }
+
+    public void turnLeft() {
+        robotDrive(0, 0, -0.5);
+    }
+
+    public void turnRight() {
+        robotDrive(0, 0, 0.5);
     }
 
     // Field Drive Movement

@@ -34,11 +34,11 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     private void handleDrivetrain() {
-        if (gamepad1.left_stick_y != 0||
+        if (gamepad1.left_stick_y != 0 ||
                 gamepad1.left_stick_x != 0 ||
                 gamepad1.right_stick_x != 0) {
 
-            drivetrain.fieldDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x, imu.getYaw());
+            drivetrain.robotDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         }
         else {
             drivetrain.stop();

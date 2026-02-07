@@ -48,6 +48,7 @@ import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
 
+@Deprecated
 @Autonomous(name="Auto_Basket_Blue", group="Linear OpMode")
 //@Disabled
 public class Auto_Basket_Blue extends LinearOpMode {

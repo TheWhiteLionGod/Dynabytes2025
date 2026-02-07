@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class Constants {
     public static boolean approxEqualTo(double a, double b) {
-        return Math.abs(a - b) < 0.0001;
+        return Math.abs(a - b) < 0.001;
     }
 
     // Carousel Position
@@ -15,14 +15,7 @@ public class Constants {
     // Lift Position
     public static final double LIFT_DOWN_POS = 0.0;
     public static final double LIFT_UP_POS = 0.095;
-
-    // Carousel Spin Time
-    public static final int CAROUSEL_SPIN_TIME = 750;
-    // Shooter Spin Time
-    public static final int SHOOTER_SPIN_TIME = 2000;
-    // Lift Up Time
     public static final int LIFT_DELAY_TIME = 100;
-    public static final int LIFT_UP_TIME = 750;
 
     // Hue Values
     public static final int GREEN_MIN = 195;
@@ -35,8 +28,6 @@ public class Constants {
     public static final int GPP_TAG = 21;
     public static final int PGP_TAG = 22;
     public static final int PPG_TAG = 23;
-    // Auto TeleOp Position Transfer
-    public static Coords currentPose = new Coords();
     // Shooter PIDF Coefficients
     public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(1.0, 0, 0, 12.051);
     public static final double shooterMaxVel = 2500;

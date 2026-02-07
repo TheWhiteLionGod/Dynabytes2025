@@ -21,8 +21,6 @@ public class Coords {
         this.unit = unit;
     }
 
-    public Coords() {}
-
     public Coords toImu() {
         if (unit == Unit.Imu) return this;
         return new Coords(x, y, (yaw <= 180) ? yaw : -(360 - yaw), Unit.Imu);
