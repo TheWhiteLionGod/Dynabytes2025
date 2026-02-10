@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.actions.UpdateHeadLight;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.BallColor;
 
 //@Disabled
-@TeleOp(name="One Player Controller", group="FTC2026")
-public class OnePlayerCtrl extends Dynawheels {
+@TeleOp(name="Two Player Controller", group="FTC2026")
+public class TwoPlayerCtrl extends Dynawheels {
     Action findColorBall, updateHeadLight;
 
     @Override
@@ -46,26 +46,26 @@ public class OnePlayerCtrl extends Dynawheels {
     }
 
     private void handleIntake() {
-        if (gamepad1.left_trigger != 0) roller.forward();
-        else if (gamepad1.left_bumper) roller.reverse();
+        if (gamepad2.left_trigger != 0) roller.forward();
+        else if (gamepad2.left_bumper) roller.reverse();
         else roller.stop();
     }
 
     private void handleCarousel() {
-        if (gamepad1.dpad_down) carousel.spin();
-        else if (gamepad1.x) findColorBall = new FindColorBall(carousel, colorSensor, BallColor.GREEN);
-        else if (gamepad1.b) findColorBall = new FindColorBall(carousel, colorSensor, BallColor.PURPLE);
+        if (gamepad2.dpad_down) carousel.spin();
+        else if (gamepad2.dpad_left) findColorBall = new FindColorBall(carousel, colorSensor, BallColor.GREEN);
+        else if (gamepad2.dpad_right) findColorBall = new FindColorBall(carousel, colorSensor, BallColor.PURPLE);
 
         if (findColorBall == null || findColorBall.run())
             findColorBall = null;
     }
 
     private void handleOuttake() {
-        if (gamepad1.a) lift.down();
-        else if (gamepad1.y) lift.up();
+        if (gamepad2.a) lift.down();
+        else if (gamepad2.y) lift.up();
 
-        if (gamepad1.right_trigger != 0) shooter.start();
-        else if (gamepad1.right_bumper) shooter.stop();
+        if (gamepad2.right_trigger != 0) shooter.start();
+        else if (gamepad2.right_bumper) shooter.stop();
     }
 
     private void handleLights() {
