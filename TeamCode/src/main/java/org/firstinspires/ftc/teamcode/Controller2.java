@@ -95,7 +95,7 @@ public class Controller2 extends LinearOpMode {
         intake = hardwareMap.get(DcMotor.class, "IntakeRoller");
         greenLight = hardwareMap.get(Servo.class, "GreenLight");
         purpleLight = hardwareMap.get(Servo.class, "PurpleLight");
-        colorSensor = hardwareMap.get(ColorSensor.class, "ColorSensor");
+        colorSensor = hardwareMap.get(ColorSensor.class, "Pos1Color");
 
         LLift.setDirection(Servo.Direction.REVERSE);
 

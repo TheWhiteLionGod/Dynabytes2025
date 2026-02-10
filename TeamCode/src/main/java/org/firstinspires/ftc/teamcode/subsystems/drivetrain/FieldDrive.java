@@ -18,8 +18,8 @@ public class FieldDrive implements Subsystem {
         FR = hardwareMap.get(DcMotorEx.class, "FR");
         BR = hardwareMap.get(DcMotorEx.class, "BR");
 
-        BL.setDirection(DcMotorEx.Direction.REVERSE);
-        FL.setDirection(DcMotorEx.Direction.REVERSE);
+        BR.setDirection(DcMotorEx.Direction.REVERSE);
+        FR.setDirection(DcMotorEx.Direction.REVERSE);
 
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

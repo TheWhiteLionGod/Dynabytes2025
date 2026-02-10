@@ -9,8 +9,6 @@ import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
-import java.util.ArrayList;
-
 //@Disabled
 @TeleOp(name="Turn Test", group="TEST")
 public class TurnTest extends Dynawheels {
@@ -69,6 +67,8 @@ public class TurnTest extends Dynawheels {
     @Override
     public void run() {
         while (opModeIsActive()) {
+            handleAction();
+
             if (gamepad1.left_stick_y != 0 ||
                     gamepad1.left_stick_x != 0 ||
                     gamepad1.right_stick_x != 0) {
@@ -80,13 +80,9 @@ public class TurnTest extends Dynawheels {
                         imu.getYaw()
                 );
             }
-            else {
-                drivetrain.stop();
-            }
-
-            handleAction();
-            if (turnDrivetrainTo == null || turnDrivetrainTo.run()) {
+            else if (turnDrivetrainTo == null || turnDrivetrainTo.run()) {
                 turnDrivetrainTo = null;
+                drivetrain.stop();
             }
 
             telemetry.addData("Position", position.toString());

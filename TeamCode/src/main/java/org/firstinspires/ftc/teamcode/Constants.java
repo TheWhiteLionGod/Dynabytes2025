@@ -18,10 +18,10 @@ public class Constants {
     public static final int LIFT_DELAY_TIME = 100;
 
     // Hue Values
-    public static final int GREEN_MIN = 195;
-    public static final int GREEN_MAX = 210;
+    public static final int GREEN_MIN = 191;
+    public static final int GREEN_MAX = 205;
     public static final int PURPLE_MIN = 120;
-    public static final int PURPLE_MAX = 150;
+    public static final int PURPLE_MAX = 160;
     // April Tag Id
     public static final int BLUE_TAG = 20;
     public static final int RED_TAG = 24;
@@ -29,6 +29,6 @@ public class Constants {
     public static final int PGP_TAG = 22;
     public static final int PPG_TAG = 23;
     // Shooter PIDF Coefficients
-    public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(1.0, 0, 0, 12.051);
-    public static final double shooterMaxVel = 2500;
+    public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(100, 0, 0, 12.051);
+    public static final double shooterMaxVel = 1400;
 }

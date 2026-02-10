@@ -8,19 +8,20 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
 
-@Disabled
+//@Disabled
 @TeleOp(name="PIDF Test", group="TEST")
 public class PIDFTest extends Dynawheels {
     DcMotorEx shooter;
 
-    double P = 1.0;
+    double P = 100;
     double F = 12.051;
 
     PIDFCoefficients PIDF = new PIDFCoefficients(P, 0, 0, F);
 
-    double highTargetVel = 2500;
+    double highTargetVel = Constants.shooterMaxVel;
     double lowTargetVel = 0;
     double curTargetVel = lowTargetVel;
 

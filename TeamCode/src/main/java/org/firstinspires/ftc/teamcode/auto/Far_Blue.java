@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
@@ -43,9 +44,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.FieldDrive;
 
-
+@Deprecated
 @Autonomous(name="Far_Auto", group="Linear OpMode")
-//@Disabled
+@Disabled
 public class Far_Blue extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.

@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -50,7 +51,7 @@ import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
 @Deprecated
 @Autonomous(name="Auto_Basket_Blue", group="Linear OpMode")
-//@Disabled
+@Disabled
 public class Auto_Basket_Blue extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
