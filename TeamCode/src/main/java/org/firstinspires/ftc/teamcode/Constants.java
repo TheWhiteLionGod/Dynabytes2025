@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-public class Constants {
+public final class Constants {
     public static boolean approxEqualTo(double a, double b) {
         return Math.abs(a - b) < 0.001;
     }
@@ -17,17 +17,23 @@ public class Constants {
     public static final double LIFT_UP_POS = 0.095;
     public static final int LIFT_DELAY_TIME = 100;
 
+    // Gate Position
+    public static final double GATE_OPEN_POS = 1.0;
+    public static final double GATE_CLOSED_POS = 0.0;
+
     // Hue Values
     public static final int GREEN_MIN = 191;
     public static final int GREEN_MAX = 205;
     public static final int PURPLE_MIN = 120;
     public static final int PURPLE_MAX = 160;
+
     // April Tag Id
     public static final int BLUE_TAG = 20;
     public static final int RED_TAG = 24;
     public static final int GPP_TAG = 21;
     public static final int PGP_TAG = 22;
     public static final int PPG_TAG = 23;
+
     // Shooter PIDF Coefficients
     public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(100, 0, 0, 12.051);
     public static final double shooterMaxVel = 1400;
