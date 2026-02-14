@@ -18,8 +18,8 @@ public final class Constants {
     public static final int LIFT_DELAY_TIME = 100;
 
     // Gate Position
-    public static final double GATE_OPEN_POS = 1.0;
-    public static final double GATE_CLOSED_POS = 0.0;
+    public static final double GATE_OPEN_POS = 0;
+    public static final double GATE_CLOSED_POS = 0.2;
 
     // Hue Values
     public static final int GREEN_MIN = 191;

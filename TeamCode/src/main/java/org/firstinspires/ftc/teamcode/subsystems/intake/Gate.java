@@ -13,6 +13,8 @@ public class Gate implements Subsystem {
 
     public Gate(HardwareMap hardwareMap, Telemetry telemetry) {
         gate = hardwareMap.get(Servo.class, "Gate");
+        gate.setPosition(Constants.GATE_CLOSED_POS);
+
         this.telemetry = telemetry;
         telemetry.addData("Gate", "Initialized");
     }

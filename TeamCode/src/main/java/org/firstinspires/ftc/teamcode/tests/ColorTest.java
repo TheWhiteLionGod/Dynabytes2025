@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.subsystems.transfer.Carousel;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.HeadLight;
 import org.firstinspires.ftc.teamcode.subsystems.transfer.Lift;
 
-@TeleOp(name="Track Ball Test", group="TEST")
-public class TrackBallTest extends Dynawheels {
+@TeleOp(name="Color Test", group="TEST")
+public class ColorTest extends Dynawheels {
     Action trackBallAction, findColorBallAction, updateHeadLight;
 
     @Override

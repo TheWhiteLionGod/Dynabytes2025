@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Dynawheels;
 
-//@Disabled
+@Disabled
 @TeleOp(name="PIDF Test", group="TEST")
 public class PIDFTest extends Dynawheels {
     DcMotorEx shooter;
