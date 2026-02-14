@@ -48,11 +48,11 @@ public class FieldDrive implements Subsystem {
     }
 
     public void turnLeft() {
-        robotDrive(0, 0, -0.5);
+        robotDrive(0, 0, 0.5);
     }
 
     public void turnRight() {
-        robotDrive(0, 0, 0.5);
+        robotDrive(0, 0, -0.5);
     }
 
     // Field Drive Movement
@@ -68,10 +68,10 @@ public class FieldDrive implements Subsystem {
 
     // Regular Movement
     public void robotDrive(double forward, double strafe, double turn) {
-        double frontLeft = forward + strafe + turn;
-        double backLeft = forward - strafe + turn;
-        double frontRight = forward - strafe - turn;
-        double backRight = forward + strafe - turn;
+        double frontLeft = forward + strafe - turn;
+        double backLeft = forward - strafe - turn;
+        double frontRight = forward - strafe + turn;
+        double backRight = forward + strafe + turn;
 
         double max = Math.max(
                 Math.max(Math.abs(frontLeft), Math.abs(backLeft)),

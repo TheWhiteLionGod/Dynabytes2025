@@ -15,7 +15,7 @@ public final class Constants {
     // Lift Position
     public static final double LIFT_DOWN_POS = 0.0;
     public static final double LIFT_UP_POS = 0.095;
-    public static final int LIFT_DELAY_TIME = 100;
+    public static final int LIFT_DELAY_TIME = 75;
 
     // Gate Position
     public static final double GATE_OPEN_POS = 0;

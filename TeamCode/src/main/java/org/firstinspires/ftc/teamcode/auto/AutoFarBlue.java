@@ -52,9 +52,13 @@ public class AutoFarBlue extends Dynawheels {
         shooter.stop();
 
         // Getting New Balls
+        drivetrain.forward();
+        sleep(250);
+        drivetrain.stop();
+
         turnDrivetrainTo = new TurnDrivetrainTo(
             drivetrain, imu,
-            new Coords(270, Coords.Unit.RoadRunner)
+            new Coords(90, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -66,7 +70,7 @@ public class AutoFarBlue extends Dynawheels {
 
         roller.forward();
         drivetrain.forward();
-        sleep(1000);
+        sleep(650);
         drivetrain.stop();
         roller.stop();
     }
@@ -74,6 +78,7 @@ public class AutoFarBlue extends Dynawheels {
     @Override
     public void cleanup() {
         super.cleanup();
-        Coords.setCurrentPos(new Coords(-12, -54, 197, Coords.Unit.RoadRunner));
+        // TODO: Save Current Position After Auto
+//        Coords.setCurrentPos(new Coords(-12, -54, 197, Coords.Unit.RoadRunner));
     }
 }

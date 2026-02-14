@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import android.graphics.Color;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -41,7 +42,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 @TeleOp(name="Controller-2Player", group="Linear OpMode")
-//@Disabled
+@Disabled
+@Deprecated
 public class Controller2 extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.

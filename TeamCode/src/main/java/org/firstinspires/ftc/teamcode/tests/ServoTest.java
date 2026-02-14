@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Dynawheels;
 
 @TeleOp(name="Servo Test", group="TEST")
+@Disabled
 public class ServoTest extends Dynawheels {
     Servo servo;
     @Override

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Coords;
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.sensor.ImuSensor;
 
 //@Disabled
 @TeleOp(name="Turn Test", group="TEST")
+@Disabled
 public class TurnTest extends Dynawheels {
     Action turnDrivetrainTo;
     static Coords FORWARD = new Coords(360, Coords.Unit.RoadRunner),
