@@ -35,6 +35,6 @@ public final class Constants {
     public static final int PPG_TAG = 23;
 
     // Shooter PIDF Coefficients
-    public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(100, 0, 0, 12.051);
+    public static final PIDFCoefficients shooterPIDF = new PIDFCoefficients(10, 0, 0, 12.051);
     public static final double shooterMaxVel = 1400;
 }

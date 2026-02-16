@@ -19,74 +19,49 @@ public class AutoBlue extends Dynawheels {
     @Override
     public void run() {
         // Turning On Shooter
+        shooter.setPwr(0.625);
         shooter.start();
 
         // Moving to Shooting Position
         drivetrain.forward();
-        sleep(800);
+        sleep(1500);
         drivetrain.stop();
 
         // Shooting Balls
+        sleep(1750);
         for (int i = 0; true; i++) {
             lift.up();
-            sleep(500);
+            sleep(750);
 
             lift.down();
-            if (i == 2) break;
-            sleep(500);
+            sleep(250);
 
+            if (i == 2) break;
             carousel.spin();
-            sleep(1000);
+            sleep(350);
         }
         shooter.stop();
 
-        // Grabbing New Set of Balls
-        drivetrain.forward();
-        sleep(200);
-        drivetrain.stop();
-
-        // Moving Out Of Shooting Zone
-        Action turnDrivetrain = new TurnDrivetrainTo(
-                drivetrain, imu,
-                new Coords(180, Coords.Unit.RoadRunner)
-        );
-
-        telemetry.clear();
-        while (turnDrivetrain.run()) {
-            telemetry.addData("Turning to 180", imu.getYaw().toRoadRunner().yaw);
-            telemetry.update();
-        }
-
-        drivetrain.forward();
-        sleep(500);
-        drivetrain.stop();
-
         // Turning to Balls
-        turnDrivetrain = new TurnDrivetrainTo(
+        Action turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(90, Coords.Unit.RoadRunner)
+                new Coords(110, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
-        while (turnDrivetrain.run()) {
-            telemetry.addData("Turning to 90", imu.getYaw().toRoadRunner().yaw);
+        while (!turnDrivetrainTo.run()) {
+            telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
             telemetry.update();
         }
+        drivetrain.stop();
 
         // Grabbing Balls
         roller.forward();
-
         drivetrain.forward();
-        sleep(400);
+        sleep(1375);
         drivetrain.stop();
 
-        carousel.spin();
-        sleep(400);
-
-        drivetrain.forward();
-        sleep(400);
-        drivetrain.stop();
-
+        sleep(500);
         roller.stop();
     }
 

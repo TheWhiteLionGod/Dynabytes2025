@@ -21,7 +21,7 @@ public class TurnDrivetrainTo implements Action {
             err *= -1;
         }
 
-        double turnPwr = Math.copySign(0.5, -err);
+        double turnPwr = Math.copySign(0.5, err);
         drivetrain.robotDrive(0, 0, turnPwr);
         return Math.abs(err) <= 3;
     }

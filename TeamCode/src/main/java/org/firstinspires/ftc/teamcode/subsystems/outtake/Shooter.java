@@ -29,7 +29,7 @@ public class Shooter implements Subsystem {
     }
 
     public void stop() {
-        shooter.setVelocity(0);
+        shooter.setPower(0);
         telemetry.addData("Shooter", "Stopped");
     }
 
@@ -39,5 +39,7 @@ public class Shooter implements Subsystem {
     public void setPwr(double pwr) {
         motorPwr = Range.clip(pwr, 0, 1);
         telemetry.addData("Shooter", "Power set to " + motorPwr);
+
+        if (shooter.getPower() != 0) start();
     }
 }
