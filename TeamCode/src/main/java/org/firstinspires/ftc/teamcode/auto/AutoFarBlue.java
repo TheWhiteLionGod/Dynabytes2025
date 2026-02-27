@@ -26,7 +26,7 @@ public class AutoFarBlue extends Dynawheels {
 
         Action turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(197, Coords.Unit.RoadRunner)
+                new Coords(157, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -43,18 +43,18 @@ public class AutoFarBlue extends Dynawheels {
             sleep(750);
 
             lift.down();
-            sleep(500);
+            sleep(750);
 
             if (i == 2) break;
             carousel.spin();
-            sleep(500);
+            sleep(750);
         }
         shooter.stop();
 
         // Getting New Balls
         turnDrivetrainTo = new TurnDrivetrainTo(
-            drivetrain, imu,
-            new Coords(90, Coords.Unit.RoadRunner)
+                drivetrain, imu,
+                new Coords(270, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -69,8 +69,46 @@ public class AutoFarBlue extends Dynawheels {
         sleep(1500);
         drivetrain.stop();
 
+        carousel.spin();
+        sleep(500);
+
+        carousel.spin();
         sleep(500);
         roller.stop();
+
+        drivetrain.backward();
+        sleep(1500);
+
+        shooter.start();
+        turnDrivetrainTo = new TurnDrivetrainTo(
+                drivetrain, imu,
+                new Coords(157, Coords.Unit.RoadRunner)
+        );
+
+        telemetry.clear();
+        while (!turnDrivetrainTo.run()) {
+            telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
+            telemetry.update();
+        }
+        drivetrain.stop();
+
+        // Shooting Balls
+        sleep(4000); // Waiting For Shooter To Start Up
+        for (int i = 0; true; i++) {
+            lift.up();
+            sleep(750);
+
+            lift.down();
+            sleep(750);
+
+            if (i == 2) break;
+            carousel.spin();
+            sleep(750);
+        }
+        shooter.stop();
+
+        drivetrain.backward();
+        sleep(500);
     }
 
     @Override

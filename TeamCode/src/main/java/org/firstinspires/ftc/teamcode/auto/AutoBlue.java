@@ -28,24 +28,25 @@ public class AutoBlue extends Dynawheels {
         drivetrain.stop();
 
         // Shooting Balls
-        sleep(1750);
+        sleep(2250);
         for (int i = 0; true; i++) {
             lift.up();
             sleep(750);
 
             lift.down();
-            sleep(250);
+            sleep(750);
 
             if (i == 2) break;
             carousel.spin();
-            sleep(350);
+            sleep(750);
         }
         shooter.stop();
 
         // Turning to Balls
         Action turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(110, Coords.Unit.RoadRunner)
+                new Coords(122.5, Coords.Unit.RoadRunner)
+
         );
 
         telemetry.clear();
@@ -58,11 +59,48 @@ public class AutoBlue extends Dynawheels {
         // Grabbing Balls
         roller.forward();
         drivetrain.forward();
-        sleep(1375);
+        sleep(1250);
         drivetrain.stop();
 
         sleep(500);
         roller.stop();
+
+        drivetrain.backward();
+        sleep(1000);
+        drivetrain.stop();
+
+        turnDrivetrainTo = new TurnDrivetrainTo(
+                drivetrain, imu,
+                new Coords(225, Coords.Unit.RoadRunner)
+        );
+
+        telemetry.clear();
+        shooter.start();
+
+        while (!turnDrivetrainTo.run()) {
+            telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
+            telemetry.update();
+        }
+        drivetrain.stop();
+
+        // Shooting Balls
+        sleep(2250);
+        for (int i = 0; true; i++) {
+            lift.up();
+            sleep(750);
+
+            lift.down();
+            sleep(750);
+
+            if (i == 2) break;
+            carousel.spin();
+            sleep(750);
+        }
+        shooter.stop();
+
+        drivetrain.forward();
+        sleep(1250);
+        drivetrain.stop();
     }
 
     @Override

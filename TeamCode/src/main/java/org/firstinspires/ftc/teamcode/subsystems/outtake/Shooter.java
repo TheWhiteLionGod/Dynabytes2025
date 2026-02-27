@@ -33,8 +33,8 @@ public class Shooter implements Subsystem {
         telemetry.addData("Shooter", "Stopped");
     }
 
-    public void increasePwr() { setPwr(motorPwr + 0.1); }
-    public void decreasePwr() { setPwr(motorPwr - 0.1); }
+    public void increasePwr() { setPwr(motorPwr + 0.05); }
+    public void decreasePwr() { setPwr(motorPwr - 0.05); }
 
     public void setPwr(double pwr) {
         motorPwr = Range.clip(pwr, 0, 1);
