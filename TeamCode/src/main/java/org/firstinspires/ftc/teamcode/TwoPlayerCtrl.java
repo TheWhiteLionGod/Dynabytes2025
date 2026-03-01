@@ -27,7 +27,7 @@ public class TwoPlayerCtrl extends Dynawheels {
             handleCarousel();
             handleOuttake();
 
-            handleLights();
+            handleAccessories();
             telemetry.update();
             sleep(50);
         }
@@ -101,7 +101,7 @@ public class TwoPlayerCtrl extends Dynawheels {
         telemetry.addData("Shooter", shooter.motorPwr);
     }
 
-    private void handleLights() {
+    private void handleAccessories() {
         updateHeadLight.run();
     }
 }

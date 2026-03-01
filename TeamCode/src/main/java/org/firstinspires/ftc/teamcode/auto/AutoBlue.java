@@ -19,7 +19,7 @@ public class AutoBlue extends Dynawheels {
     @Override
     public void run() {
         // Turning On Shooter
-        shooter.setPwr(0.625);
+        shooter.setPwr(0.55);
         shooter.start();
 
         // Moving to Shooting Position
@@ -98,7 +98,7 @@ public class AutoBlue extends Dynawheels {
         }
         shooter.stop();
 
-        drivetrain.forward();
+        drivetrain.right();
         sleep(1250);
         drivetrain.stop();
     }

@@ -26,7 +26,7 @@ public class AutoFarRed extends Dynawheels {
 
         Action turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(157, Coords.Unit.RoadRunner)
+                new Coords(160, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -37,7 +37,7 @@ public class AutoFarRed extends Dynawheels {
         drivetrain.stop();
 
         // Shooting Balls
-        sleep(4000); // Waiting For Shooter To Start Up
+        sleep(3000); // Waiting For Shooter To Start Up
         for (int i = 0; true; i++) {
             lift.up();
             sleep(750);
@@ -77,7 +77,8 @@ public class AutoFarRed extends Dynawheels {
         roller.stop();
 
         drivetrain.backward();
-        sleep(1500);
+        sleep(1250);
+        drivetrain.stop();
 
         shooter.start();
         turnDrivetrainTo = new TurnDrivetrainTo(
@@ -109,6 +110,7 @@ public class AutoFarRed extends Dynawheels {
 
         drivetrain.backward();
         sleep(500);
+        drivetrain.stop();
     }
 
     @Override

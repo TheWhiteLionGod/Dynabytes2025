@@ -98,7 +98,7 @@ public class AutoRed extends Dynawheels {
         }
         shooter.stop();
 
-        drivetrain.forward();
+        drivetrain.left();
         sleep(1250);
         drivetrain.stop();
     }
