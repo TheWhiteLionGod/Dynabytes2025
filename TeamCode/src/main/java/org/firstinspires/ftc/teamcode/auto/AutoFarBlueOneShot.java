@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 
-@Autonomous(name="AutoFarRed", group="Auto")
-public class AutoFarRed extends Dynawheels {
+@Autonomous(name="AutoFarBlueOneShot", group="Auto")
+public class AutoFarBlueOneShot extends Dynawheels {
     @Override
     public void config() {
         super.config();
@@ -24,13 +24,13 @@ public class AutoFarRed extends Dynawheels {
         sleep(300);
         drivetrain.stop();
 
-        drivetrain.right();
+        drivetrain.left();
         sleep(250);
         drivetrain.stop();
 
         Action turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(167, Coords.Unit.RoadRunner)
+                new Coords(197, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -38,70 +38,6 @@ public class AutoFarRed extends Dynawheels {
             telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
             telemetry.update();
         }
-        drivetrain.stop();
-
-        // Shooting Balls
-        sleep(3250); // Waiting For Shooter To Start Up
-        for (int i = 0; true; i++) {
-            lift.up();
-            sleep(750);
-
-            lift.down();
-            sleep(750);
-
-            if (i == 2) break;
-            carousel.spin();
-            sleep(750);
-        }
-        shooter.stop();
-
-        drivetrain.backward();
-        sleep(500);
-        drivetrain.stop();
-
-        // Getting New Balls
-        turnDrivetrainTo = new TurnDrivetrainTo(
-            drivetrain, imu,
-            new Coords(260, Coords.Unit.RoadRunner)
-        );
-
-        telemetry.clear();
-        while (!turnDrivetrainTo.run()) {
-            telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
-            telemetry.update();
-        }
-        drivetrain.stop();
-
-        roller.forward();
-        drivetrain.forward();
-        sleep(1250);
-        drivetrain.stop();
-
-        carousel.spin();
-        sleep(500);
-
-        carousel.spin();
-        sleep(500);
-
-        drivetrain.backward();
-        sleep(1100);
-        drivetrain.stop();
-
-        shooter.start();
-        turnDrivetrainTo = new TurnDrivetrainTo(
-                drivetrain, imu,
-                new Coords(168, Coords.Unit.RoadRunner)
-        );
-
-        telemetry.clear();
-        while (!turnDrivetrainTo.run()) {
-            telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
-            telemetry.update();
-        }
-        drivetrain.stop();
-
-        drivetrain.forward();
-        sleep(600);
         drivetrain.stop();
 
         // Shooting Balls
@@ -119,8 +55,25 @@ public class AutoFarRed extends Dynawheels {
         }
         shooter.stop();
 
+        turnDrivetrainTo = new TurnDrivetrainTo(
+                drivetrain, imu,
+                new Coords(0, Coords.Unit.RoadRunner)
+        );
+
+        telemetry.clear();
+        while (!turnDrivetrainTo.run()) {
+            telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
+            telemetry.update();
+        }
+        drivetrain.stop();
+
+        // Moving Out Of The Way
         drivetrain.backward();
-        sleep(500);
+        sleep(250);
+        drivetrain.stop();
+
+        drivetrain.right();
+        sleep(750);
         drivetrain.stop();
     }
 

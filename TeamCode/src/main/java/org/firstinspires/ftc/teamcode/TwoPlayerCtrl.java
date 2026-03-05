@@ -93,7 +93,7 @@ public class TwoPlayerCtrl extends Dynawheels {
         if (gamepad1.yWasPressed()) shooter.increasePwr();
         else if (gamepad1.aWasPressed()) shooter.decreasePwr();
         else if (gamepad1.left_bumper) shooter.setPwr(0.4);
-        else if (gamepad1.right_bumper) shooter.setPwr(0.7);
+        else if (gamepad1.right_bumper) shooter.setPwr(0.9);
 
         if (gamepad1.y || gamepad1.a || gamepad1.left_bumper || gamepad1.right_bumper)
             shooter.start();

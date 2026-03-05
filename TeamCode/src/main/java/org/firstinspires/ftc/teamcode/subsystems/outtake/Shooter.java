@@ -39,7 +39,6 @@ public class Shooter implements Subsystem {
     public void setPwr(double pwr) {
         motorPwr = Range.clip(pwr, 0, 1);
         telemetry.addData("Shooter", "Power set to " + motorPwr);
-
-        if (shooter.getPower() != 0) start();
+        start();
     }
 }

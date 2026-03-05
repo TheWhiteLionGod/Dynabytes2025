@@ -21,12 +21,16 @@ public class AutoFarBlue extends Dynawheels {
         shooter.start();
 
         drivetrain.backward();
-        sleep(500);
+        sleep(300);
+        drivetrain.stop();
+
+        drivetrain.left();
+        sleep(250);
         drivetrain.stop();
 
         Action turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(194, Coords.Unit.RoadRunner)
+                new Coords(195, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -37,7 +41,7 @@ public class AutoFarBlue extends Dynawheels {
         drivetrain.stop();
 
         // Shooting Balls
-        sleep(3000); // Waiting For Shooter To Start Up
+        sleep(3500); // Waiting For Shooter To Start Up
         for (int i = 0; true; i++) {
             lift.up();
             sleep(750);
@@ -50,6 +54,10 @@ public class AutoFarBlue extends Dynawheels {
             sleep(750);
         }
         shooter.stop();
+
+        drivetrain.backward();
+        sleep(250);
+        drivetrain.stop();
 
         // Getting New Balls
         turnDrivetrainTo = new TurnDrivetrainTo(
@@ -66,7 +74,7 @@ public class AutoFarBlue extends Dynawheels {
 
         roller.forward();
         drivetrain.forward();
-        sleep(1500);
+        sleep(1250);
         drivetrain.stop();
 
         carousel.spin();
@@ -74,16 +82,15 @@ public class AutoFarBlue extends Dynawheels {
 
         carousel.spin();
         sleep(500);
-        roller.stop();
 
         drivetrain.backward();
-        sleep(1250);
+        sleep(1100);
         drivetrain.stop();
 
         shooter.start();
         turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(194, Coords.Unit.RoadRunner)
+                new Coords(195, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
@@ -91,6 +98,10 @@ public class AutoFarBlue extends Dynawheels {
             telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
             telemetry.update();
         }
+        drivetrain.stop();
+
+        drivetrain.forward();
+        sleep(500);
         drivetrain.stop();
 
         // Shooting Balls

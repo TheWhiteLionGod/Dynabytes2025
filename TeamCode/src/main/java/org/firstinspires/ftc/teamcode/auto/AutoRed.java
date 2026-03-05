@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 
-@Autonomous(name="AutoRed", group="Auto")
+@Autonomous(naRed", group="Auto")
 public class AutoRed extends Dynawheels {
     @Override
     public void config() {
@@ -60,10 +60,9 @@ public class AutoRed extends Dynawheels {
         roller.forward();
         drivetrain.forward();
         sleep(1250);
-        drivetrain.stop();
 
+        drivetrain.stop();
         sleep(500);
-        roller.stop();
 
         drivetrain.backward();
         sleep(1000);
@@ -71,12 +70,11 @@ public class AutoRed extends Dynawheels {
 
         turnDrivetrainTo = new TurnDrivetrainTo(
                 drivetrain, imu,
-                new Coords(135, Coords.Unit.RoadRunner)
+                new Coords(140, Coords.Unit.RoadRunner)
         );
 
         telemetry.clear();
         shooter.start();
-
         while (!turnDrivetrainTo.run()) {
             telemetry.addData("Turning...", imu.getYaw().toRoadRunner().yaw);
             telemetry.update();
@@ -84,7 +82,7 @@ public class AutoRed extends Dynawheels {
         drivetrain.stop();
 
         // Shooting Balls
-        sleep(2250);
+        sleep(2750);
         for (int i = 0; true; i++) {
             lift.up();
             sleep(750);
@@ -98,7 +96,7 @@ public class AutoRed extends Dynawheels {
         }
         shooter.stop();
 
-        drivetrain.left();
+        drivetrain.right();
         sleep(1250);
         drivetrain.stop();
     }
