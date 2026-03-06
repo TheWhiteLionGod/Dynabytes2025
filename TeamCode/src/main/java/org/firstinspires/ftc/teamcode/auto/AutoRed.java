@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Dynawheels;
 import org.firstinspires.ftc.teamcode.actions.Action;
 import org.firstinspires.ftc.teamcode.actions.TurnDrivetrainTo;
 
-@Autonomous(naRed", group="Auto")
+@Autonomous(name="AutoRed", group="Auto")
 public class AutoRed extends Dynawheels {
     @Override
     public void config() {
